@@ -1,559 +1,792 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ZeroFill Tech — Free e-waste pickup, Las Vegas</title>
-<meta name="description" content="Free pickup of unwanted computers and electronics across the Las Vegas valley. Certified data destruction. Refurbished tech.">
-<meta property="og:title" content="ZeroFill Tech — Free e-waste pickup, Las Vegas">
-<meta property="og:description" content="Free pickup. Certified data destruction. Refurbished tech.">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23111'/%3E%3Ccircle cx='16' cy='16' r='5' fill='%23ececea'/%3E%3C/svg%3E">
+<title>ZeroFill Tech — Free computer & e-waste pickup in Las Vegas</title>
+<meta name="description" content="Free pickup of old computers, laptops, monitors and servers across the Las Vegas valley. Every drive wiped. Certified data destruction available. Nothing to landfill.">
+<meta property="og:title" content="ZeroFill Tech — We haul off your old tech. Free.">
+<meta property="og:description" content="Free pickup · Certified data destruction · Refurbished tech. Las Vegas, NV.">
+<meta name="theme-color" content="#121212">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23121212'/%3E%3Ccircle cx='16' cy='16' r='6' fill='none' stroke='%232fc4b4' stroke-width='3'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Doto:wght@400;700;900&family=Geist+Mono:wght@400;500&family=Geist:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Doto:wght@700;900&family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
+  /* ---------- THEME TOKENS ---------- */
+  :root, [data-theme="dark"]{
+    --bg:#121212; --bg-2:#161616; --panel:#1b1b1b; --panel-2:#222; --panel-3:#2a2a2a;
+    --line:rgba(255,255,255,.08); --line-2:rgba(255,255,255,.16); --line-3:rgba(255,255,255,.28);
+    --ink:#f3efe7; --muted:#a39e95; --faint:#6b6760;
+    --accent:#188f83; --accent-2:#0f6d63; --accent-hi:#2fc4b4; --accent-ink:#06201d; --accent-soft:#0c211f;
+    --accent-glow:rgba(47,196,180,.22); --shadow:0 30px 80px rgba(0,0,0,.45);
+    --dot:243,239,231; --dot-hi:47,196,180; --term-bg:#0b0b0b; --term-ink:#d8d8d4;
+    color-scheme:dark;
+  }
+  [data-theme="light"]{
+    --bg:#f6f3ec; --bg-2:#efebe2; --panel:#ffffff; --panel-2:#f7f4ee; --panel-3:#efebe2;
+    --line:rgba(20,18,14,.09); --line-2:rgba(20,18,14,.16); --line-3:rgba(20,18,14,.3);
+    --ink:#17150f; --muted:#625d53; --faint:#9a948a;
+    --accent:#f2b705; --accent-2:#d9a000; --accent-hi:#b07c00; --accent-ink:#1a1400; --accent-soft:#fff3c4;
+    --accent-glow:rgba(242,183,5,.28); --shadow:0 30px 80px rgba(60,45,0,.12);
+    --dot:23,21,15; --dot-hi:217,160,0; --term-bg:#17150f; --term-ink:#efe9da;
+    color-scheme:light;
+  }
   :root{
-    --bg:#ececea;
-    --surface:#f6f6f4;
-    --ink:#111111;
-    --muted:#6e6e6a;
-    --faint:#a3a39f;
-    --line:rgba(17,17,17,.16);
-    --line-strong:rgba(17,17,17,.4);
-    --red:#d71920;
-    --mono:'Geist Mono',ui-monospace,SFMono-Regular,Menlo,monospace;
-    --sans:'Geist',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
-    --dot:'Doto',var(--mono);
-    --gutter:clamp(16px,4vw,48px);
-    --max:1280px;
+    --sans:'Manrope',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
+    --mono:'JetBrains Mono',ui-monospace,Menlo,monospace;
+    --dotf:'Doto',var(--mono);
+    --r:22px; --gutter:clamp(16px,4vw,40px); --max:1200px;
   }
   *{box-sizing:border-box;margin:0;padding:0}
-  html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+  html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
   @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
-  body{
-    background:var(--bg);color:var(--ink);
-    font-family:var(--sans);font-weight:400;font-size:16px;line-height:1.5;
-    -webkit-font-smoothing:antialiased;text-wrap:pretty;
-    padding-bottom:84px; /* room for sticky CTA on mobile */
-  }
+  body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:18px;line-height:1.55;-webkit-font-smoothing:antialiased;text-wrap:pretty;overflow-x:hidden;
+       transition:background .25s ease,color .25s ease}
   a{color:inherit;text-decoration:none}
-  ::selection{background:var(--ink);color:var(--bg)}
-
-  .mono{font-family:var(--mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;font-weight:400}
+  button{font:inherit;color:inherit}
+  ::selection{background:var(--accent);color:var(--accent-ink)}
   .wrap{max-width:var(--max);margin:0 auto;padding:0 var(--gutter)}
+  .mono{font-family:var(--mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+
+  /* ---------- BUTTONS ---------- */
+  .btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;font-weight:800;font-size:16px;
+       background:var(--accent);color:var(--accent-ink);border:0;border-radius:999px;padding:0 22px;height:48px;cursor:pointer;white-space:nowrap;
+       transition:transform .15s ease,filter .15s ease,box-shadow .15s ease;box-shadow:0 8px 24px var(--accent-glow)}
+  .btn:hover{filter:brightness(1.06);transform:translateY(-1px)}
+  .btn:disabled{opacity:.45;cursor:not-allowed;transform:none;box-shadow:none}
+  .btn.ghost{background:transparent;color:var(--ink);border:1.5px solid var(--line-2);box-shadow:none}
+  .btn.ghost:hover{border-color:var(--ink)}
+  .btn.lg{height:60px;padding:0 30px;font-size:18px}
+  .btn:focus-visible,.tile:focus-visible,.chip:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-visible{outline:3px solid var(--accent-hi);outline-offset:2px}
 
   /* ---------- NAV ---------- */
-  header{
-    position:sticky;top:0;z-index:20;background:var(--bg);
-    border-bottom:1px solid var(--line);
-  }
-  .nav{height:56px;display:flex;align-items:center;justify-content:space-between;gap:16px}
+  header{position:sticky;top:0;z-index:20;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);background:color-mix(in srgb,var(--bg) 78%,transparent);border-bottom:1px solid var(--line)}
+  .nav{height:64px;display:flex;align-items:center;justify-content:space-between;gap:16px}
   .brand{display:flex;align-items:center;gap:10px}
-  .brand .dotmark{width:10px;height:10px;border-radius:50%;background:var(--ink);position:relative}
-  .brand .dotmark::after{content:"";position:absolute;inset:3px;border-radius:50%;background:var(--bg)}
-  .brand .word{font-family:var(--dot);font-weight:900;font-size:22px;letter-spacing:.06em}
-  .nav .links{display:none;gap:28px}
-  .nav .links a{color:var(--muted)}
-  .nav .links a:hover{color:var(--ink)}
-  .nav .loc{display:none;color:var(--muted)}
-  .btn{
-    display:inline-flex;align-items:center;justify-content:center;gap:10px;
-    font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;
-    background:var(--ink);color:var(--bg);border:1px solid var(--ink);
-    padding:0 18px;height:40px;border-radius:0;cursor:pointer;white-space:nowrap;
-    transition:opacity .15s ease;
-  }
-  .btn:hover{opacity:.8}
-  .btn.ghost{background:transparent;color:var(--ink)}
-  .btn.ghost:hover{background:var(--ink);color:var(--bg);opacity:1}
-  @media (min-width:860px){
-    .nav .links{display:flex}
-    .nav .loc{display:block}
-  }
+  .brand .word{font-family:var(--dotf);font-weight:900;font-size:24px;letter-spacing:.06em;color:var(--ink)}
+  .brand .word b{color:var(--accent-hi);font-weight:900}
+  .nav-links{display:none;gap:26px;font-weight:600;font-size:15px;color:var(--muted)}
+  .nav-links a:hover{color:var(--ink)}
+  .nav-right{display:flex;align-items:center;gap:12px}
+  .nav .call{display:none;color:var(--muted);font-weight:600;font-size:16px}
+  .nav .call b{color:var(--ink);font-weight:700}
+  .theme{width:44px;height:44px;border-radius:50%;border:1.5px solid var(--line-2);background:var(--panel);display:grid;place-items:center;cursor:pointer;transition:border-color .15s,transform .15s}
+  .theme:hover{border-color:var(--ink);transform:rotate(15deg)}
+  .theme svg{width:20px;height:20px;stroke:var(--ink);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+  .theme .sun{display:none} [data-theme="light"] .theme .sun{display:block} [data-theme="light"] .theme .moon{display:none}
+  .nav .btn{display:none}
+  @media (min-width:560px){.nav .btn{display:inline-flex}}
+  @media (min-width:960px){.nav-links{display:flex}.nav .call{display:inline}}
 
   /* ---------- HERO ---------- */
-  .hero{
-    border-bottom:1px solid var(--line);
-    background-image:radial-gradient(rgba(17,17,17,.18) 1px,transparent 1px);
-    background-size:14px 14px;background-position:0 0;
-  }
-  .hero-inner{
-    background:linear-gradient(90deg,var(--bg) 0%,rgba(236,236,234,.85) 60%,rgba(236,236,234,0) 100%);
-    padding:clamp(56px,10vw,128px) 0 clamp(40px,7vw,96px);
-  }
-  .index{display:flex;justify-content:space-between;color:var(--muted);margin-bottom:28px}
-  .h1{
-    font-family:var(--dot);font-weight:900;line-height:.98;letter-spacing:.01em;
-    font-size:clamp(44px,9.5vw,128px);max-width:14ch;
-  }
-  .h1 .ghost{color:transparent;-webkit-text-stroke:1.5px var(--ink)}
-  .tagline{
-    margin-top:28px;font-family:var(--mono);font-size:clamp(12px,1.6vw,15px);
-    letter-spacing:.1em;text-transform:uppercase;color:var(--ink);
-    display:flex;flex-wrap:wrap;gap:10px 0;
-  }
-  .tagline span{display:inline-flex;align-items:center}
-  .tagline span + span::before{content:"";display:inline-block;width:5px;height:5px;border-radius:50%;background:var(--ink);margin:0 14px}
-  .hero-cta{margin-top:36px;display:flex;gap:12px;flex-wrap:wrap}
-  .live{display:inline-flex;align-items:center;gap:8px;color:var(--muted)}
-  .live::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--red);animation:blink 1.6s infinite}
-  @keyframes blink{0%,100%{opacity:1}50%{opacity:.25}}
-  @media (prefers-reduced-motion:reduce){.live::before{animation:none}}
+  .hero{position:relative;overflow:hidden;border-bottom:1px solid var(--line);background:radial-gradient(ellipse 80% 60% at 80% 20%,var(--accent-glow),transparent 60%),var(--bg)}
+  .hero canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
+  .hero::after{content:"";position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse 60% 80% at 22% 45%,color-mix(in srgb,var(--bg) 92%,transparent) 0%,color-mix(in srgb,var(--bg) 70%,transparent) 40%,transparent 75%)}
+  .hero .wrap{position:relative;z-index:1;padding-top:clamp(56px,9vw,120px);padding-bottom:clamp(40px,7vw,96px)}
+  .kicker{display:inline-flex;align-items:center;gap:10px;font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);
+          background:color-mix(in srgb,var(--panel) 80%,transparent);border:1px solid var(--line);border-radius:999px;padding:8px 14px}
+  .kicker::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--accent-hi);box-shadow:0 0 12px var(--accent-hi)}
+  .h1{margin-top:22px;font-weight:800;font-size:clamp(40px,7.2vw,88px);line-height:1.02;letter-spacing:-.025em;max-width:13ch}
+  .h1 em{font-style:normal;color:var(--accent-hi)}
+  .lede{margin-top:22px;font-size:clamp(18px,2vw,22px);color:var(--muted);max-width:42ch;font-weight:500}
+  .lede b{color:var(--ink);font-weight:700}
+  .hero-cta{margin-top:32px;display:flex;gap:12px;flex-wrap:wrap;align-items:center}
+  .trust{margin-top:36px;display:flex;flex-wrap:wrap;gap:10px 26px;color:var(--muted);font-weight:600;font-size:15px}
+  .trust span{display:inline-flex;align-items:center;gap:8px}
+  .trust svg{width:18px;height:18px;stroke:var(--accent-hi);fill:none;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
 
-  /* ---------- SECTION SCAFFOLD ---------- */
-  section{border-bottom:1px solid var(--line)}
-  .sec-head{
-    display:flex;justify-content:space-between;align-items:baseline;gap:16px;
-    padding:18px 0;border-bottom:1px solid var(--line);color:var(--muted);
-  }
-  .sec-head .t{color:var(--ink)}
+  /* ---------- SECTIONS ---------- */
+  .sec{padding:clamp(56px,8vw,112px) 0}
+  .sec.alt{background:var(--bg-2);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .sec-head{max-width:760px;margin-bottom:clamp(28px,4vw,48px)}
+  .eyebrow{display:inline-flex;align-items:center;gap:10px;font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent-hi)}
+  .eyebrow::before{content:"";width:22px;height:2px;background:var(--accent-hi)}
+  .h2{margin-top:14px;font-weight:800;font-size:clamp(32px,4.6vw,56px);line-height:1.05;letter-spacing:-.025em}
+  .sub{margin-top:16px;color:var(--muted);font-size:clamp(17px,1.6vw,20px);max-width:56ch}
+  .reveal{opacity:0;transform:translateY(22px);transition:opacity .7s cubic-bezier(.2,.7,.2,1),transform .7s cubic-bezier(.2,.7,.2,1)}
+  .reveal.in{opacity:1;transform:none}
+  @media (prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}}
 
-  /* ---------- SERVICES (ruled grid) ---------- */
-  .grid3{display:grid;grid-template-columns:1fr;}
-  .cell{
-    padding:28px 0 32px;border-bottom:1px solid var(--line);
-    display:grid;grid-template-rows:auto auto 1fr auto;gap:18px;min-height:0;
-  }
-  .cell:last-child{border-bottom:0}
-  .cell .num{display:flex;justify-content:space-between;color:var(--muted)}
-  .cell .num .plus{color:var(--faint)}
-  .cell h3{font-family:var(--dot);font-weight:700;font-size:clamp(30px,4.5vw,46px);line-height:1;letter-spacing:.02em}
-  .cell p{color:var(--muted);max-width:40ch;font-weight:300}
-  .cell .spec{
-    display:grid;grid-template-columns:auto 1fr;gap:6px 16px;
-    font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;
-    padding-top:16px;border-top:1px dashed var(--line);
-  }
-  .cell .spec dt{color:var(--faint)}
-  .cell .spec dd{color:var(--ink)}
-  @media (min-width:860px){
-    .grid3{grid-template-columns:1fr 1fr 1fr}
-    .cell{padding:32px 28px 40px;border-bottom:0;border-right:1px solid var(--line)}
-    .cell:first-child{padding-left:0}
-    .cell:last-child{border-right:0;padding-right:0}
-  }
+  /* ---------- BOOKING PANEL ---------- */
+  .book{padding:clamp(28px,5vw,64px) 0 clamp(48px,7vw,96px)}
+  .panel{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:clamp(20px,3vw,36px);box-shadow:var(--shadow);position:relative;overflow:hidden}
+  .panel::before{content:"";position:absolute;inset:0 0 auto 0;height:3px;background:linear-gradient(90deg,var(--accent),var(--accent-hi))}
+  .steps{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+  .steps .s{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--faint);cursor:default}
+  .steps .s i{width:26px;height:26px;border-radius:50%;border:1.5px solid var(--line-2);display:inline-grid;place-items:center;font-style:normal;font-size:12px;color:var(--muted)}
+  .steps .s.on{color:var(--ink)} .steps .s.on i{background:var(--accent);border-color:var(--accent);color:var(--accent-ink);font-weight:700}
+  .steps .s.done i{background:var(--accent-soft);border-color:var(--accent);color:var(--accent-hi)}
+  .steps .s.done{cursor:pointer}
+  .steps .sep{width:18px;height:1px;background:var(--line-2)}
+  .step{display:none;animation:fade .35s ease}
+  .step.on{display:block}
+  @keyframes fade{from{opacity:0;transform:translateX(8px)}to{opacity:1;transform:none}}
+  .q{margin-top:22px;font-weight:800;font-size:clamp(26px,3.6vw,40px);letter-spacing:-.02em;line-height:1.1}
+  .q small{display:block;margin-top:8px;font-weight:500;font-size:17px;color:var(--muted);letter-spacing:0}
+  .tiles{margin-top:24px;display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+  @media (min-width:640px){.tiles{grid-template-columns:repeat(4,1fr)}}
+  .tile{position:relative;text-align:left;background:var(--panel-2);border:1.5px solid var(--line);border-radius:18px;padding:18px 16px 16px;min-height:150px;cursor:pointer;color:var(--ink);
+        display:flex;flex-direction:column;justify-content:space-between;gap:14px;transition:border-color .15s,transform .15s,background .15s,box-shadow .15s;user-select:none}
+  .tile:hover{border-color:var(--line-3);transform:translateY(-2px)}
+  .tile svg.ico{width:38px;height:38px;stroke:var(--ink);fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+  .tile .t{font-weight:700;font-size:17px;line-height:1.2}
+  .tile .t small{display:block;font-weight:500;color:var(--muted);font-size:13px;margin-top:3px}
+  .tile .chk{position:absolute;top:12px;right:12px;width:24px;height:24px;border-radius:50%;border:1.5px solid var(--line-2);display:grid;place-items:center;background:var(--panel)}
+  .tile .chk svg{width:14px;height:14px;stroke:var(--accent-ink);fill:none;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;opacity:0}
+  .tile.on{border-color:var(--accent);background:var(--accent-soft);box-shadow:0 0 0 4px var(--accent-glow)}
+  .tile.on .chk{background:var(--accent);border-color:var(--accent)} .tile.on .chk svg{opacity:1}
+  .tile.on svg.ico{stroke:var(--accent-hi)}
+  .qty{display:none;align-items:center;border:1.5px solid var(--line-3);border-radius:999px;overflow:hidden;width:max-content;background:var(--panel)}
+  .tile.on .qty{display:inline-flex}
+  .qty button{width:40px;height:38px;background:transparent;border:0;font-size:20px;font-weight:700;cursor:pointer}
+  .qty button:hover{background:var(--accent-soft)}
+  .qty b{min-width:30px;text-align:center;font-family:var(--mono);font-size:15px}
+  .bigload{margin-top:16px;display:flex;gap:14px;align-items:flex-start;padding:16px 18px;border:1.5px dashed var(--line-2);border-radius:16px;cursor:pointer;background:var(--panel-2)}
+  .bigload input{width:22px;height:22px;margin-top:3px;accent-color:var(--accent);flex:none}
+  .bigload b{display:block;font-size:16px}
+  .bigload span span{color:var(--muted);font-size:15px}
+  .tray{margin-top:22px;display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;border-top:1px solid var(--line);padding-top:20px}
+  .tray .sum{color:var(--muted);font-weight:600;font-size:16px}
+  .tray .sum b{color:var(--ink)}
+  .tray .acts{display:flex;gap:10px;flex-wrap:wrap}
+  .note{margin-top:14px;color:var(--faint);font-size:14px}
+  .note a{color:var(--muted);text-decoration:underline}
 
-  /* ---------- PURGE terminal ---------- */
-  .purge{display:grid;grid-template-columns:1fr;gap:32px;padding:40px 0 56px}
-  .purge .copy h2{font-family:var(--dot);font-weight:900;font-size:clamp(36px,6vw,72px);line-height:.95;letter-spacing:.02em}
-  .purge .copy p{color:var(--muted);margin-top:20px;max-width:46ch;font-weight:300}
-  .purge .copy ul{list-style:none;margin-top:24px;display:grid;gap:10px}
-  .purge .copy li{display:grid;grid-template-columns:28px 1fr;gap:12px;font-size:15px}
-  .purge .copy li .k{font-family:var(--mono);font-size:11px;color:var(--faint);padding-top:4px}
-  .term{
-    background:var(--ink);color:#d8d8d4;border:1px solid var(--ink);
-    font-family:var(--mono);font-size:12.5px;line-height:1.7;padding:22px 22px 26px;
-    overflow:hidden;position:relative;
-  }
+  /* fields */
+  .fields{margin-top:24px;display:grid;gap:14px}
+  @media (min-width:720px){.fields.two{grid-template-columns:1fr 1fr}.fields .span{grid-column:1/-1}}
+  .f label{display:block;font-weight:700;font-size:15px;margin-bottom:8px}
+  .f label small{color:var(--muted);font-weight:500}
+  .f input,.f textarea,.f select{width:100%;font:inherit;font-size:17px;color:var(--ink);background:var(--panel-2);border:1.5px solid var(--line-2);border-radius:14px;padding:14px 16px;min-height:54px;transition:border-color .15s}
+  .f input:focus,.f textarea:focus,.f select:focus{border-color:var(--accent);outline:none}
+  .f textarea{resize:vertical;min-height:110px}
+  .f select{appearance:none;-webkit-appearance:none;background-image:linear-gradient(45deg,transparent 50%,var(--muted) 50%),linear-gradient(135deg,var(--muted) 50%,transparent 50%);background-position:calc(100% - 20px) 24px,calc(100% - 14px) 24px;background-size:6px 6px;background-repeat:no-repeat;padding-right:44px}
+  ::placeholder{color:var(--faint)}
+  .err{color:#ff6b6b;font-size:14px;font-weight:600;margin-top:10px;min-height:18px}
+  [data-theme="light"] .err{color:#b3261e}
+
+  /* chips */
+  .chips{display:flex;flex-wrap:wrap;gap:10px;margin-top:12px}
+  .chip{border:1.5px solid var(--line-2);background:var(--panel-2);border-radius:14px;padding:12px 16px;cursor:pointer;font-weight:700;font-size:15px;min-height:52px;display:inline-flex;flex-direction:column;justify-content:center;align-items:flex-start;transition:border-color .15s,background .15s;text-align:left}
+  .chip small{display:block;font-weight:500;color:var(--muted);font-size:13px}
+  .chip:hover{border-color:var(--line-3)}
+  .chip.on{border-color:var(--accent);background:var(--accent-soft);box-shadow:0 0 0 3px var(--accent-glow)}
+  .chip.wide{width:100%;flex-direction:row;justify-content:space-between;align-items:center;gap:12px}
+  .chip .price{font-family:var(--mono);font-size:13px;color:var(--accent-hi);white-space:nowrap}
+  .lbl{margin-top:22px;font-weight:700;font-size:15px}
+  .lbl small{color:var(--muted);font-weight:500}
+
+  /* photos */
+  .drop{margin-top:22px;border:2px dashed var(--line-2);border-radius:18px;padding:28px 20px;text-align:center;background:var(--panel-2);cursor:pointer;transition:border-color .15s,background .15s;display:block}
+  .drop.over,.drop:hover{border-color:var(--accent);background:var(--accent-soft)}
+  .drop svg{width:40px;height:40px;stroke:var(--accent-hi);fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+  .drop b{display:block;margin-top:10px;font-size:17px}
+  .drop span{display:block;color:var(--muted);font-size:14px;margin-top:4px}
+  .drop input{display:none}
+  .thumbs{display:grid;grid-template-columns:repeat(auto-fill,minmax(96px,1fr));gap:10px;margin-top:14px}
+  .thumb{position:relative;aspect-ratio:1;border-radius:12px;overflow:hidden;border:1px solid var(--line-2);background:var(--panel-2)}
+  .thumb img{width:100%;height:100%;object-fit:cover;display:block}
+  .thumb button{position:absolute;top:6px;right:6px;width:26px;height:26px;border-radius:50%;border:0;background:rgba(0,0,0,.7);color:#fff;font-size:16px;line-height:1;cursor:pointer}
+
+  /* review / done */
+  .review{margin-top:22px;display:grid;gap:0}
+  .review .row{display:grid;grid-template-columns:90px 1fr;gap:12px;padding:12px 0;border-bottom:1px solid var(--line);font-size:16px}
+  .review .row:last-child{border-bottom:0}
+  .review .k{color:var(--muted);font-weight:600;font-size:14px;padding-top:2px}
+  .done{text-align:center;padding:30px 10px 10px}
+  .done .big{width:76px;height:76px;border-radius:50%;background:var(--accent);display:grid;place-items:center;margin:0 auto 18px;box-shadow:0 10px 40px var(--accent-glow)}
+  .done .big svg{width:36px;height:36px;stroke:var(--accent-ink);fill:none;stroke-width:3;stroke-linecap:round;stroke-linejoin:round}
+  .done h3{font-size:clamp(26px,3.6vw,38px);font-weight:800;letter-spacing:-.02em}
+  .done p{color:var(--muted);margin-top:10px;max-width:46ch;margin-inline:auto}
+  .done p b{color:var(--ink)}
+
+  /* ---------- SERVICES ---------- */
+  .cards{display:grid;gap:14px;grid-template-columns:1fr}
+  @media (min-width:860px){.cards{grid-template-columns:repeat(3,1fr)}}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:28px 26px 26px;display:flex;flex-direction:column;gap:16px;transition:transform .2s,border-color .2s}
+  .card:hover{transform:translateY(-3px);border-color:var(--line-3)}
+  .card .ico{width:52px;height:52px;border-radius:14px;background:var(--accent-soft);display:grid;place-items:center}
+  .card .ico svg{width:26px;height:26px;stroke:var(--accent-hi);fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+  .card h3{font-size:24px;font-weight:800;letter-spacing:-.01em;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+  .card p{color:var(--muted);font-size:16px}
+  .price{margin-top:auto;display:grid;gap:8px;border-top:1px solid var(--line);padding-top:16px}
+  .price div{display:flex;justify-content:space-between;gap:12px;font-size:15px}
+  .price div span:last-child{font-family:var(--mono);font-size:13px;color:var(--accent-hi);white-space:nowrap}
+  .price div.free span:last-child{color:var(--ink)}
+  .tag{display:inline-block;font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--accent-hi);background:var(--accent-soft);border-radius:999px;padding:4px 10px}
+
+  /* ---------- PURGE ---------- */
+  .purge{display:grid;grid-template-columns:1fr;gap:32px;align-items:center}
+  @media (min-width:900px){.purge{grid-template-columns:1fr 1fr;gap:56px}}
+  .purge ul{list-style:none;margin-top:24px;display:grid;gap:14px}
+  .purge li{display:grid;grid-template-columns:34px 1fr;gap:14px;font-size:16px;color:var(--muted)}
+  .purge li b{color:var(--ink)}
+  .purge li .k{width:28px;height:28px;border-radius:50%;background:var(--accent-soft);color:var(--accent-hi);font-family:var(--mono);font-size:12px;display:grid;place-items:center}
+  .term{background:var(--term-bg);color:var(--term-ink);border:1px solid var(--line-2);border-radius:18px;font-family:var(--mono);font-size:13px;line-height:1.75;padding:20px 22px 24px;box-shadow:var(--shadow);overflow:hidden}
   .term .bar{display:flex;justify-content:space-between;color:#8a8a86;border-bottom:1px solid rgba(255,255,255,.12);padding-bottom:10px;margin-bottom:14px;letter-spacing:.1em;text-transform:uppercase;font-size:11px}
-  .term .ok{color:#fff}
-  .term .dim{color:#8a8a86}
-  .term .red{color:#ff5a5f}
-  .term .cursor{display:inline-block;width:8px;height:14px;background:#d8d8d4;vertical-align:-2px;animation:blink 1s steps(1) infinite}
-  @media (prefers-reduced-motion:reduce){.term .cursor{animation:none}}
-  @media (min-width:860px){.purge{grid-template-columns:1fr 1fr;gap:56px;padding:64px 0 80px}}
+  .term .bar i{display:inline-flex;gap:6px}.term .bar i b{width:10px;height:10px;border-radius:50%;background:#444;display:inline-block}
+  .term .ln{opacity:0;transform:translateY(4px);transition:opacity .3s,transform .3s}
+  .term .ln.show{opacity:1;transform:none}
+  .term .ok{color:var(--accent-hi)} .term .dim{color:#8a8a86} .term .red{color:#ff5a5f}
+  .term .cursor{display:inline-block;width:8px;height:14px;background:var(--term-ink);vertical-align:-2px;animation:blink 1s steps(1) infinite}
+  @keyframes blink{50%{opacity:0}}
 
   /* ---------- TAKE / REFUSE ---------- */
-  .two{display:grid;grid-template-columns:1fr}
-  .col{padding:28px 0 36px}
-  .col + .col{border-top:1px solid var(--line)}
-  .col h3{font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;display:flex;align-items:center;gap:10px;margin-bottom:18px}
-  .col h3 .sq{width:9px;height:9px;border:1.5px solid var(--ink)}
-  .col h3 .sq.fill{background:var(--ink)}
-  .col ol{list-style:none;display:grid}
-  .col li{
-    display:grid;grid-template-columns:40px 1fr;gap:14px;padding:12px 0;
-    border-top:1px solid var(--line);font-size:15px;
-  }
-  .col li:last-child{border-bottom:1px solid var(--line)}
-  .col li .n{font-family:var(--mono);font-size:11px;color:var(--faint);padding-top:4px;letter-spacing:.08em}
-  .col li b{font-weight:500}
-  .col li small{display:block;color:var(--muted);font-weight:300}
-  .col.refuse li{color:var(--muted)}
-  .col.refuse li b{color:var(--ink);text-decoration:line-through;text-decoration-thickness:1px;text-decoration-color:var(--red)}
-  .note{color:var(--muted);font-size:13px;margin-top:16px;max-width:52ch;font-weight:300}
-  @media (min-width:860px){
-    .two{grid-template-columns:1fr 1fr}
-    .col{padding:36px 40px 48px}
-    .col:first-child{padding-left:0}
-    .col + .col{border-top:0;border-left:1px solid var(--line);padding-right:0}
-  }
+  .two{display:grid;gap:14px;grid-template-columns:1fr}
+  @media (min-width:860px){.two{grid-template-columns:1fr 1fr}}
+  .list{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:26px}
+  .list h3{display:flex;align-items:center;gap:10px;font-size:20px;font-weight:800;margin-bottom:14px}
+  .list h3 .dotk{width:12px;height:12px;border-radius:50%;background:var(--accent-hi)}
+  .list.no h3 .dotk{background:#ff5a5f}
+  .list ul{list-style:none;display:grid}
+  .list li{padding:12px 0;border-top:1px solid var(--line);font-size:16px}
+  .list li b{display:block;font-weight:700}
+  .list li span{color:var(--muted);font-size:15px}
+  .list.no li b{text-decoration:line-through;text-decoration-color:#ff5a5f;text-decoration-thickness:2px;color:var(--muted)}
+  .list .foot{margin-top:14px;color:var(--faint);font-size:14px}
 
-  /* ---------- HOW IT WORKS ---------- */
-  .steps{display:grid;grid-template-columns:1fr}
-  .step{padding:26px 0;border-bottom:1px solid var(--line);display:grid;gap:12px}
-  .step:last-child{border-bottom:0}
-  .step .big{font-family:var(--dot);font-weight:900;font-size:56px;line-height:1;color:transparent;-webkit-text-stroke:1.2px var(--ink)}
-  .step h4{font-weight:500;font-size:17px}
-  .step p{color:var(--muted);font-weight:300;max-width:34ch}
-  @media (min-width:860px){
-    .steps{grid-template-columns:repeat(4,1fr)}
-    .step{padding:36px 28px 44px;border-bottom:0;border-right:1px solid var(--line)}
-    .step:first-child{padding-left:0}
-    .step:last-child{border-right:0;padding-right:0}
-  }
+  /* ---------- HOW ---------- */
+  .how{display:grid;gap:14px;grid-template-columns:1fr}
+  @media (min-width:720px){.how{grid-template-columns:repeat(2,1fr)}}
+  @media (min-width:1000px){.how{grid-template-columns:repeat(4,1fr)}}
+  .hs{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:26px 24px}
+  .hs .n{font-family:var(--dotf);font-weight:900;font-size:44px;color:var(--accent-hi);line-height:1}
+  .hs h4{margin-top:12px;font-size:20px;font-weight:800}
+  .hs p{margin-top:8px;color:var(--muted);font-size:16px}
 
-  /* ---------- REQUEST FORM ---------- */
-  .req{display:grid;grid-template-columns:1fr;gap:32px;padding:40px 0 64px}
-  .req .lead h2{font-family:var(--dot);font-weight:900;font-size:clamp(36px,6vw,72px);line-height:.95;letter-spacing:.02em}
-  .req .lead p{color:var(--muted);margin-top:18px;max-width:40ch;font-weight:300}
-  .req .alt{margin-top:28px;display:grid;gap:10px}
-  .req .alt a{display:flex;justify-content:space-between;border-top:1px solid var(--line);padding:12px 0;font-family:var(--mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase}
-  .req .alt a:last-child{border-bottom:1px solid var(--line)}
-  .req .alt a span:last-child{color:var(--muted)}
-  form{display:grid;gap:0;border-top:1px solid var(--line)}
-  .field{display:grid;grid-template-columns:1fr;border-bottom:1px solid var(--line)}
-  .field label{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);padding:14px 0 0}
-  .field input,.field select,.field textarea{
-    font:inherit;font-weight:300;font-size:16px;color:var(--ink);
-    background:transparent;border:0;outline:0;padding:6px 0 14px;width:100%;border-radius:0;
-    -webkit-appearance:none;appearance:none;
-  }
-  .field textarea{resize:vertical;min-height:96px}
-  .field select{cursor:pointer;background-image:linear-gradient(45deg,transparent 50%,var(--ink) 50%),linear-gradient(135deg,var(--ink) 50%,transparent 50%);background-position:calc(100% - 14px) 14px,calc(100% - 9px) 14px;background-size:5px 5px;background-repeat:no-repeat}
-  .field:focus-within{background:var(--surface)}
-  .field:focus-within label{color:var(--ink)}
-  ::placeholder{color:var(--faint)}
-  .chips{display:flex;flex-wrap:wrap;gap:8px;padding:6px 0 16px}
-  .chip{position:relative;display:inline-flex}
-  .chip input{position:absolute;opacity:0;inset:0;cursor:pointer}
-  .chip span{display:inline-block;font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;padding:9px 12px;border:1px solid var(--line-strong);background:transparent;cursor:pointer;min-height:36px;line-height:1.4}
-  .chip input:checked + span{background:var(--ink);color:var(--bg);border-color:var(--ink)}
-  .chip input:focus-visible + span{outline:2px solid var(--ink);outline-offset:2px}
-  .submit{margin-top:22px;display:grid;gap:12px}
-  .submit .btn{height:52px;width:100%;font-size:13px}
-  .fine{color:var(--faint);font-size:12px;font-family:var(--mono);letter-spacing:.06em;text-transform:uppercase}
-  .status{font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);min-height:18px}
-  .status.ok{color:var(--ink)}
-  .status.err{color:var(--red)}
-  @media (min-width:860px){
-    .req{grid-template-columns:5fr 7fr;gap:72px;padding:64px 0 96px}
-    .field{grid-template-columns:180px 1fr;align-items:start}
-    .field label{padding:16px 0}
-    .field input,.field select,.field textarea{padding:14px 0}
-    .chips{padding:12px 0}
-    .submit{grid-template-columns:auto 1fr;align-items:center}
-    .submit .btn{width:auto;padding:0 32px}
-  }
+  /* ---------- FAQ ---------- */
+  .faq{max-width:820px}
+  .faq details{border-top:1px solid var(--line);padding:4px 0}
+  .faq details:last-child{border-bottom:1px solid var(--line)}
+  .faq summary{list-style:none;cursor:pointer;padding:18px 0;font-weight:700;font-size:18px;display:flex;justify-content:space-between;gap:16px;align-items:center}
+  .faq summary::-webkit-details-marker{display:none}
+  .faq summary::after{content:"+";font-family:var(--mono);font-size:22px;color:var(--accent-hi);transition:transform .2s}
+  .faq details[open] summary::after{transform:rotate(45deg)}
+  .faq p{color:var(--muted);padding-bottom:20px;font-size:16px;max-width:64ch}
 
   /* ---------- FOOTER ---------- */
-  footer{padding:28px 0 36px;color:var(--muted)}
-  .foot{display:grid;gap:14px}
-  .foot .row{display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px 24px}
-  .foot .word{font-family:var(--dot);font-weight:900;font-size:18px;letter-spacing:.06em;color:var(--ink)}
+  footer{border-top:1px solid var(--line);padding:40px 0 48px;background:var(--bg-2)}
+  .foot{display:grid;gap:22px}
+  @media (min-width:720px){.foot{grid-template-columns:1.2fr 1fr 1fr}}
+  .foot .word{font-family:var(--dotf);font-weight:900;font-size:22px;letter-spacing:.06em}
+  .foot .word b{color:var(--accent-hi)}
+  .foot p{color:var(--muted);font-size:15px;margin-top:10px;max-width:36ch}
+  .foot h5{font-family:var(--mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:10px}
+  .foot a{display:block;font-weight:600;font-size:16px;padding:4px 0}
+  .foot a:hover{color:var(--accent-hi)}
+  .foot .legal{grid-column:1/-1;color:var(--faint);font-size:13px;border-top:1px solid var(--line);padding-top:18px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
 
-  /* ---------- STICKY MOBILE CTA ---------- */
-  .sticky{
-    position:fixed;left:0;right:0;bottom:0;z-index:30;
-    background:var(--bg);border-top:1px solid var(--line);
-    padding:12px var(--gutter) calc(12px + env(safe-area-inset-bottom));
-    display:grid;grid-template-columns:1fr;gap:8px;
-  }
-  .sticky .btn{height:52px;width:100%;font-size:13px}
-  .sticky .mini{display:flex;justify-content:center;gap:16px;color:var(--muted);font-size:11px}
-  @media (min-width:860px){.sticky{display:none} body{padding-bottom:0}}
+  /* sticky CTA */
+  .sticky{position:fixed;left:0;right:0;bottom:0;z-index:30;padding:10px var(--gutter) calc(10px + env(safe-area-inset-bottom));
+          background:linear-gradient(180deg,transparent,color-mix(in srgb,var(--bg) 92%,transparent) 35%);display:flex;justify-content:center;transition:transform .25s}
+  .sticky.hide{transform:translateY(120%)}
+  .sticky .btn{width:100%;max-width:520px;height:56px}
+  @media (min-width:960px){.sticky{display:none}}
+  body{padding-bottom:84px} @media (min-width:960px){body{padding-bottom:0}}
 </style>
 </head>
 <body>
 
-<header>
-  <div class="wrap nav">
-    <a class="brand" href="#top" aria-label="ZeroFill Tech home">
-      <span class="dotmark" aria-hidden="true"></span>
-      <span class="word">ZEROFILL</span>
-    </a>
-    <nav class="links mono" aria-label="Sections">
-      <a href="#services">Services</a>
-      <a href="#purge">Purge</a>
-      <a href="#intake">What we take</a>
-      <a href="#how">How it works</a>
-    </nav>
-    <div style="display:flex;align-items:center;gap:20px">
-      <span class="loc mono live">Las Vegas, NV</span>
-      <a class="btn" href="#request">Request pickup</a>
-    </div>
+<header><div class="wrap nav">
+  <a class="brand" href="#top" aria-label="ZeroFill Tech home"><span class="word">ZER<b>0</b>FILL</span></a>
+  <nav class="nav-links" aria-label="Sections">
+    <a href="#services">Services</a><a href="#purge">PURGE</a><a href="#take">What we take</a><a href="#how">How it works</a><a href="#faq">FAQ</a>
+  </nav>
+  <div class="nav-right">
+    <a class="call" href="tel:+17027605037">Call <b>(702) 760-5037</b></a>
+    <button class="theme" id="theme" aria-label="Toggle light and dark theme">
+      <svg class="moon" viewBox="0 0 24 24"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+      <svg class="sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+    </button>
+    <a class="btn" href="#book">Book a free pickup</a>
   </div>
-</header>
+</div></header>
 
 <main id="top">
 
-  <section class="hero">
-    <div class="wrap hero-inner">
-      <div class="index mono"><span>01 / 05 &nbsp;·&nbsp; Free pickup</span><span>Las Vegas valley</span></div>
-      <h1 class="h1">Your old<br>computers,<br><span class="ghost">gone.</span></h1>
-      <p class="tagline">
-        <span>Free pickup</span>
-        <span>Certified data destruction</span>
-        <span>Refurbished tech</span>
-      </p>
-      <div class="hero-cta">
-        <a class="btn" href="#request">Request free pickup</a>
-        <a class="btn ghost" href="#intake">What we take</a>
+<!-- HERO -->
+<section class="hero">
+  <canvas id="dots" aria-hidden="true"></canvas>
+  <div class="wrap">
+    <span class="kicker">Las Vegas · Free pickup</span>
+    <h1 class="h1">We haul off your old tech. <em>Free.</em></h1>
+    <p class="lede">Computers, laptops, monitors, servers — <b>we pick them up</b>, wipe every drive, and give what's still good a second life. You get a clean garage and a clear conscience.</p>
+    <div class="hero-cta">
+      <a class="btn lg" href="#book">Book a free pickup</a>
+      <a class="btn ghost lg" href="#how">How it works</a>
+    </div>
+    <div class="trust">
+      <span><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>$0 standard pickup</span>
+      <span><svg viewBox="0 0 24 24"><path d="M12 3l8 4v5c0 5-3.5 8-8 9-4.5-1-8-4-8-9V7z"/></svg>Every drive wiped</span>
+      <span><svg viewBox="0 0 24 24"><path d="M3 12a9 9 0 0 1 15.5-6.3M21 12a9 9 0 0 1-15.5 6.3M18 3v4h-4M6 21v-4h4"/></svg>Nothing to landfill</span>
+    </div>
+  </div>
+</section>
+
+<!-- BOOKING -->
+<section class="book" id="book"><div class="wrap">
+  <div class="panel" id="wiz">
+    <div class="steps" id="steps">
+      <span class="s on"><i>1</i> Items</span><span class="sep"></span>
+      <span class="s"><i>2</i> Where</span><span class="sep"></span>
+      <span class="s"><i>3</i> When</span><span class="sep"></span>
+      <span class="s"><i>4</i> Photos</span><span class="sep"></span>
+      <span class="s"><i>5</i> You</span>
+    </div>
+
+    <!-- STEP 1 ITEMS -->
+    <div class="step on" data-step="0">
+      <h2 class="q">What are you getting rid of?<small>Tap everything that applies. Rough counts are fine.</small></h2>
+      <div class="tiles" id="tiles">
+        <div class="tile" role="button" tabindex="0" data-item="Desktop PC"><span class="chk"><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg></span>
+          <svg class="ico" viewBox="0 0 24 24"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 7h8M8 11h8M15 17h1"/></svg>
+          <span class="t">Desktop PC<small>Tower or small form</small></span>
+          <span class="qty"><button type="button" data-d="-1" aria-label="fewer">−</button><b>1</b><button type="button" data-d="1" aria-label="more">+</button></span></div>
+        <div class="tile" role="button" tabindex="0" data-item="Laptop"><span class="chk"><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg></span>
+          <svg class="ico" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="12" rx="1.5"/><path d="M2 19h20"/></svg>
+          <span class="t">Laptop<small>Working or dead</small></span>
+          <span class="qty"><button type="button" data-d="-1" aria-label="fewer">−</button><b>1</b><button type="button" data-d="1" aria-label="more">+</button></span></div>
+        <div class="tile" role="button" tabindex="0" data-item="Monitor"><span class="chk"><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg></span>
+          <svg class="ico" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="12" rx="1.5"/><path d="M12 16v4M8 20h8"/></svg>
+          <span class="t">Monitor<small>Flat panel only</small></span>
+          <span class="qty"><button type="button" data-d="-1" aria-label="fewer">−</button><b>1</b><button type="button" data-d="1" aria-label="more">+</button></span></div>
+        <div class="tile" role="button" tabindex="0" data-item="Server / NAS"><span class="chk"><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg></span>
+          <svg class="ico" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="6" rx="1"/><rect x="3" y="14" width="18" height="6" rx="1"/><path d="M7 7h.01M7 17h.01"/></svg>
+          <span class="t">Server / NAS<small>Rack or tower</small></span>
+          <span class="qty"><button type="button" data-d="-1" aria-label="fewer">−</button><b>1</b><button type="button" data-d="1" aria-label="more">+</button></span></div>
+        <div class="tile" role="button" tabindex="0" data-item="Networking"><span class="chk"><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg></span>
+          <svg class="ico" viewBox="0 0 24 24"><rect x="3" y="9" width="18" height="6" rx="1"/><path d="M7 9V5h10v4M8 15v4h8v-4"/></svg>
+          <span class="t">Networking<small>Routers, switches, APs</small></span>
+          <span class="qty"><button type="button" data-d="-1" aria-label="fewer">−</button><b>1</b><button type="button" data-d="1" aria-label="more">+</button></span></div>
+        <div class="tile" role="button" tabindex="0" data-item="Phones / tablets"><span class="chk"><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg></span>
+          <svg class="ico" viewBox="0 0 24 24"><rect x="7" y="2" width="10" height="20" rx="2"/><path d="M11 18h2"/></svg>
+          <span class="t">Phones &amp; tablets<small>Reset in front of us</small></span>
+          <span class="qty"><button type="button" data-d="-1" aria-label="fewer">−</button><b>1</b><button type="button" data-d="1" aria-label="more">+</button></span></div>
+        <div class="tile" role="button" tabindex="0" data-item="Printer"><span class="chk"><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg></span>
+          <svg class="ico" viewBox="0 0 24 24"><path d="M4 8h16v8H4zM8 8V4h8v4M8 16v4h8v-4"/></svg>
+          <span class="t">Printer<small>Laser only, no inkjets</small></span>
+          <span class="qty"><button type="button" data-d="-1" aria-label="fewer">−</button><b>1</b><button type="button" data-d="1" aria-label="more">+</button></span></div>
+        <div class="tile" role="button" tabindex="0" data-item="Parts / cables"><span class="chk"><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg></span>
+          <svg class="ico" viewBox="0 0 24 24"><path d="M4 7h16l-1 13H5zM9 7V4h6v3"/></svg>
+          <span class="t">Parts &amp; cables<small>Boxes of misc</small></span>
+          <span class="qty"><button type="button" data-d="-1" aria-label="fewer">−</button><b>1</b><button type="button" data-d="1" aria-label="more">+</button></span></div>
+      </div>
+      <label class="bigload"><input type="checkbox" id="bigload">
+        <span><b>It's a big load</b><span>More than ~6 machines, a full rack, or an office cleanout. We bring a truck — flat $49, and we'll confirm before we come. Normal loads are free.</span></span></label>
+      <div class="tray">
+        <span class="sum" id="sum">Nothing selected yet</span>
+        <div class="acts"><button class="btn" id="n0" disabled>Next: where is it? →</button></div>
+      </div>
+      <p class="note">We don't take tube TVs, loose batteries, or appliances — <a href="#take">see the full list</a>.</p>
+    </div>
+
+    <!-- STEP 2 WHERE -->
+    <div class="step" data-step="1">
+      <h2 class="q">Where is it?<small>Street address or just the cross-streets — we only need enough to plan the route.</small></h2>
+      <div class="fields two">
+        <div class="f span"><label for="addr">Address <small>(or nearest cross-streets)</small></label><input id="addr" autocomplete="street-address" placeholder="1234 W Charleston Blvd" required></div>
+        <div class="f"><label for="area">Area</label>
+          <select id="area" required><option value="" disabled selected>Choose one</option><option>Las Vegas</option><option>Henderson</option><option>North Las Vegas</option><option>Summerlin</option><option>Spring Valley</option><option>Boulder City</option><option>Other / not sure</option></select></div>
+        <div class="f"><label for="ptype">Pickup from</label>
+          <select id="ptype" required><option value="" disabled selected>Choose one</option><option>Home — curb or driveway</option><option>Home — garage / inside</option><option>Apartment</option><option>Office / business</option></select></div>
+        <div class="f span"><label for="access">Anything we should know? <small>(optional)</small></label><textarea id="access" placeholder="Gate code, stairs, business hours, dog in the yard…"></textarea></div>
+      </div>
+      <div class="err" id="e1"></div>
+      <div class="tray"><button class="btn ghost" data-back>← Back</button><div class="acts"><button class="btn" id="n1">Next: when? →</button></div></div>
+    </div>
+
+    <!-- STEP 3 WHEN -->
+    <div class="step" data-step="2">
+      <h2 class="q">When works for you?<small>Pick a day and a window. We'll text to lock in a time.</small></h2>
+      <div class="lbl">Day</div>
+      <div class="chips" id="days"></div>
+      <div class="lbl">Time window</div>
+      <div class="chips" id="wins">
+        <button class="chip" data-win="Morning (8–11am)">Morning<small>8 – 11am</small></button>
+        <button class="chip" data-win="Midday (11am–2pm)">Midday<small>11am – 2pm</small></button>
+        <button class="chip" data-win="Afternoon (2–5pm)">Afternoon<small>2 – 5pm</small></button>
+        <button class="chip" data-win="Evening (5–8pm)">Evening<small>5 – 8pm</small></button>
+        <button class="chip" data-win="Flexible">Flexible<small>Whenever's easiest</small></button>
+      </div>
+      <div class="err" id="e2"></div>
+      <div class="tray"><button class="btn ghost" data-back>← Back</button><div class="acts"><button class="btn" id="n2">Next: photos →</button></div></div>
+    </div>
+
+    <!-- STEP 4 PHOTOS -->
+    <div class="step" data-step="3">
+      <h2 class="q">Got a photo?<small>Optional, but it helps us bring the right car and the right boxes. Especially for big or heavy stuff.</small></h2>
+      <label class="drop" id="drop">
+        <svg viewBox="0 0 24 24"><path d="M4 16v3a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-3M12 4v12M7 9l5-5 5 5"/></svg>
+        <b>Tap to add photos</b><span>Up to 5 · we shrink them for you, so phone photos are fine</span>
+        <input type="file" id="files" accept="image/*" multiple>
+      </label>
+      <div class="thumbs" id="thumbs"></div>
+      <div class="err" id="e3"></div>
+      <div class="tray"><button class="btn ghost" data-back>← Back</button><div class="acts"><button class="btn ghost" id="skip3">Skip</button><button class="btn" id="n3">Next: your details →</button></div></div>
+    </div>
+
+    <!-- STEP 5 YOU -->
+    <div class="step" data-step="4">
+      <h2 class="q">Last thing — how do we reach you?<small>We'll text you a pickup time. No spam, no list.</small></h2>
+      <div class="fields two">
+        <div class="f"><label for="name">Name</label><input id="name" autocomplete="name" placeholder="First name is fine" required></div>
+        <div class="f"><label for="phone">Mobile number</label><input id="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="(702) 555-0100" required></div>
+        <div class="f span"><label for="email">Email <small>(optional — needed if you want a certificate)</small></label><input id="email" type="email" autocomplete="email" placeholder="you@example.com"></div>
+      </div>
+      <div class="lbl">Your data <small>— every drive gets wiped either way</small></div>
+      <div class="chips" id="data">
+        <button class="chip wide on" data-data="Wipe (free)"><span>Just wipe it<small>NIST 800-88 wipe on every drive</small></span><span class="price">FREE</span></button>
+        <button class="chip wide" data-data="Wipe + certificate ($10/drive, $25 min)"><span>Wipe + certificate of destruction<small>Serialized PDF for your records or compliance</small></span><span class="price">$10 / drive</span></button>
+        <button class="chip wide" data-data="Physically destroy drives ($15/drive)"><span>Physically destroy the drives<small>Drilled or shredded, photo proof + certificate</small></span><span class="price">$15 / drive</span></button>
+      </div>
+      <input type="text" id="hp" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px" aria-hidden="true">
+      <div class="err" id="e4"></div>
+      <div class="tray"><button class="btn ghost" data-back>← Back</button><div class="acts"><button class="btn" id="n4">Review →</button></div></div>
+    </div>
+
+    <!-- STEP 6 REVIEW -->
+    <div class="step" data-step="5">
+      <h2 class="q">Look right?<small>We'll text you within a day to confirm the time.</small></h2>
+      <div class="review" id="review"></div>
+      <div class="err" id="e5"></div>
+      <div class="tray"><button class="btn ghost" data-back>← Back</button><div class="acts"><button class="btn lg" id="send">Book my free pickup</button></div></div>
+    </div>
+
+    <!-- DONE -->
+    <div class="step" data-step="6">
+      <div class="done">
+        <div class="big"><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg></div>
+        <h3>You're booked.</h3>
+        <p>We've got your request. Expect a text from <b>(702) 760-5037</b> to lock in the time. Need it sooner? Just call that number.</p>
+        <div class="hero-cta" style="justify-content:center"><a class="btn ghost" href="#top">Back to top</a></div>
       </div>
     </div>
-  </section>
+  </div>
+</div></section>
 
-  <section id="services">
-    <div class="wrap">
-      <div class="sec-head mono"><span class="t">02 / 05 &nbsp;·&nbsp; Services</span><span>Three ways in</span></div>
-      <div class="grid3">
-        <article class="cell">
-          <div class="num mono"><span>001 Pickup</span><span class="plus">+</span></div>
-          <h3>FREE<br>PICKUP</h3>
-          <p>Desktops, laptops, servers, networking gear and monitors, collected from your home or office across the valley. No fee, no minimum.</p>
-          <dl class="spec">
-            <dt>Cost</dt><dd>$0</dd>
-            <dt>Area</dt><dd>Las Vegas · Henderson · N. Las Vegas · Summerlin</dd>
-            <dt>Lead time</dt><dd>Usually within the week</dd>
-          </dl>
-        </article>
-        <article class="cell">
-          <div class="num mono"><span>002 Purge</span><span class="plus">+</span></div>
-          <h3>DATA<br>DESTRUCTION</h3>
-          <p>Every drive is pulled before anything else happens. Wiped to NIST 800-88 or physically destroyed, with a certificate listing each serial number.</p>
-          <dl class="spec">
-            <dt>Standard</dt><dd>NIST SP 800-88</dd>
-            <dt>Proof</dt><dd>Certificate of destruction</dd>
-            <dt>For</dt><dd>Small offices · home users</dd>
-          </dl>
-        </article>
-        <article class="cell">
-          <div class="num mono"><span>003 Refurb</span><span class="plus">+</span></div>
-          <h3>REFURBISHED<br>TECH</h3>
-          <p>Business-class machines we collect are tested, cleaned and resold. What can't be reused is parted out or recycled responsibly — nothing to landfill.</p>
-          <dl class="spec">
-            <dt>Sold on</dt><dd>eBay · local Marketplace</dd>
-            <dt>Tested</dt><dd>Power, RAM, storage, display</dd>
-            <dt>Leftovers</dt><dd>Recycled, never dumped</dd>
-          </dl>
-        </article>
+<!-- SERVICES -->
+<section class="sec" id="services"><div class="wrap">
+  <div class="sec-head reveal">
+    <span class="eyebrow">Services</span>
+    <h2 class="h2">Three things we do. One of them is free.</h2>
+    <p class="sub">Pickup costs nothing because the gear has value to us. Businesses pay for the paperwork, not the truck.</p>
+  </div>
+  <div class="cards">
+    <div class="card reveal">
+      <div class="ico"><svg viewBox="0 0 24 24"><path d="M3 7h11v9H3zM14 10h4l3 3v3h-7zM7 19a2 2 0 1 0 0-4 2 2 0 0 0 0 4zM17 19a2 2 0 1 0 0-4 2 2 0 0 0 0 4z"/></svg></div>
+      <h3>Free pickup</h3>
+      <p>Desktops, laptops, servers, networking gear and monitors — collected from your home or office anywhere in the valley. No fee, no minimum.</p>
+      <div class="price">
+        <div class="free"><span>Standard pickup (fits in a car)</span><span>Free</span></div>
+        <div><span>Big load — truck day</span><span>$49 flat</span></div>
+        <div><span>Confirmed before we come</span><span>Always</span></div>
       </div>
     </div>
-  </section>
-
-  <section id="purge">
-    <div class="wrap">
-      <div class="sec-head mono"><span class="t">03 / 05 &nbsp;·&nbsp; Purge</span><span>purge.exe</span></div>
-      <div class="purge">
-        <div class="copy">
-          <h2>NOTHING<br>LEFT TO<br>RECOVER.</h2>
-          <p>Handing off a computer means handing off everything on it. PURGE is our data-destruction process: drives come out first, get wiped or shredded, and you get paperwork you can file.</p>
-          <ul>
-            <li><span class="k">01</span><span>Drives pulled and labeled before any testing or resale.</span></li>
-            <li><span class="k">02</span><span>Wiped to NIST SP 800-88 (Clear / Purge), or physically destroyed on request.</span></li>
-            <li><span class="k">03</span><span>Certificate of destruction with device and drive serials, dated and signed.</span></li>
-          </ul>
-        </div>
-        <div class="term" aria-label="Example purge log">
-          <div class="bar"><span>purge.exe</span><span>v0.1 · nist 800-88</span></div>
-          <div><span class="dim">$</span> purge --target /dev/sda --method clear --cert</div>
-          <div><span class="dim">[00:00]</span> device&nbsp;&nbsp; Samsung 870 EVO 500GB</div>
-          <div><span class="dim">[00:00]</span> serial&nbsp;&nbsp; S6PXNX0R••••••</div>
-          <div><span class="dim">[00:01]</span> pass 1/1 <span class="ok">zero-fill</span> ........ 100%</div>
-          <div><span class="dim">[04:12]</span> verify&nbsp;&nbsp; <span class="ok">OK</span> — 0 readable sectors</div>
-          <div><span class="dim">[04:12]</span> cert&nbsp;&nbsp;&nbsp;&nbsp; ZF-2026-0001.pdf <span class="ok">written</span></div>
-          <div><span class="dim">[04:12]</span> status&nbsp;&nbsp; <span class="red">NOTHING LEFT TO RECOVER</span></div>
-          <div><span class="dim">$</span> <span class="cursor"></span></div>
-        </div>
+    <div class="card reveal">
+      <div class="ico"><svg viewBox="0 0 24 24"><path d="M12 3l8 4v5c0 5-3.5 8-8 9-4.5-1-8-4-8-9V7z"/><path d="M9 12l2 2 4-4"/></svg></div>
+      <h3>PURGE <span class="tag">data destruction</span></h3>
+      <p>Drives come out before anything else. Every one is wiped to NIST SP 800-88. Need proof? We serialize it and sign it.</p>
+      <div class="price">
+        <div class="free"><span>Secure wipe, every drive</span><span>Free</span></div>
+        <div><span>Certificate of destruction</span><span>$10 / drive · $25 min</span></div>
+        <div><span>Physical destruction + photo</span><span>$15 / drive</span></div>
       </div>
     </div>
-  </section>
-
-  <section id="intake">
-    <div class="wrap">
-      <div class="sec-head mono"><span class="t">04 / 05 &nbsp;·&nbsp; What we take</span><span>Year one list</span></div>
-      <div class="two">
-        <div class="col">
-          <h3><span class="sq fill"></span>We take</h3>
-          <ol>
-            <li><span class="n">001</span><span><b>Business desktops &amp; laptops</b><small>Dell OptiPlex / Latitude, HP EliteDesk / EliteBook, Lenovo ThinkCentre / ThinkPad — working or not.</small></span></li>
-            <li><span class="n">002</span><span><b>Servers, workstations, NAS</b><small>Rack or tower. RAM, CPUs, drives and cards all get reused.</small></span></li>
-            <li><span class="n">003</span><span><b>Networking gear</b><small>Switches, routers, access points, firewalls.</small></span></li>
-            <li><span class="n">004</span><span><b>Gaming &amp; consumer PCs</b><small>Whole systems or loose parts: GPUs, PSUs, RAM, cases.</small></span></li>
-            <li><span class="n">005</span><span><b>Monitors 24" and up</b><small>Flat panel, 1080p or better, with stand.</small></span></li>
-            <li><span class="n">006</span><span><b>Dead or cracked laptops</b><small>Still worth it for the drive, RAM and screen.</small></span></li>
-            <li><span class="n">007</span><span><b>Phones &amp; tablets</b><small>Factory-reset in front of us; we'll walk you through it.</small></span></li>
-          </ol>
-        </div>
-        <div class="col refuse">
-          <h3><span class="sq"></span>We don't take</h3>
-          <ol>
-            <li><span class="n">—</span><span><b>CRT / tube TVs and monitors</b><small>Lead glass. Nevada State Recycle on Industrial Rd takes them for a small fee.</small></span></li>
-            <li><span class="n">—</span><span><b>Loose batteries, e-bike / scooter packs</b><small>Fire risk in transit. Laptop batteries still inside the laptop are fine.</small></span></li>
-            <li><span class="n">—</span><span><b>Appliances, microwaves, anything with refrigerant</b></span></li>
-            <li><span class="n">—</span><span><b>Inkjet printers</b><small>Working business laser printers are OK.</small></span></li>
-            <li><span class="n">—</span><span><b>Wet, moldy or pest-damaged equipment</b></span></li>
-          </ol>
-          <p class="note">Not sure? Send a photo with your request and we'll tell you straight.</p>
-        </div>
+    <div class="card reveal">
+      <div class="ico"><svg viewBox="0 0 24 24"><path d="M3 12a9 9 0 0 1 15.5-6.3M21 12a9 9 0 0 1-15.5 6.3M18 3v4h-4M6 21v-4h4"/></svg></div>
+      <h3>Refurbished tech</h3>
+      <p>Business-class machines get tested, cleaned and resold. The rest is parted out or recycled with a licensed downstream — nothing to landfill.</p>
+      <div class="price">
+        <div><span>Tested used laptops &amp; desktops</span><span>Ask us</span></div>
+        <div><span>Parts: RAM, SSDs, GPUs</span><span>eBay</span></div>
+        <div class="free"><span>Zero-value leftovers</span><span>Recycled</span></div>
       </div>
     </div>
-  </section>
+  </div>
+</div></section>
 
-  <section id="how">
-    <div class="wrap">
-      <div class="sec-head mono"><span class="t">05 / 05 &nbsp;·&nbsp; How it works</span><span>Four steps</span></div>
-      <div class="steps">
-        <div class="step"><span class="big">01</span><h4>Request</h4><p>Fill the form below or give us a call.</p></div>
-        <div class="step"><span class="big">02</span><h4>Confirm</h4><p>We reply with a pickup window. Curbside, garage or office — your call.</p></div>
-        <div class="step"><span class="big">03</span><h4>Pickup</h4><p>We load it. You sign a one-line intake sheet listing what left with us.</p></div>
-        <div class="step"><span class="big">04</span><h4>Purge</h4><p>Drives wiped or destroyed. Certificate emailed if you asked for one.</p></div>
-      </div>
+<!-- PURGE -->
+<section class="sec alt" id="purge"><div class="wrap">
+  <div class="purge">
+    <div class="reveal">
+      <span class="eyebrow">purge.exe</span>
+      <h2 class="h2">Nothing left to recover.</h2>
+      <p class="sub">Handing off a computer means handing off everything on it — tax returns, passwords, customer files. PURGE is how we make sure none of it leaves with the machine.</p>
+      <ul>
+        <li><span class="k">01</span><span><b>Drives out first.</b> Pulled and labeled before any testing or resale happens.</span></li>
+        <li><span class="k">02</span><span><b>Wiped to the federal standard.</b> NIST SP 800-88 Clear / Purge — or physically destroyed on request.</span></li>
+        <li><span class="k">03</span><span><b>Paperwork you can file.</b> Certificate with device and drive serials, dated and signed.</span></li>
+      </ul>
     </div>
-  </section>
-
-  <section id="request">
-    <div class="wrap">
-      <div class="req">
-        <div class="lead">
-          <div class="mono" style="color:var(--muted);margin-bottom:22px">Request · free pickup</div>
-          <h2>TELL US<br>WHAT YOU<br>HAVE.</h2>
-          <p>Takes a minute. We'll call or email back with a pickup window — no quotes, no haggling, it's free.</p>
-          <div class="alt">
-            <a id="alt-text" href="#"><span>Call us</span><span data-phone>—</span></a>
-            <a id="alt-mail" href="#"><span>Email</span><span data-email>—</span></a>
-          </div>
-        </div>
-
-        <form id="pickup" novalidate>
-          <div class="field">
-            <label for="name">Name</label>
-            <input id="name" name="name" type="text" autocomplete="name" placeholder="First name is fine" required>
-          </div>
-          <div class="field">
-            <label for="phone">Phone</label>
-            <input id="phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" placeholder="(702) 555-0100" required>
-          </div>
-          <div class="field">
-            <label for="email">Email</label>
-            <input id="email" name="email" type="email" autocomplete="email" placeholder="Optional — for the certificate">
-          </div>
-          <div class="field">
-            <label for="area">Area</label>
-            <select id="area" name="area" required>
-              <option value="" disabled selected>Choose one</option>
-              <option>Las Vegas</option>
-              <option>Henderson</option>
-              <option>North Las Vegas</option>
-              <option>Summerlin</option>
-              <option>Boulder City</option>
-              <option>Other / not sure</option>
-            </select>
-          </div>
-          <div class="field">
-            <label>Type</label>
-            <div class="chips" role="group" aria-label="Equipment type">
-              <label class="chip"><input type="checkbox" name="type" value="Desktops"><span>Desktops</span></label>
-              <label class="chip"><input type="checkbox" name="type" value="Laptops"><span>Laptops</span></label>
-              <label class="chip"><input type="checkbox" name="type" value="Servers / NAS"><span>Servers / NAS</span></label>
-              <label class="chip"><input type="checkbox" name="type" value="Networking"><span>Networking</span></label>
-              <label class="chip"><input type="checkbox" name="type" value="Monitors"><span>Monitors</span></label>
-              <label class="chip"><input type="checkbox" name="type" value="Parts / misc"><span>Parts / misc</span></label>
-            </div>
-          </div>
-          <div class="field">
-            <label for="details">Details</label>
-            <textarea id="details" name="details" placeholder="Roughly how many items, and anything we should know (stairs, gate code, business hours)."></textarea>
-          </div>
-          <div class="field">
-            <label>Data</label>
-            <div class="chips" role="group" aria-label="Data destruction">
-              <label class="chip"><input type="radio" name="cert" value="Wipe, no certificate" checked><span>Wipe it</span></label>
-              <label class="chip"><input type="radio" name="cert" value="Wipe + certificate"><span>Wipe + certificate</span></label>
-              <label class="chip"><input type="radio" name="cert" value="Physically destroy drives"><span>Destroy drives</span></label>
-            </div>
-          </div>
-          <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px" aria-hidden="true">
-          <div class="submit">
-            <button class="btn" type="submit">Send request</button>
-            <div>
-              <div class="status" id="status" aria-live="polite"></div>
-              <div class="fine">No CRTs · no loose batteries · free pickup</div>
-            </div>
-          </div>
-        </form>
-      </div>
+    <div class="term reveal" id="term" aria-label="Example purge log">
+      <div class="bar"><i><b></b><b></b><b></b></i><span>purge.exe · nist 800-88</span></div>
+      <div class="ln"><span class="dim">$</span> purge --target /dev/sda --method clear --cert</div>
+      <div class="ln"><span class="dim">[00:00]</span> device&nbsp;&nbsp; Samsung 870 EVO 500GB</div>
+      <div class="ln"><span class="dim">[00:00]</span> serial&nbsp;&nbsp; S6PXNX0R••••••</div>
+      <div class="ln"><span class="dim">[00:01]</span> pass 1/1 <span class="ok">zero-fill</span> ████████████ 100%</div>
+      <div class="ln"><span class="dim">[04:12]</span> verify&nbsp;&nbsp; <span class="ok">OK</span> — 0 readable sectors</div>
+      <div class="ln"><span class="dim">[04:12]</span> cert&nbsp;&nbsp;&nbsp;&nbsp; ZF-2026-0001.pdf <span class="ok">written</span></div>
+      <div class="ln"><span class="dim">[04:12]</span> status&nbsp;&nbsp; <span class="red">NOTHING LEFT TO RECOVER</span></div>
+      <div class="ln"><span class="dim">$</span> <span class="cursor"></span></div>
     </div>
-  </section>
+  </div>
+</div></section>
+
+<!-- TAKE / REFUSE -->
+<section class="sec" id="take"><div class="wrap">
+  <div class="sec-head reveal">
+    <span class="eyebrow">What we take</span>
+    <h2 class="h2">Yes to most of it. No to the dangerous stuff.</h2>
+    <p class="sub">Not sure? Add a photo when you book and we'll tell you straight.</p>
+  </div>
+  <div class="two">
+    <div class="list reveal"><h3><span class="dotk"></span>We take</h3><ul>
+      <li><b>Business desktops &amp; laptops</b><span>Dell, HP, Lenovo — working or not.</span></li>
+      <li><b>Servers, workstations, NAS</b><span>Rack or tower; RAM, CPUs, drives all get reused.</span></li>
+      <li><b>Networking gear</b><span>Switches, routers, access points, firewalls.</span></li>
+      <li><b>Gaming &amp; consumer PCs</b><span>Whole systems or loose parts.</span></li>
+      <li><b>Monitors 24" and up</b><span>Flat panel, with stand.</span></li>
+      <li><b>Dead or cracked laptops</b><span>Still worth it for the drive, RAM and screen.</span></li>
+      <li><b>Phones &amp; tablets</b><span>Factory-reset in front of us — we'll walk you through it.</span></li>
+    </ul></div>
+    <div class="list no reveal"><h3><span class="dotk"></span>We don't take</h3><ul>
+      <li><b>Tube TVs and CRT monitors</b><span>Lead glass. Nevada State Recycle (1816 Industrial Rd) takes them for a small fee.</span></li>
+      <li><b>Loose batteries, e-bike / scooter packs</b><span>Fire risk in transit. Batteries still inside a laptop are fine.</span></li>
+      <li><b>Appliances, microwaves, anything with refrigerant</b></li>
+      <li><b>Inkjet printers</b><span>Working business laser printers are OK.</span></li>
+      <li><b>Wet, moldy or pest-damaged equipment</b></li>
+    </ul><p class="foot">Have one of these anyway? Ask — we can usually point you to the right place.</p></div>
+  </div>
+</div></section>
+
+<!-- HOW -->
+<section class="sec alt" id="how"><div class="wrap">
+  <div class="sec-head reveal">
+    <span class="eyebrow">How it works</span>
+    <h2 class="h2">Four steps. You do one of them.</h2>
+  </div>
+  <div class="how">
+    <div class="hs reveal"><div class="n">01</div><h4>Book</h4><p>Tap what you've got, pick a day, add a photo if you like. Two minutes.</p></div>
+    <div class="hs reveal"><div class="n">02</div><h4>We confirm</h4><p>You get a text with a time window — and a heads-up if it's a truck day.</p></div>
+    <div class="hs reveal"><div class="n">03</div><h4>We load it</h4><p>Curb, garage or office. You sign a one-line sheet listing what left with us.</p></div>
+    <div class="hs reveal"><div class="n">04</div><h4>We purge it</h4><p>Drives wiped or destroyed. Certificate emailed if you asked for one.</p></div>
+  </div>
+</div></section>
+
+<!-- FAQ -->
+<section class="sec" id="faq"><div class="wrap">
+  <div class="sec-head reveal"><span class="eyebrow">Questions</span><h2 class="h2">Fair questions.</h2></div>
+  <div class="faq reveal">
+    <details><summary>Why is it free?</summary><p>Because working parts have value. A six-year-old office PC still holds RAM, an SSD and a CPU that someone wants. We make our money reselling tested gear, so we'd rather pick yours up than see it in a dumpster.</p></details>
+    <details><summary>When is there a charge?</summary><p>Two cases. A big load that needs a rented truck (more than about six machines, a full rack, or an office cleanout) is a flat $49 — and we tell you before we come. And if you want a certificate of destruction or physical drive destruction for compliance, that's $10 or $15 per drive. Residential pickups almost never pay anything.</p></details>
+    <details><summary>What happens to my data?</summary><p>Every storage drive is removed before the machine is tested or resold, then wiped using the NIST SP 800-88 method — the same standard federal agencies use. If you'd like proof, we issue a signed certificate listing each drive serial. If you'd rather, we drill or shred the drive and send you a photo.</p></details>
+    <details><summary>Do I need to wipe it myself first?</summary><p>No. Leave it as is. If you have passwords or a BIOS lock, you don't need to remove them either — we're wiping the drive, not logging in. For phones and tablets we do ask you to factory-reset in front of us, because activation locks make them unusable.</p></details>
+    <details><summary>Where do you go?</summary><p>Anywhere in the Las Vegas valley: Las Vegas, Henderson, North Las Vegas, Summerlin, Spring Valley, Boulder City. Further out is fine too — just mention it when you book.</p></details>
+    <details><summary>Are you a licensed recycler?</summary><p>Nevada doesn't license e-waste recyclers (NDEP). We operate as a small-quantity handler, refuse the hazardous categories (CRTs, loose batteries), and send anything we can't reuse to a licensed downstream recycler in Las Vegas. Nothing goes to a landfill.</p></details>
+  </div>
+</div></section>
 
 </main>
 
-<footer>
-  <div class="wrap foot mono">
-    <div class="row">
-      <span class="word">ZEROFILL TECH</span>
-      <span>Las Vegas, NV</span>
-    </div>
-    <div class="row">
-      <span>Free pickup · certified data destruction · refurbished tech</span>
-      <span>© <span id="yr">2026</span></span>
-    </div>
-  </div>
-</footer>
+<footer><div class="wrap foot">
+  <div><div class="word">ZER<b>0</b>FILL TECH</div><p>Free pickup. Certified data destruction. Refurbished tech. Las Vegas, NV.</p></div>
+  <div><h5>Contact</h5><a href="tel:+17027605037">(702) 760-5037</a><a href="mailto:hello@zerofill.tech">hello@zerofill.tech</a></div>
+  <div><h5>Site</h5><a href="#book">Book a pickup</a><a href="#purge">PURGE data destruction</a><a href="#take">What we take</a><a href="#faq">FAQ</a></div>
+  <div class="legal"><span>© <span id="yr">2026</span> ZeroFill Tech</span><span>Las Vegas, Nevada</span></div>
+</div></footer>
 
-<div class="sticky" aria-hidden="false">
-  <a class="btn" href="#request">Request free pickup</a>
-  <div class="mini mono"><span>No CRTs</span><span>No loose batteries</span><span>$0</span></div>
-</div>
+<div class="sticky" id="sticky"><a class="btn" href="#book">Book a free pickup</a></div>
 
 <script>
-/* ============================================================
-   CONFIG — the only block you need to edit.
-   FORM_ENDPOINT: paste a Formspree (https://formspree.io) form URL
-   like "https://formspree.io/f/abcdwxyz" to receive requests by
-   email without any backend. Leave "" to fall back to a mailto:
-   link that opens the visitor's mail app with the form pre-filled.
-   ============================================================ */
+/* ================= CONFIG ================= */
 const CONFIG = {
-  CONTACT_PHONE: "+17027605037",           // ZeroFill Front Desk (Telnyx)
-  CONTACT_EMAIL: "hello@zerofill.tech",    // set up free email forwarding at Porkbun
-  FORM_ENDPOINT: ""                        // Formspree URL, or "" for mailto fallback
+  PHONE_DISPLAY: "(702) 760-5037",
+  EMAIL: "hello@zerofill.tech",
+  // Cloudflare Worker that forwards bookings + photos to Telegram (see worker/ in the repo).
+  // Leave "" to fall back to a pre-filled email (photos are dropped in the fallback).
+  WORKER_URL: ""
 };
 
-(function(){
-  const fmtPhone = p => p.replace(/^\+1(\d{3})(\d{3})(\d{4})$/, "($1) $2-$3");
-  const t = document.getElementById("alt-text");
-  const m = document.getElementById("alt-mail");
-  if (CONFIG.CONTACT_PHONE){
-    t.href = "tel:" + CONFIG.CONTACT_PHONE;
-    t.querySelector("[data-phone]").textContent = fmtPhone(CONFIG.CONTACT_PHONE);
-  } else { t.style.display = "none"; }
-  if (CONFIG.CONTACT_EMAIL){
-    m.href = "mailto:" + CONFIG.CONTACT_EMAIL;
-    m.querySelector("[data-email]").textContent = CONFIG.CONTACT_EMAIL;
-  } else { m.style.display = "none"; }
-  document.getElementById("yr").textContent = new Date().getFullYear();
+/* ================= THEME ================= */
+(() => {
+  const root=document.documentElement, key='zf-theme';
+  const saved=localStorage.getItem(key);
+  const sys=matchMedia('(prefers-color-scheme: light)').matches?'light':'dark';
+  root.dataset.theme = saved || sys;
+  const meta=document.querySelector('meta[name=theme-color]');
+  const sync=()=>{ meta.content = root.dataset.theme==='light' ? '#f6f3ec' : '#121212'; };
+  sync();
+  document.getElementById('theme').addEventListener('click',()=>{
+    root.dataset.theme = root.dataset.theme==='light'?'dark':'light';
+    localStorage.setItem(key, root.dataset.theme); sync();
+  });
+})();
 
-  const form = document.getElementById("pickup");
-  const status = document.getElementById("status");
-  const setStatus = (msg, cls) => { status.textContent = msg; status.className = "status " + (cls||""); };
-
-  form.addEventListener("submit", async (e) => {
-    e.preventDefault();
-    const fd = new FormData(form);
-    if (fd.get("_gotcha")) return;
-    const name = (fd.get("name")||"").trim(), phone = (fd.get("phone")||"").trim(), area = fd.get("area");
-    if (!name || !phone || !area){ setStatus("Name, phone and area are required.", "err"); return; }
-    const types = fd.getAll("type").join(", ") || "—";
-    const body = [
-      "Pickup request — zerofill.tech", "",
-      "Name: " + name, "Phone: " + phone, "Email: " + (fd.get("email")||"—"),
-      "Area: " + area, "Type: " + types, "Data: " + fd.get("cert"), "",
-      "Details:", (fd.get("details")||"—")
-    ].join("\n");
-
-    if (CONFIG.FORM_ENDPOINT){
-      setStatus("Sending…");
-      try{
-        const r = await fetch(CONFIG.FORM_ENDPOINT, { method:"POST", headers:{ "Accept":"application/json" }, body: fd });
-        if (r.ok){ form.reset(); setStatus("Got it. We'll reply with a pickup window.", "ok"); }
-        else { setStatus("Couldn't send. Text or email us instead.", "err"); }
-      }catch(err){ setStatus("Couldn't send. Text or email us instead.", "err"); }
-    } else {
-      const subject = "Pickup request — " + name + " (" + area + ")";
-      window.location.href = "mailto:" + CONFIG.CONTACT_EMAIL + "?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(body);
-      setStatus("Opening your mail app…", "ok");
+/* ================= HERO DOT FIELD ================= */
+(() => {
+  const c=document.getElementById('dots'), ctx=c.getContext('2d');
+  const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let W,H,cols,rows,gap,dots,mask,t0,mx=-1e9,my=-1e9,dpr=1;
+  const txt=document.createElement('canvas'), tctx=txt.getContext('2d');
+  function build(){
+    dpr=Math.min(2,devicePixelRatio||1);
+    const r=c.parentElement.getBoundingClientRect(); W=c.width=r.width*dpr; H=c.height=r.height*dpr;
+    gap=Math.max(14,Math.min(22,r.width/60))*dpr; cols=Math.ceil(W/gap)+1; rows=Math.ceil(H/gap)+1;
+    dots=new Float32Array(cols*rows); for(let i=0;i<dots.length;i++) dots[i]=Math.random();
+    txt.width=cols; txt.height=rows; tctx.clearRect(0,0,cols,rows);
+    tctx.fillStyle='#fff'; tctx.textBaseline='alphabetic'; tctx.textAlign='right';
+    const fs=Math.min(rows*0.55, cols*0.19); tctx.font=`900 ${fs}px Doto, monospace`;
+    tctx.fillText('ZER0FILL', cols-1, rows-Math.max(2,rows*0.08));
+    mask=tctx.getImageData(0,0,cols,rows).data; t0=performance.now();
+  }
+  function glyph(px,py,r,kind,a,col){
+    const s=`rgba(${col},${a})`; ctx.strokeStyle=s; ctx.fillStyle=s; ctx.lineWidth=Math.max(1,r*0.9);
+    if(kind===0){ ctx.beginPath(); ctx.arc(px,py,r,0,6.283); ctx.fill(); return; }
+    const L=r*2.6; ctx.beginPath();
+    if(kind===1){ ctx.moveTo(px-L,py); ctx.lineTo(px+L,py); ctx.moveTo(px,py-L); ctx.lineTo(px,py+L); }
+    else { ctx.moveTo(px-L,py-L); ctx.lineTo(px+L,py+L); ctx.moveTo(px+L,py-L); ctx.lineTo(px-L,py+L); }
+    ctx.stroke();
+  }
+  let visible=true; new IntersectionObserver(e=>visible=e[0].isIntersecting).observe(c);
+  function draw(now){
+    requestAnimationFrame(draw); if(!visible) return;
+    const st=getComputedStyle(document.documentElement), DOT=st.getPropertyValue('--dot').trim(), HI=st.getPropertyValue('--dot-hi').trim();
+    const light=document.documentElement.dataset.theme==='light', k=light?1.6:1;
+    const t=(now-t0)/1000, dur=2.2, head=reduce?1e9:Math.min(1.08,t/dur)*W*1.1;
+    ctx.clearRect(0,0,W,H);
+    for(let y=0;y<rows;y++) for(let x=0;x<cols;x++){
+      const i=y*cols+x, px=x*gap, py=y*gap, inMask=mask[i*4+3]>80, n=dots[i];
+      const wv=Math.sin(t*0.9 + px/(gap*9) + py/(gap*14));
+      const wv2=Math.sin(t*0.5 - px/(gap*16) + py/(gap*7));
+      let a, kind=0;
+      if(px>head){ a=(n>0.82? 0.4 : n>0.6? 0.16 : 0.05)*k; if(Math.random()<0.015) dots[i]=Math.random(); }
+      else { a= inMask? 0.92 : (0.06+0.05*(wv+1))*k; if(!inMask && wv>0.72 && n>0.55) kind= n>0.8? 2:1; }
+      const d=Math.abs(px-head); if(d<gap*3) a=Math.max(a,0.9-d/(gap*3));
+      const dx=px-mx, dy=py-my, dd=Math.sqrt(dx*dx+dy*dy); if(dd<gap*6){ a=Math.min(1,a+(1-dd/(gap*6))*0.6); if(dd<gap*3 && !inMask) kind=1; }
+      const base=gap*0.10, grow= px<=head? (1+0.55*(wv2+1)*0.5+0.25*Math.max(0,wv)) : 1;
+      const r=(inMask&&px<=head? 1.4:1)*base*grow;
+      glyph(px,py,r,kind,a.toFixed(3),(inMask&&px<=head)?HI:DOT);
     }
+  }
+  addEventListener('resize',build);
+  c.parentElement.addEventListener('pointermove',e=>{const r=c.getBoundingClientRect();mx=(e.clientX-r.left)*dpr;my=(e.clientY-r.top)*dpr;});
+  c.parentElement.addEventListener('pointerleave',()=>{mx=my=-1e9;});
+  document.fonts.ready.then(()=>{build(); requestAnimationFrame(draw);});
+})();
+
+/* ================= SCROLL REVEAL + TERMINAL + STICKY ================= */
+(() => {
+  const io=new IntersectionObserver(es=>es.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target);} }),{threshold:.12});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+  const term=document.getElementById('term'); let played=false;
+  new IntersectionObserver(es=>{ if(es[0].isIntersecting && !played){ played=true; term.querySelectorAll('.ln').forEach((l,i)=>setTimeout(()=>l.classList.add('show'), 250+i*420+(i>3?700:0))); } },{threshold:.4}).observe(term);
+  document.getElementById('yr').textContent=new Date().getFullYear();
+  const sticky=document.getElementById('sticky');
+  new IntersectionObserver(es=>sticky.classList.toggle('hide',es[0].isIntersecting),{threshold:.05}).observe(document.getElementById('wiz'));
+})();
+
+/* ================= BOOKING WIZARD ================= */
+(() => {
+  const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
+  const state={items:{},big:false,addr:'',area:'',ptype:'',access:'',day:'',win:'',photos:[],name:'',phone:'',email:'',data:'Wipe (free)'};
+  let cur=0;
+  const steps=$$('#steps .s'), panes=$$('.step');
+  function go(n){
+    cur=n; panes.forEach(p=>p.classList.toggle('on',+p.dataset.step===n));
+    steps.forEach((s,i)=>{ s.classList.toggle('on',i===Math.min(n,4)); s.classList.toggle('done',i<n); });
+    if(n===5) renderReview();
+    if(n>0) $('#wiz').scrollIntoView({block:'start',behavior:'smooth'});
+  }
+  steps.forEach((s,i)=>s.addEventListener('click',()=>{ if(s.classList.contains('done') && cur<6) go(i); }));
+  $$('[data-back]').forEach(b=>b.addEventListener('click',()=>go(Math.max(0,cur-1))));
+
+  // step 1
+  const tiles=$$('#tiles .tile');
+  function sum(){
+    const ents=Object.entries(state.items); const n=ents.reduce((a,[,q])=>a+q,0);
+    $('#sum').innerHTML = n? `<b>${n} item${n>1?'s':''}</b> · ${ents.map(([k,q])=>`${k} ×${q}`).join(', ')}${state.big?' · <b>truck</b>':''}` : 'Nothing selected yet';
+    $('#n0').disabled=!n;
+  }
+  tiles.forEach(t=>{
+    const name=t.dataset.item, qb=t.querySelector('.qty b');
+    const toggle=()=>{ if(state.items[name]){ delete state.items[name]; t.classList.remove('on'); } else { state.items[name]=1; qb.textContent=1; t.classList.add('on'); } sum(); };
+    t.addEventListener('click',e=>{ if(e.target.closest('.qty')) return; toggle(); });
+    t.addEventListener('keydown',e=>{ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); toggle(); } });
+    t.querySelectorAll('.qty button').forEach(b=>b.addEventListener('click',e=>{ e.stopPropagation(); const q=Math.max(1,Math.min(99,(state.items[name]||1)+ +b.dataset.d)); state.items[name]=q; qb.textContent=q; sum(); }));
+  });
+  $('#bigload').addEventListener('change',e=>{ state.big=e.target.checked; sum(); });
+  $('#n0').addEventListener('click',()=>go(1));
+
+  // step 2
+  $('#n1').addEventListener('click',()=>{
+    state.addr=$('#addr').value.trim(); state.area=$('#area').value; state.ptype=$('#ptype').value; state.access=$('#access').value.trim();
+    if(!state.addr||!state.area||!state.ptype){ $('#e1').textContent='Address, area and pickup type are needed.'; return; }
+    $('#e1').textContent=''; go(2);
+  });
+
+  // step 3
+  const days=$('#days'), fmt=new Intl.DateTimeFormat('en-US',{weekday:'short'}), fmt2=new Intl.DateTimeFormat('en-US',{month:'short',day:'numeric'});
+  for(let i=1;i<=7;i++){ const d=new Date(); d.setDate(d.getDate()+i); const b=document.createElement('button'); b.type='button'; b.className='chip'; b.dataset.day=`${fmt.format(d)} ${fmt2.format(d)}`; b.innerHTML=`${i===1?'Tomorrow':fmt.format(d)}<small>${fmt2.format(d)}</small>`; days.appendChild(b); }
+  const any=document.createElement('button'); any.type='button'; any.className='chip'; any.dataset.day='Any day this week'; any.innerHTML='Any day<small>This week</small>'; days.appendChild(any);
+  const pick=(wrap,key,attr)=>wrap.addEventListener('click',e=>{ const b=e.target.closest('.chip'); if(!b) return; wrap.querySelectorAll('.chip').forEach(c=>c.classList.remove('on')); b.classList.add('on'); state[key]=b.dataset[attr]; });
+  pick(days,'day','day'); pick($('#wins'),'win','win'); pick($('#data'),'data','data');
+  $('#n2').addEventListener('click',()=>{ if(!state.day||!state.win){ $('#e2').textContent='Pick a day and a time window.'; return; } $('#e2').textContent=''; go(3); });
+
+  // step 4 photos (resize to <=1280px JPEG)
+  const drop=$('#drop'), files=$('#files'), thumbs=$('#thumbs');
+  const shrink=file=>new Promise(res=>{ const img=new Image(); img.onload=()=>{ const s=Math.min(1,1280/Math.max(img.width,img.height)); const cv=document.createElement('canvas'); cv.width=Math.round(img.width*s); cv.height=Math.round(img.height*s); cv.getContext('2d').drawImage(img,0,0,cv.width,cv.height); cv.toBlob(b=>res(b||file),'image/jpeg',.8); URL.revokeObjectURL(img.src); }; img.onerror=()=>res(file); img.src=URL.createObjectURL(file); });
+  async function addFiles(list){
+    $('#e3').textContent='';
+    for(const f of list){ if(state.photos.length>=5){ $('#e3').textContent='Five photos is plenty.'; break; } if(!f.type.startsWith('image/')) continue; state.photos.push(await shrink(f)); }
+    renderThumbs(); files.value='';
+  }
+  function renderThumbs(){ thumbs.innerHTML=''; state.photos.forEach((b,i)=>{ const d=document.createElement('div'); d.className='thumb'; const im=document.createElement('img'); im.alt=`photo ${i+1}`; im.src=URL.createObjectURL(b); const x=document.createElement('button'); x.type='button'; x.textContent='×'; x.setAttribute('aria-label','remove photo'); x.onclick=()=>{ state.photos.splice(i,1); renderThumbs(); }; d.append(im,x); thumbs.appendChild(d); }); }
+  files.addEventListener('change',e=>addFiles(e.target.files));
+  ['dragenter','dragover'].forEach(ev=>drop.addEventListener(ev,e=>{e.preventDefault();drop.classList.add('over');}));
+  ['dragleave','drop'].forEach(ev=>drop.addEventListener(ev,e=>{e.preventDefault();drop.classList.remove('over');}));
+  drop.addEventListener('drop',e=>addFiles(e.dataTransfer.files));
+  $('#n3').addEventListener('click',()=>go(4)); $('#skip3').addEventListener('click',()=>go(4));
+
+  // step 5
+  $('#n4').addEventListener('click',()=>{
+    state.name=$('#name').value.trim(); state.phone=$('#phone').value.trim(); state.email=$('#email').value.trim();
+    if(!state.name||state.phone.replace(/\D/g,'').length<10){ $('#e4').textContent='We need a name and a 10-digit mobile number.'; return; }
+    if(state.data!=='Wipe (free)' && !state.email){ $('#e4').textContent='Add an email so we can send the certificate.'; return; }
+    $('#e4').textContent=''; go(5);
+  });
+
+  // review
+  const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+  function renderReview(){
+    const items=Object.entries(state.items).map(([k,q])=>`${k} ×${q}`).join(', ');
+    const rows=[['Items',esc(items)+(state.big?' — <b>big load</b> (truck, $49)':'')],
+      ['Where',`${esc(state.addr)}, ${esc(state.area)}<br><span style="color:var(--muted)">${esc(state.ptype)}${state.access?' · '+esc(state.access):''}</span>`],
+      ['When',`${esc(state.day)} · ${esc(state.win)}`],
+      ['Photos',state.photos.length?`${state.photos.length} attached`:'None'],
+      ['You',`${esc(state.name)} · ${esc(state.phone)}${state.email?' · '+esc(state.email):''}`],
+      ['Data',esc(state.data)]];
+    $('#review').innerHTML=rows.map(([k,v])=>`<div class="row"><span class="k">${k}</span><span>${v}</span></div>`).join('');
+  }
+
+  // send
+  function summaryText(){
+    const items=Object.entries(state.items).map(([k,q])=>`• ${k} ×${q}`).join('\n');
+    return [`NEW PICKUP — zerofill.tech`,``,`ITEMS`,items,state.big?`⚠ Big load — truck ($49)`:null,``,`WHERE`,`${state.addr}, ${state.area}`,state.ptype,state.access?`Notes: ${state.access}`:null,``,`WHEN`,`${state.day} · ${state.win}`,``,`CONTACT`,state.name,state.phone,state.email||null,``,`DATA: ${state.data}`].filter(l=>l!==null).join('\n');
+  }
+  $('#send').addEventListener('click',async()=>{
+    if($('#hp').value) return;
+    const btn=$('#send'); btn.disabled=true; btn.textContent='Sending…'; $('#e5').textContent='';
+    try{
+      if(CONFIG.WORKER_URL){
+        const fd=new FormData(); fd.append('text',summaryText()); fd.append('json',JSON.stringify({...state,photos:state.photos.length}));
+        state.photos.forEach((b,i)=>fd.append('photo',b,`photo-${i+1}.jpg`));
+        const r=await fetch(CONFIG.WORKER_URL,{method:'POST',body:fd}); if(!r.ok) throw new Error('bad status '+r.status);
+      } else {
+        location.href=`mailto:${CONFIG.EMAIL}?subject=${encodeURIComponent('Pickup request — '+state.name+' ('+state.area+')')}&body=${encodeURIComponent(summaryText()+(state.photos.length?'\n\n(Photos could not be attached by email — we will text you for them.)':''))}`;
+      }
+      go(6);
+    }catch(err){ $('#e5').textContent=`Couldn't send. Call or text ${CONFIG.PHONE_DISPLAY} and we'll sort it.`; btn.disabled=false; btn.textContent='Book my free pickup'; }
   });
 })();
 </script>
