@@ -394,7 +394,7 @@
     <div class="wrap">
       <div class="sec-head mono"><span class="t">05 / 05 &nbsp;·&nbsp; How it works</span><span>Four steps</span></div>
       <div class="steps">
-        <div class="step"><span class="big">01</span><h4>Request</h4><p>Fill the form below or text us a photo of what you've got.</p></div>
+        <div class="step"><span class="big">01</span><h4>Request</h4><p>Fill the form below or give us a call.</p></div>
         <div class="step"><span class="big">02</span><h4>Confirm</h4><p>We reply with a pickup window. Curbside, garage or office — your call.</p></div>
         <div class="step"><span class="big">03</span><h4>Pickup</h4><p>We load it. You sign a one-line intake sheet listing what left with us.</p></div>
         <div class="step"><span class="big">04</span><h4>Purge</h4><p>Drives wiped or destroyed. Certificate emailed if you asked for one.</p></div>
@@ -408,9 +408,9 @@
         <div class="lead">
           <div class="mono" style="color:var(--muted);margin-bottom:22px">Request · free pickup</div>
           <h2>TELL US<br>WHAT YOU<br>HAVE.</h2>
-          <p>Takes a minute. We'll text or email back with a pickup window — no quotes, no haggling, it's free.</p>
+          <p>Takes a minute. We'll call or email back with a pickup window — no quotes, no haggling, it's free.</p>
           <div class="alt">
-            <a id="alt-text" href="#"><span>Text us</span><span data-phone>—</span></a>
+            <a id="alt-text" href="#"><span>Call us</span><span data-phone>—</span></a>
             <a id="alt-mail" href="#"><span>Email</span><span data-email>—</span></a>
           </div>
         </div>
@@ -505,7 +505,7 @@
    link that opens the visitor's mail app with the form pre-filled.
    ============================================================ */
 const CONFIG = {
-  CONTACT_PHONE: "",                       // e.g. "+17025550100"
+  CONTACT_PHONE: "+17027605037",           // ZeroFill Front Desk (Telnyx)
   CONTACT_EMAIL: "hello@zerofill.tech",    // set up free email forwarding at Porkbun
   FORM_ENDPOINT: ""                        // Formspree URL, or "" for mailto fallback
 };
@@ -515,7 +515,7 @@ const CONFIG = {
   const t = document.getElementById("alt-text");
   const m = document.getElementById("alt-mail");
   if (CONFIG.CONTACT_PHONE){
-    t.href = "sms:" + CONFIG.CONTACT_PHONE;
+    t.href = "tel:" + CONFIG.CONTACT_PHONE;
     t.querySelector("[data-phone]").textContent = fmtPhone(CONFIG.CONTACT_PHONE);
   } else { t.style.display = "none"; }
   if (CONFIG.CONTACT_EMAIL){
