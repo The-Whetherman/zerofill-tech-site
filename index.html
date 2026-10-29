@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ZeroFill Tech — Free e-waste pickup, Las Vegas</title>
+<meta name="description" content="Free pickup of unwanted computers and electronics across the Las Vegas valley. Certified data destruction. Refurbished tech.">
+<meta property="og:title" content="ZeroFill Tech — Free e-waste pickup, Las Vegas">
+<meta property="og:description" content="Free pickup. Certified data destruction. Refurbished tech.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23111'/%3E%3Ccircle cx='16' cy='16' r='5' fill='%23ececea'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Doto:wght@400;700;900&family=Geist+Mono:wght@400;500&family=Geist:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#ececea;
+    --surface:#f6f6f4;
+    --ink:#111111;
+    --muted:#6e6e6a;
+    --faint:#a3a39f;
+    --line:rgba(17,17,17,.16);
+    --line-strong:rgba(17,17,17,.4);
+    --red:#d71920;
+    --mono:'Geist Mono',ui-monospace,SFMono-Regular,Menlo,monospace;
+    --sans:'Geist',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
+    --dot:'Doto',var(--mono);
+    --gutter:clamp(16px,4vw,48px);
+    --max:1280px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+  @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+  body{
+    background:var(--bg);color:var(--ink);
+    font-family:var(--sans);font-weight:400;font-size:16px;line-height:1.5;
+    -webkit-font-smoothing:antialiased;text-wrap:pretty;
+    padding-bottom:84px; /* room for sticky CTA on mobile */
+  }
+  a{color:inherit;text-decoration:none}
+  ::selection{background:var(--ink);color:var(--bg)}
+
+  .mono{font-family:var(--mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;font-weight:400}
+  .wrap{max-width:var(--max);margin:0 auto;padding:0 var(--gutter)}
+
+  /* ---------- NAV ---------- */
+  header{
+    position:sticky;top:0;z-index:20;background:var(--bg);
+    border-bottom:1px solid var(--line);
+  }
+  .nav{height:56px;display:flex;align-items:center;justify-content:space-between;gap:16px}
+  .brand{display:flex;align-items:center;gap:10px}
+  .brand .dotmark{width:10px;height:10px;border-radius:50%;background:var(--ink);position:relative}
+  .brand .dotmark::after{content:"";position:absolute;inset:3px;border-radius:50%;background:var(--bg)}
+  .brand .word{font-family:var(--dot);font-weight:900;font-size:22px;letter-spacing:.06em}
+  .nav .links{display:none;gap:28px}
+  .nav .links a{color:var(--muted)}
+  .nav .links a:hover{color:var(--ink)}
+  .nav .loc{display:none;color:var(--muted)}
+  .btn{
+    display:inline-flex;align-items:center;justify-content:center;gap:10px;
+    font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;
+    background:var(--ink);color:var(--bg);border:1px solid var(--ink);
+    padding:0 18px;height:40px;border-radius:0;cursor:pointer;white-space:nowrap;
+    transition:opacity .15s ease;
+  }
+  .btn:hover{opacity:.8}
+  .btn.ghost{background:transparent;color:var(--ink)}
+  .btn.ghost:hover{background:var(--ink);color:var(--bg);opacity:1}
+  @media (min-width:860px){
+    .nav .links{display:flex}
+    .nav .loc{display:block}
+  }
+
+  /* ---------- HERO ---------- */
+  .hero{
+    border-bottom:1px solid var(--line);
+    background-image:radial-gradient(rgba(17,17,17,.18) 1px,transparent 1px);
+    background-size:14px 14px;background-position:0 0;
+  }
+  .hero-inner{
+    background:linear-gradient(90deg,var(--bg) 0%,rgba(236,236,234,.85) 60%,rgba(236,236,234,0) 100%);
+    padding:clamp(56px,10vw,128px) 0 clamp(40px,7vw,96px);
+  }
+  .index{display:flex;justify-content:space-between;color:var(--muted);margin-bottom:28px}
+  .h1{
+    font-family:var(--dot);font-weight:900;line-height:.98;letter-spacing:.01em;
+    font-size:clamp(44px,9.5vw,128px);max-width:14ch;
+  }
+  .h1 .ghost{color:transparent;-webkit-text-stroke:1.5px var(--ink)}
+  .tagline{
+    margin-top:28px;font-family:var(--mono);font-size:clamp(12px,1.6vw,15px);
+    letter-spacing:.1em;text-transform:uppercase;color:var(--ink);
+    display:flex;flex-wrap:wrap;gap:10px 0;
+  }
+  .tagline span{display:inline-flex;align-items:center}
+  .tagline span + span::before{content:"";display:inline-block;width:5px;height:5px;border-radius:50%;background:var(--ink);margin:0 14px}
+  .hero-cta{margin-top:36px;display:flex;gap:12px;flex-wrap:wrap}
+  .live{display:inline-flex;align-items:center;gap:8px;color:var(--muted)}
+  .live::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--red);animation:blink 1.6s infinite}
+  @keyframes blink{0%,100%{opacity:1}50%{opacity:.25}}
+  @media (prefers-reduced-motion:reduce){.live::before{animation:none}}
+
+  /* ---------- SECTION SCAFFOLD ---------- */
+  section{border-bottom:1px solid var(--line)}
+  .sec-head{
+    display:flex;justify-content:space-between;align-items:baseline;gap:16px;
+    padding:18px 0;border-bottom:1px solid var(--line);color:var(--muted);
+  }
+  .sec-head .t{color:var(--ink)}
+
+  /* ---------- SERVICES (ruled grid) ---------- */
+  .grid3{display:grid;grid-template-columns:1fr;}
+  .cell{
+    padding:28px 0 32px;border-bottom:1px solid var(--line);
+    display:grid;grid-template-rows:auto auto 1fr auto;gap:18px;min-height:0;
+  }
+  .cell:last-child{border-bottom:0}
+  .cell .num{display:flex;justify-content:space-between;color:var(--muted)}
+  .cell .num .plus{color:var(--faint)}
+  .cell h3{font-family:var(--dot);font-weight:700;font-size:clamp(30px,4.5vw,46px);line-height:1;letter-spacing:.02em}
+  .cell p{color:var(--muted);max-width:40ch;font-weight:300}
+  .cell .spec{
+    display:grid;grid-template-columns:auto 1fr;gap:6px 16px;
+    font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;
+    padding-top:16px;border-top:1px dashed var(--line);
+  }
+  .cell .spec dt{color:var(--faint)}
+  .cell .spec dd{color:var(--ink)}
+  @media (min-width:860px){
+    .grid3{grid-template-columns:1fr 1fr 1fr}
+    .cell{padding:32px 28px 40px;border-bottom:0;border-right:1px solid var(--line)}
+    .cell:first-child{padding-left:0}
+    .cell:last-child{border-right:0;padding-right:0}
+  }
+
+  /* ---------- PURGE terminal ---------- */
+  .purge{display:grid;grid-template-columns:1fr;gap:32px;padding:40px 0 56px}
+  .purge .copy h2{font-family:var(--dot);font-weight:900;font-size:clamp(36px,6vw,72px);line-height:.95;letter-spacing:.02em}
+  .purge .copy p{color:var(--muted);margin-top:20px;max-width:46ch;font-weight:300}
+  .purge .copy ul{list-style:none;margin-top:24px;display:grid;gap:10px}
+  .purge .copy li{display:grid;grid-template-columns:28px 1fr;gap:12px;font-size:15px}
+  .purge .copy li .k{font-family:var(--mono);font-size:11px;color:var(--faint);padding-top:4px}
+  .term{
+    background:var(--ink);color:#d8d8d4;border:1px solid var(--ink);
+    font-family:var(--mono);font-size:12.5px;line-height:1.7;padding:22px 22px 26px;
+    overflow:hidden;position:relative;
+  }
+  .term .bar{display:flex;justify-content:space-between;color:#8a8a86;border-bottom:1px solid rgba(255,255,255,.12);padding-bottom:10px;margin-bottom:14px;letter-spacing:.1em;text-transform:uppercase;font-size:11px}
+  .term .ok{color:#fff}
+  .term .dim{color:#8a8a86}
+  .term .red{color:#ff5a5f}
+  .term .cursor{display:inline-block;width:8px;height:14px;background:#d8d8d4;vertical-align:-2px;animation:blink 1s steps(1) infinite}
+  @media (prefers-reduced-motion:reduce){.term .cursor{animation:none}}
+  @media (min-width:860px){.purge{grid-template-columns:1fr 1fr;gap:56px;padding:64px 0 80px}}
+
+  /* ---------- TAKE / REFUSE ---------- */
+  .two{display:grid;grid-template-columns:1fr}
+  .col{padding:28px 0 36px}
+  .col + .col{border-top:1px solid var(--line)}
+  .col h3{font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;display:flex;align-items:center;gap:10px;margin-bottom:18px}
+  .col h3 .sq{width:9px;height:9px;border:1.5px solid var(--ink)}
+  .col h3 .sq.fill{background:var(--ink)}
+  .col ol{list-style:none;display:grid}
+  .col li{
+    display:grid;grid-template-columns:40px 1fr;gap:14px;padding:12px 0;
+    border-top:1px solid var(--line);font-size:15px;
+  }
+  .col li:last-child{border-bottom:1px solid var(--line)}
+  .col li .n{font-family:var(--mono);font-size:11px;color:var(--faint);padding-top:4px;letter-spacing:.08em}
+  .col li b{font-weight:500}
+  .col li small{display:block;color:var(--muted);font-weight:300}
+  .col.refuse li{color:var(--muted)}
+  .col.refuse li b{color:var(--ink);text-decoration:line-through;text-decoration-thickness:1px;text-decoration-color:var(--red)}
+  .note{color:var(--muted);font-size:13px;margin-top:16px;max-width:52ch;font-weight:300}
+  @media (min-width:860px){
+    .two{grid-template-columns:1fr 1fr}
+    .col{padding:36px 40px 48px}
+    .col:first-child{padding-left:0}
+    .col + .col{border-top:0;border-left:1px solid var(--line);padding-right:0}
+  }
+
+  /* ---------- HOW IT WORKS ---------- */
+  .steps{display:grid;grid-template-columns:1fr}
+  .step{padding:26px 0;border-bottom:1px solid var(--line);display:grid;gap:12px}
+  .step:last-child{border-bottom:0}
+  .step .big{font-family:var(--dot);font-weight:900;font-size:56px;line-height:1;color:transparent;-webkit-text-stroke:1.2px var(--ink)}
+  .step h4{font-weight:500;font-size:17px}
+  .step p{color:var(--muted);font-weight:300;max-width:34ch}
+  @media (min-width:860px){
+    .steps{grid-template-columns:repeat(4,1fr)}
+    .step{padding:36px 28px 44px;border-bottom:0;border-right:1px solid var(--line)}
+    .step:first-child{padding-left:0}
+    .step:last-child{border-right:0;padding-right:0}
+  }
+
+  /* ---------- REQUEST FORM ---------- */
+  .req{display:grid;grid-template-columns:1fr;gap:32px;padding:40px 0 64px}
+  .req .lead h2{font-family:var(--dot);font-weight:900;font-size:clamp(36px,6vw,72px);line-height:.95;letter-spacing:.02em}
+  .req .lead p{color:var(--muted);margin-top:18px;max-width:40ch;font-weight:300}
+  .req .alt{margin-top:28px;display:grid;gap:10px}
+  .req .alt a{display:flex;justify-content:space-between;border-top:1px solid var(--line);padding:12px 0;font-family:var(--mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase}
+  .req .alt a:last-child{border-bottom:1px solid var(--line)}
+  .req .alt a span:last-child{color:var(--muted)}
+  form{display:grid;gap:0;border-top:1px solid var(--line)}
+  .field{display:grid;grid-template-columns:1fr;border-bottom:1px solid var(--line)}
+  .field label{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);padding:14px 0 0}
+  .field input,.field select,.field textarea{
+    font:inherit;font-weight:300;font-size:16px;color:var(--ink);
+    background:transparent;border:0;outline:0;padding:6px 0 14px;width:100%;border-radius:0;
+    -webkit-appearance:none;appearance:none;
+  }
+  .field textarea{resize:vertical;min-height:96px}
+  .field select{cursor:pointer;background-image:linear-gradient(45deg,transparent 50%,var(--ink) 50%),linear-gradient(135deg,var(--ink) 50%,transparent 50%);background-position:calc(100% - 14px) 14px,calc(100% - 9px) 14px;background-size:5px 5px;background-repeat:no-repeat}
+  .field:focus-within{background:var(--surface)}
+  .field:focus-within label{color:var(--ink)}
+  ::placeholder{color:var(--faint)}
+  .chips{display:flex;flex-wrap:wrap;gap:8px;padding:6px 0 16px}
+  .chip{position:relative}
+  .chip input{position:absolute;opacity:0;inset:0;cursor:pointer}
+  .chip span{display:inline-block;font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;padding:9px 12px;border:1px solid var(--line-strong);background:transparent;cursor:pointer;min-height:36px;line-height:1.4}
+  .chip input:checked + span{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+  .chip input:focus-visible + span{outline:2px solid var(--ink);outline-offset:2px}
+  .submit{margin-top:22px;display:grid;gap:12px}
+  .submit .btn{height:52px;width:100%;font-size:13px}
+  .fine{color:var(--faint);font-size:12px;font-family:var(--mono);letter-spacing:.06em;text-transform:uppercase}
+  .status{font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);min-height:18px}
+  .status.ok{color:var(--ink)}
+  .status.err{color:var(--red)}
+  @media (min-width:860px){
+    .req{grid-template-columns:5fr 7fr;gap:72px;padding:64px 0 96px}
+    .field{grid-template-columns:180px 1fr;align-items:start}
+    .field label{padding:16px 0}
+    .field input,.field select,.field textarea{padding:14px 0}
+    .chips{padding:12px 0}
+    .submit{grid-template-columns:auto 1fr;align-items:center}
+    .submit .btn{width:auto;padding:0 32px}
+  }
+
+  /* ---------- FOOTER ---------- */
+  footer{padding:28px 0 36px;color:var(--muted)}
+  .foot{display:grid;gap:14px}
+  .foot .row{display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px 24px}
+  .foot .word{font-family:var(--dot);font-weight:900;font-size:18px;letter-spacing:.06em;color:var(--ink)}
+
+  /* ---------- STICKY MOBILE CTA ---------- */
+  .sticky{
+    position:fixed;left:0;right:0;bottom:0;z-index:30;
+    background:var(--bg);border-top:1px solid var(--line);
+    padding:12px var(--gutter) calc(12px + env(safe-area-inset-bottom));
+    display:grid;grid-template-columns:1fr;gap:8px;
+  }
+  .sticky .btn{height:52px;width:100%;font-size:13px}
+  .sticky .mini{display:flex;justify-content:center;gap:16px;color:var(--muted);font-size:11px}
+  @media (min-width:860px){.sticky{display:none} body{padding-bottom:0}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <a class="brand" href="#top" aria-label="ZeroFill Tech home">
+      <span class="dotmark" aria-hidden="true"></span>
+      <span class="word">ZEROFILL</span>
+    </a>
+    <nav class="links mono" aria-label="Sections">
+      <a href="#services">Services</a>
+      <a href="#purge">Purge</a>
+      <a href="#intake">What we take</a>
+      <a href="#how">How it works</a>
+    </nav>
+    <div style="display:flex;align-items:center;gap:20px">
+      <span class="loc mono live">Las Vegas, NV</span>
+      <a class="btn" href="#request">Request pickup</a>
+    </div>
+  </div>
+</header>
+
+<main id="top">
+
+  <section class="hero">
+    <div class="wrap hero-inner">
+      <div class="index mono"><span>01 / 05 &nbsp;·&nbsp; Free pickup</span><span>Las Vegas valley</span></div>
+      <h1 class="h1">Your old<br>computers,<br><span class="ghost">gone.</span></h1>
+      <p class="tagline">
+        <span>Free pickup</span>
+        <span>Certified data destruction</span>
+        <span>Refurbished tech</span>
+      </p>
+      <div class="hero-cta">
+        <a class="btn" href="#request">Request free pickup</a>
+        <a class="btn ghost" href="#intake">What we take</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="services">
+    <div class="wrap">
+      <div class="sec-head mono"><span class="t">02 / 05 &nbsp;·&nbsp; Services</span><span>Three ways in</span></div>
+      <div class="grid3">
+        <article class="cell">
+          <div class="num mono"><span>001 Pickup</span><span class="plus">+</span></div>
+          <h3>FREE<br>PICKUP</h3>
+          <p>Desktops, laptops, servers, networking gear and monitors, collected from your home or office across the valley. No fee, no minimum.</p>
+          <dl class="spec">
+            <dt>Cost</dt><dd>$0</dd>
+            <dt>Area</dt><dd>Las Vegas · Henderson · N. Las Vegas · Summerlin</dd>
+            <dt>Lead time</dt><dd>Usually within the week</dd>
+          </dl>
+        </article>
+        <article class="cell">
+          <div class="num mono"><span>002 Purge</span><span class="plus">+</span></div>
+          <h3>DATA<br>DESTRUCTION</h3>
+          <p>Every drive is pulled before anything else happens. Wiped to NIST 800-88 or physically destroyed, with a certificate listing each serial number.</p>
+          <dl class="spec">
+            <dt>Standard</dt><dd>NIST SP 800-88</dd>
+            <dt>Proof</dt><dd>Certificate of destruction</dd>
+            <dt>For</dt><dd>Small offices · home users</dd>
+          </dl>
+        </article>
+        <article class="cell">
+          <div class="num mono"><span>003 Refurb</span><span class="plus">+</span></div>
+          <h3>REFURBISHED<br>TECH</h3>
+          <p>Business-class machines we collect are tested, cleaned and resold. What can't be reused is parted out or recycled responsibly — nothing to landfill.</p>
+          <dl class="spec">
+            <dt>Sold on</dt><dd>eBay · local Marketplace</dd>
+            <dt>Tested</dt><dd>Power, RAM, storage, display</dd>
+            <dt>Leftovers</dt><dd>Recycled, never dumped</dd>
+          </dl>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="purge">
+    <div class="wrap">
+      <div class="sec-head mono"><span class="t">03 / 05 &nbsp;·&nbsp; Purge</span><span>purge.exe</span></div>
+      <div class="purge">
+        <div class="copy">
+          <h2>NOTHING<br>LEFT TO<br>RECOVER.</h2>
+          <p>Handing off a computer means handing off everything on it. PURGE is our data-destruction process: drives come out first, get wiped or shredded, and you get paperwork you can file.</p>
+          <ul>
+            <li><span class="k">01</span><span>Drives pulled and labeled before any testing or resale.</span></li>
+            <li><span class="k">02</span><span>Wiped to NIST SP 800-88 (Clear / Purge), or physically destroyed on request.</span></li>
+            <li><span class="k">03</span><span>Certificate of destruction with device and drive serials, dated and signed.</span></li>
+          </ul>
+        </div>
+        <div class="term" aria-label="Example purge log">
+          <div class="bar"><span>purge.exe</span><span>v0.1 · nist 800-88</span></div>
+          <div><span class="dim">$</span> purge --target /dev/sda --method clear --cert</div>
+          <div><span class="dim">[00:00]</span> device&nbsp;&nbsp; Samsung 870 EVO 500GB</div>
+          <div><span class="dim">[00:00]</span> serial&nbsp;&nbsp; S6PXNX0R••••••</div>
+          <div><span class="dim">[00:01]</span> pass 1/1 <span class="ok">zero-fill</span> ........ 100%</div>
+          <div><span class="dim">[04:12]</span> verify&nbsp;&nbsp; <span class="ok">OK</span> — 0 readable sectors</div>
+          <div><span class="dim">[04:12]</span> cert&nbsp;&nbsp;&nbsp;&nbsp; ZF-2026-0001.pdf <span class="ok">written</span></div>
+          <div><span class="dim">[04:12]</span> status&nbsp;&nbsp; <span class="red">NOTHING LEFT TO RECOVER</span></div>
+          <div><span class="dim">$</span> <span class="cursor"></span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="intake">
+    <div class="wrap">
+      <div class="sec-head mono"><span class="t">04 / 05 &nbsp;·&nbsp; What we take</span><span>Year one list</span></div>
+      <div class="two">
+        <div class="col">
+          <h3><span class="sq fill"></span>We take</h3>
+          <ol>
+            <li><span class="n">001</span><span><b>Business desktops &amp; laptops</b><small>Dell OptiPlex / Latitude, HP EliteDesk / EliteBook, Lenovo ThinkCentre / ThinkPad — working or not.</small></span></li>
+            <li><span class="n">002</span><span><b>Servers, workstations, NAS</b><small>Rack or tower. RAM, CPUs, drives and cards all get reused.</small></span></li>
+            <li><span class="n">003</span><span><b>Networking gear</b><small>Switches, routers, access points, firewalls.</small></span></li>
+            <li><span class="n">004</span><span><b>Gaming &amp; consumer PCs</b><small>Whole systems or loose parts: GPUs, PSUs, RAM, cases.</small></span></li>
+            <li><span class="n">005</span><span><b>Monitors 24" and up</b><small>Flat panel, 1080p or better, with stand.</small></span></li>
+            <li><span class="n">006</span><span><b>Dead or cracked laptops</b><small>Still worth it for the drive, RAM and screen.</small></span></li>
+            <li><span class="n">007</span><span><b>Phones &amp; tablets</b><small>Factory-reset in front of us; we'll walk you through it.</small></span></li>
+          </ol>
+        </div>
+        <div class="col refuse">
+          <h3><span class="sq"></span>We don't take</h3>
+          <ol>
+            <li><span class="n">—</span><span><b>CRT / tube TVs and monitors</b><small>Lead glass. Nevada State Recycle on Industrial Rd takes them for a small fee.</small></span></li>
+            <li><span class="n">—</span><span><b>Loose batteries, e-bike / scooter packs</b><small>Fire risk in transit. Laptop batteries still inside the laptop are fine.</small></span></li>
+            <li><span class="n">—</span><span><b>Appliances, microwaves, anything with refrigerant</b></span></li>
+            <li><span class="n">—</span><span><b>Inkjet printers</b><small>Working business laser printers are OK.</small></span></li>
+            <li><span class="n">—</span><span><b>Wet, moldy or pest-damaged equipment</b></span></li>
+          </ol>
+          <p class="note">Not sure? Send a photo with your request and we'll tell you straight.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="how">
+    <div class="wrap">
+      <div class="sec-head mono"><span class="t">05 / 05 &nbsp;·&nbsp; How it works</span><span>Four steps</span></div>
+      <div class="steps">
+        <div class="step"><span class="big">01</span><h4>Request</h4><p>Fill the form below or text us a photo of what you've got.</p></div>
+        <div class="step"><span class="big">02</span><h4>Confirm</h4><p>We reply with a pickup window. Curbside, garage or office — your call.</p></div>
+        <div class="step"><span class="big">03</span><h4>Pickup</h4><p>We load it. You sign a one-line intake sheet listing what left with us.</p></div>
+        <div class="step"><span class="big">04</span><h4>Purge</h4><p>Drives wiped or destroyed. Certificate emailed if you asked for one.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="request">
+    <div class="wrap">
+      <div class="req">
+        <div class="lead">
+          <div class="mono" style="color:var(--muted);margin-bottom:22px">Request · free pickup</div>
+          <h2>TELL US<br>WHAT YOU<br>HAVE.</h2>
+          <p>Takes a minute. We'll text or email back with a pickup window — no quotes, no haggling, it's free.</p>
+          <div class="alt">
+            <a id="alt-text" href="#"><span>Text us</span><span data-phone>—</span></a>
+            <a id="alt-mail" href="#"><span>Email</span><span data-email>—</span></a>
+          </div>
+        </div>
+
+        <form id="pickup" novalidate>
+          <div class="field">
+            <label for="name">Name</label>
+            <input id="name" name="name" type="text" autocomplete="name" placeholder="First name is fine" required>
+          </div>
+          <div class="field">
+            <label for="phone">Phone</label>
+            <input id="phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" placeholder="(702) 555-0100" required>
+          </div>
+          <div class="field">
+            <label for="email">Email</label>
+            <input id="email" name="email" type="email" autocomplete="email" placeholder="Optional — for the certificate">
+          </div>
+          <div class="field">
+            <label for="area">Area</label>
+            <select id="area" name="area" required>
+              <option value="" disabled selected>Choose one</option>
+              <option>Las Vegas</option>
+              <option>Henderson</option>
+              <option>North Las Vegas</option>
+              <option>Summerlin</option>
+              <option>Boulder City</option>
+              <option>Other / not sure</option>
+            </select>
+          </div>
+          <div class="field">
+            <label>Type</label>
+            <div class="chips" role="group" aria-label="Equipment type">
+              <label class="chip"><input type="checkbox" name="type" value="Desktops"><span>Desktops</span></label>
+              <label class="chip"><input type="checkbox" name="type" value="Laptops"><span>Laptops</span></label>
+              <label class="chip"><input type="checkbox" name="type" value="Servers / NAS"><span>Servers / NAS</span></label>
+              <label class="chip"><input type="checkbox" name="type" value="Networking"><span>Networking</span></label>
+              <label class="chip"><input type="checkbox" name="type" value="Monitors"><span>Monitors</span></label>
+              <label class="chip"><input type="checkbox" name="type" value="Parts / misc"><span>Parts / misc</span></label>
+            </div>
+          </div>
+          <div class="field">
+            <label for="details">Details</label>
+            <textarea id="details" name="details" placeholder="Roughly how many items, and anything we should know (stairs, gate code, business hours)."></textarea>
+          </div>
+          <div class="field">
+            <label>Data</label>
+            <div class="chips" role="group" aria-label="Data destruction">
+              <label class="chip"><input type="radio" name="cert" value="Wipe, no certificate" checked><span>Wipe it</span></label>
+              <label class="chip"><input type="radio" name="cert" value="Wipe + certificate"><span>Wipe + certificate</span></label>
+              <label class="chip"><input type="radio" name="cert" value="Physically destroy drives"><span>Destroy drives</span></label>
+            </div>
+          </div>
+          <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px" aria-hidden="true">
+          <div class="submit">
+            <button class="btn" type="submit">Send request</button>
+            <div>
+              <div class="status" id="status" aria-live="polite"></div>
+              <div class="fine">No CRTs · no loose batteries · free pickup</div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap foot mono">
+    <div class="row">
+      <span class="word">ZEROFILL TECH</span>
+      <span>Las Vegas, NV</span>
+    </div>
+    <div class="row">
+      <span>Free pickup · certified data destruction · refurbished tech</span>
+      <span>© <span id="yr">2026</span></span>
+    </div>
+  </div>
+</footer>
+
+<div class="sticky" aria-hidden="false">
+  <a class="btn" href="#request">Request free pickup</a>
+  <div class="mini mono"><span>No CRTs</span><span>No loose batteries</span><span>$0</span></div>
+</div>
+
+<script>
+/* ============================================================
+   CONFIG — the only block you need to edit.
+   FORM_ENDPOINT: paste a Formspree (https://formspree.io) form URL
+   like "https://formspree.io/f/abcdwxyz" to receive requests by
+   email without any backend. Leave "" to fall back to a mailto:
+   link that opens the visitor's mail app with the form pre-filled.
+   ============================================================ */
+const CONFIG = {
+  CONTACT_PHONE: "",                       // e.g. "+17025550100"
+  CONTACT_EMAIL: "hello@zerofill.tech",    // set up free email forwarding at Porkbun
+  FORM_ENDPOINT: ""                        // Formspree URL, or "" for mailto fallback
+};
+
+(function(){
+  const fmtPhone = p => p.replace(/^\+1(\d{3})(\d{3})(\d{4})$/, "($1) $2-$3");
+  const t = document.getElementById("alt-text");
+  const m = document.getElementById("alt-mail");
+  if (CONFIG.CONTACT_PHONE){
+    t.href = "sms:" + CONFIG.CONTACT_PHONE;
+    t.querySelector("[data-phone]").textContent = fmtPhone(CONFIG.CONTACT_PHONE);
+  } else { t.style.display = "none"; }
+  if (CONFIG.CONTACT_EMAIL){
+    m.href = "mailto:" + CONFIG.CONTACT_EMAIL;
+    m.querySelector("[data-email]").textContent = CONFIG.CONTACT_EMAIL;
+  } else { m.style.display = "none"; }
+  document.getElementById("yr").textContent = new Date().getFullYear();
+
+  const form = document.getElementById("pickup");
+  const status = document.getElementById("status");
+  const setStatus = (msg, cls) => { status.textContent = msg; status.className = "status " + (cls||""); };
+
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const fd = new FormData(form);
+    if (fd.get("_gotcha")) return;
+    const name = (fd.get("name")||"").trim(), phone = (fd.get("phone")||"").trim(), area = fd.get("area");
+    if (!name || !phone || !area){ setStatus("Name, phone and area are required.", "err"); return; }
+    const types = fd.getAll("type").join(", ") || "—";
+    const body = [
+      "Pickup request — zerofill.tech", "",
+      "Name: " + name, "Phone: " + phone, "Email: " + (fd.get("email")||"—"),
+      "Area: " + area, "Type: " + types, "Data: " + fd.get("cert"), "",
+      "Details:", (fd.get("details")||"—")
+    ].join("\n");
+
+    if (CONFIG.FORM_ENDPOINT){
+      setStatus("Sending…");
+      try{
+        const r = await fetch(CONFIG.FORM_ENDPOINT, { method:"POST", headers:{ "Accept":"application/json" }, body: fd });
+        if (r.ok){ form.reset(); setStatus("Got it. We'll reply with a pickup window.", "ok"); }
+        else { setStatus("Couldn't send. Text or email us instead.", "err"); }
+      }catch(err){ setStatus("Couldn't send. Text or email us instead.", "err"); }
+    } else {
+      const subject = "Pickup request — " + name + " (" + area + ")";
+      window.location.href = "mailto:" + CONFIG.CONTACT_EMAIL + "?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(body);
+      setStatus("Opening your mail app…", "ok");
+    }
+  });
+})();
+</script>
+</body>
+</html>
