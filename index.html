@@ -76,7 +76,10 @@
   .theme svg{width:20px;height:20px;stroke:var(--ink);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
   .theme .sun{display:none} [data-theme="light"] .theme .sun{display:block} [data-theme="light"] .theme .moon{display:none}
   .nav .btn{display:none}
+  .nav .callbtn{display:inline-flex;padding:0 16px}
+  .nav .callnum{display:none}
   @media (min-width:560px){.nav .btn{display:inline-flex}}
+  @media (min-width:700px){.nav .callnum{display:inline}.nav .calltxt{display:none}}
   @media (min-width:960px){.nav-links{display:flex}.nav .call{display:inline}}
 
   /* ---------- HERO ---------- */
@@ -237,13 +240,16 @@
   @media (min-width:860px){.two{grid-template-columns:1fr 1fr}}
   .list{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:26px}
   .list h3{display:flex;align-items:center;gap:10px;font-size:20px;font-weight:800;margin-bottom:14px}
-  .list h3 .dotk{width:12px;height:12px;border-radius:50%;background:var(--accent-hi)}
-  .list.no h3 .dotk{background:#ff5a5f}
+  .list h3 .dotk{width:12px;height:12px;border-radius:50%;background:#1f8a5b}
+  .list.no h3 .dotk{background:#d93838}
   .list ul{list-style:none;display:grid}
-  .list li{padding:12px 0;border-top:1px solid var(--line);font-size:16px}
+  .list li{padding:12px 0;border-top:1px solid var(--line);font-size:16px;display:grid;grid-template-columns:30px 1fr;gap:14px;align-items:start}
+  .list li::before{content:"";width:26px;height:26px;border-radius:7px;margin-top:1px;background-color:#1f8a5b;background-repeat:no-repeat;background-position:center;background-size:16px;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 6 9 17l-5-5'/%3E%3C/svg%3E")}
+  .list.no li::before{background-color:#d93838;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3.2' stroke-linecap='round'%3E%3Cpath d='M6 6l12 12M18 6 6 18'/%3E%3C/svg%3E")}
   .list li b{display:block;font-weight:700}
-  .list li span{color:var(--muted);font-size:15px}
-  .list.no li b{text-decoration:line-through;text-decoration-color:#ff5a5f;text-decoration-thickness:2px;color:var(--muted)}
+  .list li .c{display:block}
+  .list li .c span{color:var(--muted);font-size:15px;display:block}
   .list .foot{margin-top:14px;color:var(--faint);font-size:14px}
 
   /* ---------- HOW ---------- */
@@ -294,7 +300,7 @@
     <a href="#services">Services</a><a href="#purge">PURGE</a><a href="#take">What we take</a><a href="#how">How it works</a><a href="#faq">FAQ</a>
   </nav>
   <div class="nav-right">
-    <a class="call" href="tel:+17027605037">Call <b>(702) 760-5037</b></a>
+    <a class="btn ghost callbtn" href="tel:+17027605037"><svg viewBox="0 0 24 24" style="width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8.1 9.7a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.8 2z"/></svg><span class="callnum">(702) 760-5037</span><span class="calltxt">Call us</span></a>
     <button class="theme" id="theme" aria-label="Toggle light and dark theme">
       <svg class="moon" viewBox="0 0 24 24"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
       <svg class="sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
@@ -387,7 +393,7 @@
       <div class="fields two">
         <div class="f span"><label for="addr">Address <small>(or nearest cross-streets)</small></label><input id="addr" autocomplete="street-address" placeholder="1234 W Charleston Blvd" required></div>
         <div class="f"><label for="area">Area</label>
-          <select id="area" required><option value="" disabled selected>Choose one</option><option>Las Vegas</option><option>Henderson</option><option>North Las Vegas</option><option>Summerlin</option><option>Spring Valley</option><option>Boulder City</option><option>Other / not sure</option></select></div>
+          <select id="area" required><option value="" disabled selected>Choose one</option><option>Las Vegas</option><option>North Las Vegas</option><option>Summerlin</option><option>Spring Valley</option><option>Henderson (extended — grouped runs)</option><option>Boulder City (extended — grouped runs)</option><option>Other / not sure</option></select></div>
         <div class="f"><label for="ptype">Pickup from</label>
           <select id="ptype" required><option value="" disabled selected>Choose one</option><option>Home — curb or driveway</option><option>Home — garage / inside</option><option>Apartment</option><option>Office / business</option></select></div>
         <div class="f span"><label for="access">Anything we should know? <small>(optional)</small></label><textarea id="access" placeholder="Gate code, stairs, business hours, dog in the yard…"></textarea></div>
@@ -398,15 +404,15 @@
 
     <!-- STEP 3 WHEN -->
     <div class="step" data-step="2">
-      <h2 class="q">When works for you?<small>Pick a day and a window. We'll text to lock in a time.</small></h2>
+      <h2 class="q">When works for you?<small>We run pickups Wednesdays, Thursdays and weekend afternoons. Pick a day and a window — we'll text to lock in a time.</small></h2>
       <div class="lbl">Day</div>
       <div class="chips" id="days"></div>
       <div class="lbl">Time window</div>
       <div class="chips" id="wins">
         <button class="chip" data-win="Morning (8–11am)">Morning<small>8 – 11am</small></button>
         <button class="chip" data-win="Midday (11am–2pm)">Midday<small>11am – 2pm</small></button>
-        <button class="chip" data-win="Afternoon (2–5pm)">Afternoon<small>2 – 5pm</small></button>
-        <button class="chip" data-win="Evening (5–8pm)">Evening<small>5 – 8pm</small></button>
+        <button class="chip" data-win="Afternoon (3–6pm)">Afternoon<small>3 – 6pm</small></button>
+        <button class="chip" data-win="Evening (6–8pm)">Evening<small>6 – 8pm</small></button>
         <button class="chip" data-win="Flexible">Flexible<small>Whenever's easiest</small></button>
       </div>
       <div class="err" id="e2"></div>
@@ -542,21 +548,21 @@
   </div>
   <div class="two">
     <div class="list reveal"><h3><span class="dotk"></span>We take</h3><ul>
-      <li><b>Business desktops &amp; laptops</b><span>Dell, HP, Lenovo — working or not.</span></li>
-      <li><b>Servers, workstations, NAS</b><span>Rack or tower; RAM, CPUs, drives all get reused.</span></li>
-      <li><b>Networking gear</b><span>Switches, routers, access points, firewalls.</span></li>
-      <li><b>Gaming &amp; consumer PCs</b><span>Whole systems or loose parts.</span></li>
-      <li><b>Monitors 24" and up</b><span>Flat panel, with stand.</span></li>
-      <li><b>Dead or cracked laptops</b><span>Still worth it for the drive, RAM and screen.</span></li>
-      <li><b>Phones &amp; tablets</b><span>Factory-reset in front of us — we'll walk you through it.</span></li>
+      <li><span class="c"><b>Business desktops &amp; laptops</b><span>Dell, HP, Lenovo — working or not.</span></span></li>
+      <li><span class="c"><b>Servers, workstations, NAS</b><span>Rack or tower; RAM, CPUs, drives all get reused.</span></span></li>
+      <li><span class="c"><b>Networking gear</b><span>Switches, routers, access points, firewalls.</span></span></li>
+      <li><span class="c"><b>Gaming &amp; consumer PCs</b><span>Whole systems or loose parts.</span></span></li>
+      <li><span class="c"><b>Monitors 24" and up</b><span>Flat panel, with stand.</span></span></li>
+      <li><span class="c"><b>Dead or cracked laptops</b><span>Still worth it for the drive, RAM and screen.</span></span></li>
+      <li><span class="c"><b>Phones &amp; tablets</b><span>Factory-reset in front of us — we'll walk you through it.</span></span></li>
     </ul></div>
     <div class="list no reveal"><h3><span class="dotk"></span>We don't take</h3><ul>
-      <li><b>Tube TVs and CRT monitors</b><span>Lead glass. Nevada State Recycle (1816 Industrial Rd) takes them for a small fee.</span></li>
-      <li><b>Loose batteries, e-bike / scooter packs</b><span>Fire risk in transit. Batteries still inside a laptop are fine.</span></li>
-      <li><b>Appliances, microwaves, anything with refrigerant</b></li>
-      <li><b>Inkjet printers</b><span>Working business laser printers are OK.</span></li>
-      <li><b>Wet, moldy or pest-damaged equipment</b></li>
-    </ul><p class="foot">Have one of these anyway? Ask — we can usually point you to the right place.</p></div>
+      <li><span class="c"><b>Tube TVs and CRT monitors</b><span>Lead glass. Nevada State Recycle (1816 Industrial Rd) takes them for a small fee.</span></span></li>
+      <li><span class="c"><b>Loose batteries, e-bike / scooter packs</b><span>Fire risk in transit. Batteries still inside a laptop are fine.</span></span></li>
+      <li><span class="c"><b>Appliances, microwaves, anything with refrigerant</b></span></li>
+      <li><span class="c"><b>Inkjet printers</b><span>Working business laser printers are OK.</span></span></li>
+      <li><span class="c"><b>Wet, moldy or pest-damaged equipment</b></span></li>
+    </ul><p class="foot" style="max-width:none">Have one of these anyway? Ask — we can usually point you to the right place.</p></div>
   </div>
 </div></section>
 
@@ -567,8 +573,8 @@
     <h2 class="h2">Four steps. You do one of them.</h2>
   </div>
   <div class="how">
-    <div class="hs reveal"><div class="n">01</div><h4>Book</h4><p>Tap what you've got, pick a day, add a photo if you like. Two minutes.</p></div>
-    <div class="hs reveal"><div class="n">02</div><h4>We confirm</h4><p>You get a text with a time window — and a heads-up if it's a truck day.</p></div>
+    <div class="hs reveal"><div class="n">01</div><h4>Book</h4><p>Select the items you have or send a photo. Choose a pick-up day.</p></div>
+    <div class="hs reveal"><div class="n">02</div><h4>We confirm</h4><p>You get a text with a time window — and a reminder the morning of.</p></div>
     <div class="hs reveal"><div class="n">03</div><h4>We load it</h4><p>Curb, garage or office. You sign a one-line sheet listing what left with us.</p></div>
     <div class="hs reveal"><div class="n">04</div><h4>We purge it</h4><p>Drives wiped or destroyed. Certificate emailed if you asked for one.</p></div>
   </div>
@@ -582,7 +588,7 @@
     <details><summary>When is there a charge?</summary><p>Two cases. A big load that needs a rented truck (more than about six machines, a full rack, or an office cleanout) is a flat $49 — and we tell you before we come. And if you want a certificate of destruction or physical drive destruction for compliance, that's $10 or $15 per drive. Residential pickups almost never pay anything.</p></details>
     <details><summary>What happens to my data?</summary><p>Every storage drive is removed before the machine is tested or resold, then wiped using the NIST SP 800-88 method — the same standard federal agencies use. If you'd like proof, we issue a signed certificate listing each drive serial. If you'd rather, we drill or shred the drive and send you a photo.</p></details>
     <details><summary>Do I need to wipe it myself first?</summary><p>No. Leave it as is. If you have passwords or a BIOS lock, you don't need to remove them either — we're wiping the drive, not logging in. For phones and tablets we do ask you to factory-reset in front of us, because activation locks make them unusable.</p></details>
-    <details><summary>Where do you go?</summary><p>Anywhere in the Las Vegas valley: Las Vegas, Henderson, North Las Vegas, Summerlin, Spring Valley, Boulder City. Further out is fine too — just mention it when you book.</p></details>
+    <details><summary>Where do you go?</summary><p>Our core area is Las Vegas, North Las Vegas, Summerlin and Spring Valley. Henderson and Boulder City are an extended area — we group those pickups into one run, so it may take a week or so, and small single items may be better dropped at Nevada State Recycle. Pickups happen Wednesdays, Thursdays and weekend afternoons.</p></details>
     <details><summary>Are you a licensed recycler?</summary><p>Nevada doesn't license e-waste recyclers (NDEP). We operate as a small-quantity handler, refuse the hazardous categories (CRTs, loose batteries), and send anything we can't reuse to a licensed downstream recycler in Las Vegas. Nothing goes to a landfill.</p></details>
   </div>
 </div></section>
@@ -653,7 +659,7 @@ const CONFIG = {
     requestAnimationFrame(draw); if(!visible) return;
     const st=getComputedStyle(document.documentElement), DOT=st.getPropertyValue('--dot').trim(), HI=st.getPropertyValue('--dot-hi').trim();
     const light=document.documentElement.dataset.theme==='light', k=light?1.6:1;
-    const t=(now-t0)/1000, dur=2.2, head=reduce?1e9:Math.min(1.08,t/dur)*W*1.1;
+    const t=(now-t0)/1000, head=1e9; // static field; motion comes from the waves only
     ctx.clearRect(0,0,W,H);
     for(let y=0;y<rows;y++) for(let x=0;x<cols;x++){
       const i=y*cols+x, px=x*gap, py=y*gap, inMask=mask[i*4+3]>80, n=dots[i];
@@ -662,7 +668,6 @@ const CONFIG = {
       let a, kind=0;
       if(px>head){ a=(n>0.82? 0.4 : n>0.6? 0.16 : 0.05)*k; if(Math.random()<0.015) dots[i]=Math.random(); }
       else { a= inMask? 0.92 : (0.06+0.05*(wv+1))*k; if(!inMask && wv>0.72 && n>0.55) kind= n>0.8? 2:1; }
-      const d=Math.abs(px-head); if(d<gap*3) a=Math.max(a,0.9-d/(gap*3));
       const dx=px-mx, dy=py-my, dd=Math.sqrt(dx*dx+dy*dy); if(dd<gap*6){ a=Math.min(1,a+(1-dd/(gap*6))*0.6); if(dd<gap*3 && !inMask) kind=1; }
       const base=gap*0.10, grow= px<=head? (1+0.55*(wv2+1)*0.5+0.25*Math.max(0,wv)) : 1;
       const r=(inMask&&px<=head? 1.4:1)*base*grow;
@@ -689,7 +694,8 @@ const CONFIG = {
 /* ================= BOOKING WIZARD ================= */
 (() => {
   const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
-  const state={items:{},big:false,addr:'',area:'',ptype:'',access:'',day:'',win:'',photos:[],name:'',phone:'',email:'',data:'Wipe (free)'};
+  const REF=new URLSearchParams(location.search).get('ref')||''; localStorage.setItem('zf-ref',REF||localStorage.getItem('zf-ref')||'');
+  const state={ref:REF||localStorage.getItem('zf-ref')||'',items:{},big:false,addr:'',area:'',ptype:'',access:'',day:'',win:'',photos:[],name:'',phone:'',email:'',data:'Wipe (free)'};
   let cur=0;
   const steps=$$('#steps .s'), panes=$$('.step');
   function go(n){
@@ -727,8 +733,14 @@ const CONFIG = {
 
   // step 3
   const days=$('#days'), fmt=new Intl.DateTimeFormat('en-US',{weekday:'short'}), fmt2=new Intl.DateTimeFormat('en-US',{month:'short',day:'numeric'});
-  for(let i=1;i<=7;i++){ const d=new Date(); d.setDate(d.getDate()+i); const b=document.createElement('button'); b.type='button'; b.className='chip'; b.dataset.day=`${fmt.format(d)} ${fmt2.format(d)}`; b.innerHTML=`${i===1?'Tomorrow':fmt.format(d)}<small>${fmt2.format(d)}</small>`; days.appendChild(b); }
-  const any=document.createElement('button'); any.type='button'; any.className='chip'; any.dataset.day='Any day this week'; any.innerHTML='Any day<small>This week</small>'; days.appendChild(any);
+  // Pickup days: Wed + Thu (all day), Sat + Sun (afternoon/evening). Next two weeks.
+  const PICK={3:'full',4:'full',6:'late',0:'late'}; let shown=0;
+  for(let i=1;i<=14 && shown<6;i++){ const d=new Date(); d.setDate(d.getDate()+i); const kind=PICK[d.getDay()]; if(!kind) continue; shown++;
+    const b=document.createElement('button'); b.type='button'; b.className='chip'; b.dataset.day=`${fmt.format(d)} ${fmt2.format(d)}`; b.dataset.kind=kind;
+    b.innerHTML=`${i===1?'Tomorrow':fmt.format(d)}<small>${fmt2.format(d)}${kind==='late'?' · after 3pm':''}</small>`; days.appendChild(b); }
+  const any=document.createElement('button'); any.type='button'; any.className='chip'; any.dataset.day='Next available'; any.dataset.kind='full'; any.innerHTML='Next available<small>Wed / Thu / weekend pm</small>'; days.appendChild(any);
+  days.addEventListener('click',()=>{ const late=days.querySelector('.chip.on')?.dataset.kind==='late';
+    $$('#wins .chip').forEach(w=>{ const early=/Morning|Midday/.test(w.dataset.win); w.style.display=(late&&early)?'none':''; if(late&&early&&w.classList.contains('on')){ w.classList.remove('on'); state.win=''; } }); });
   const pick=(wrap,key,attr)=>wrap.addEventListener('click',e=>{ const b=e.target.closest('.chip'); if(!b) return; wrap.querySelectorAll('.chip').forEach(c=>c.classList.remove('on')); b.classList.add('on'); state[key]=b.dataset[attr]; });
   pick(days,'day','day'); pick($('#wins'),'win','win'); pick($('#data'),'data','data');
   $('#n2').addEventListener('click',()=>{ if(!state.day||!state.win){ $('#e2').textContent='Pick a day and a time window.'; return; } $('#e2').textContent=''; go(3); });
@@ -772,7 +784,7 @@ const CONFIG = {
   // send
   function summaryText(){
     const items=Object.entries(state.items).map(([k,q])=>`• ${k} ×${q}`).join('\n');
-    return [`NEW PICKUP — zerofill.tech`,``,`ITEMS`,items,state.big?`⚠ Big load — truck ($49)`:null,``,`WHERE`,`${state.addr}, ${state.area}`,state.ptype,state.access?`Notes: ${state.access}`:null,``,`WHEN`,`${state.day} · ${state.win}`,``,`CONTACT`,state.name,state.phone,state.email||null,``,`DATA: ${state.data}`].filter(l=>l!==null).join('\n');
+    return [`NEW PICKUP — zerofill.tech`,``,`ITEMS`,items,state.big?`⚠ Big load — truck ($49)`:null,``,`WHERE`,`${state.addr}, ${state.area}`,state.ptype,state.access?`Notes: ${state.access}`:null,``,`WHEN`,`${state.day} · ${state.win}`,``,`CONTACT`,state.name,state.phone,state.email||null,``,`DATA: ${state.data}`,state.ref?`REF: ${state.ref}`:null].filter(l=>l!==null).join('\n');
   }
   $('#send').addEventListener('click',async()=>{
     if($('#hp').value) return;
