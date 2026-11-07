@@ -68,6 +68,8 @@
   .brand .word b{color:var(--accent-hi);font-weight:900}
   .nav-links{display:none;gap:26px;font-weight:600;font-size:15px;color:var(--muted)}
   .nav-links a:hover{color:var(--ink)}
+  .nav-links a{white-space:nowrap}
+  .nav-links a.opt{display:none} @media (min-width:1280px){.nav-links a.opt{display:inline}}
   .nav-right{display:flex;align-items:center;gap:12px}
   .nav .call{display:none;color:var(--muted);font-weight:600;font-size:16px}
   .nav .call b{color:var(--ink);font-weight:700}
@@ -81,6 +83,7 @@
   @media (min-width:560px){.nav .btn{display:inline-flex}}
   @media (min-width:700px){.nav .callnum{display:inline}.nav .calltxt{display:none}}
   @media (min-width:960px){.nav-links{display:flex}.nav .call{display:inline}}
+  @media (min-width:960px) and (max-width:1099px){.nav .callnum{display:none}.nav .calltxt{display:inline}}
 
   /* ---------- HERO ---------- */
   .hero{position:relative;overflow:hidden;border-bottom:1px solid var(--line);background:radial-gradient(ellipse 80% 60% at 80% 20%,var(--accent-glow),transparent 60%),var(--bg)}
@@ -297,7 +300,7 @@
 <header><div class="wrap nav">
   <a class="brand" href="#top" aria-label="ZeroFill Tech home"><span class="word">ZER<b>0</b>FILL</span></a>
   <nav class="nav-links" aria-label="Sections">
-    <a href="#services">Services</a><a href="#purge">PURGE</a><a href="#take">What we take</a><a href="#how">How it works</a><a href="#faq">FAQ</a>
+    <a href="#services">Services</a><a href="#purge">PURGE</a><a href="#business">Businesses</a><a href="#take">What we take</a><a class="opt" href="#how">How it works</a><a class="opt" href="#faq">FAQ</a>
   </nav>
   <div class="nav-right">
     <a class="btn ghost callbtn" href="tel:+17027605037"><svg viewBox="0 0 24 24" style="width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8.1 9.7a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.8 2z"/></svg><span class="callnum">(702) 760-5037</span><span class="calltxt">Call us</span></a>
@@ -526,7 +529,7 @@
       <ul>
         <li><span class="k">01</span><span><b>Drives out first.</b> Pulled and labeled before any testing or resale happens.</span></li>
         <li><span class="k">02</span><span><b>Wiped to the federal standard.</b> NIST SP 800-88 Clear / Purge — or physically destroyed on request.</span></li>
-        <li><span class="k">03</span><span><b>Paperwork you can file.</b> Certificate with device and drive serials, dated and signed.</span></li>
+        <li><span class="k">03</span><span><b>Paperwork you can file.</b> Certificate with device and drive serials, dated and signed. <a href="assets/sample-certificate-of-destruction.pdf" target="_blank" rel="noopener" style="text-decoration:underline">See a sample</a>.</span></li>
       </ul>
     </div>
     <div class="term reveal" id="term" aria-label="Example purge log">
@@ -543,8 +546,38 @@
   </div>
 </div></section>
 
+<!-- FOR BUSINESSES -->
+<section class="sec" id="business"><div class="wrap">
+  <div class="sec-head reveal">
+    <span class="eyebrow">For businesses</span>
+    <h2 class="h2">Retiring office tech? Get paperwork you can file.</h2>
+    <p class="sub">Built for the small offices the big recyclers screen out. No minimums and no "commercial quantities only." One laptop or a whole floor.</p>
+  </div>
+  <div class="two">
+    <div class="list reveal"><h3><span class="dotk"></span>What you get</h3><ul>
+      <li><span class="c"><b>Signed chain-of-custody receipt</b><span>Every device counted and signed for before it leaves your office.</span></span></li>
+      <li><span class="c"><b>Serialized certificate of destruction</b><span>Each drive's serial, method, date and technician. <a href="assets/sample-certificate-of-destruction.pdf" target="_blank" rel="noopener" style="text-decoration:underline">See a sample (PDF)</a>.</span></span></li>
+      <li><span class="c"><b>Your asset tags on the paperwork</b><span>Tell us when you book and we'll record them next to each serial.</span></span></li>
+      <li><span class="c"><b>Witnessed destruction on request</b><span>Drives destroyed at your location while you watch, if your policy requires it.</span></span></li>
+      <li><span class="c"><b>Easy for your bookkeeper</b><span>W-9 the same day. Net 15 invoice, payable by card, ACH or check.</span></span></li>
+    </ul></div>
+    <div class="list reveal"><h3><span class="dotk"></span>Who we work with</h3><ul>
+      <li><span class="c"><b>Medical &amp; dental offices</b><span>HIPAA expects patient data on retired drives to be destroyed or made unreadable.</span></span></li>
+      <li><span class="c"><b>Accountants &amp; tax preparers</b><span>The FTC Safeguards Rule requires secure disposal of customer information.</span></span></li>
+      <li><span class="c"><b>Mortgage brokers &amp; auto dealers</b><span>Covered by the same Safeguards Rule (GLBA).</span></span></li>
+      <li><span class="c"><b>Law &amp; insurance offices</b><span>Client files live on those drives too.</span></span></li>
+      <li><span class="c"><b>Property managers &amp; office cleanouts</b><span>Tenant left a server closet behind? We'll clear it.</span></span></li>
+    </ul><p class="foot" style="max-width:none">Nevada requires any business that retires customer records to make them unreadable (NRS 603A.200). The certificate is your proof.</p></div>
+  </div>
+  <div class="hero-cta reveal" style="margin-top:28px">
+    <a class="btn" href="#book">Book a business pickup</a>
+    <a class="btn ghost" href="assets/sample-certificate-of-destruction.pdf" target="_blank" rel="noopener">Sample certificate (PDF)</a>
+    <a class="btn ghost" href="tel:+17027605037">Call (702) 760-5037</a>
+  </div>
+</div></section>
+
 <!-- TAKE / REFUSE -->
-<section class="sec" id="take"><div class="wrap">
+<section class="sec alt" id="take"><div class="wrap">
   <div class="sec-head reveal">
     <span class="eyebrow">What we take</span>
     <h2 class="h2">Yes to most of it. No to the dangerous stuff.</h2>
@@ -571,7 +604,7 @@
 </div></section>
 
 <!-- HOW -->
-<section class="sec alt" id="how"><div class="wrap">
+<section class="sec" id="how"><div class="wrap">
   <div class="sec-head reveal">
     <span class="eyebrow">How it works</span>
     <h2 class="h2">Four steps. You do one of them.</h2>
@@ -585,7 +618,7 @@
 </div></section>
 
 <!-- FAQ -->
-<section class="sec" id="faq"><div class="wrap">
+<section class="sec alt" id="faq"><div class="wrap">
   <div class="sec-head reveal"><span class="eyebrow">Questions</span><h2 class="h2">Fair questions.</h2></div>
   <div class="faq reveal">
     <details><summary>Why is it free?</summary><p>Because working parts have value. A six-year-old office PC still holds RAM, an SSD and a CPU that someone wants. We make our money reselling tested gear, so we'd rather pick yours up than see it in a dumpster.</p></details>
