@@ -1,6 +1,6 @@
 # Booking relay (Cloudflare Worker → Telegram)
 
-**Live:** https://zerofill-relay.isaiahmiguel95.workers.dev (account details are in the private business repo's NOTES.md).
+**Live:** https://zerofill-relay.zerofill.workers.dev (account details: private business repo NOTES.md).
 Settings live in `wrangler.toml` (CHAT_ID, ALLOWED_ORIGIN). Redeploy after editing `worker.js`:
 `cd worker && npx wrangler deploy`. The only secret is BOT_TOKEN: set it with
 `npx wrangler secret put BOT_TOKEN` or in the dashboard. It's never committed.
