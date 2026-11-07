@@ -35,14 +35,20 @@ export default {
     if (!text.includes("NEW PICKUP")) return new Response("Bad request", { status: 400, headers: cors });
     const photos = form.getAll("photo").filter(p => p && typeof p === "object" && p.size > 0).slice(0, 5);
 
-    const api = (m) => `https://api.telegram.org/bot${env.BOT_TOKEN}/${m}`;
+    const token = String(env.BOT_TOKEN || "").trim().replace(/^["']|["']$/g, "");
+    const api = (m) => `https://api.telegram.org/bot${token}/${m}`;
 
     // 1) text message
     const r1 = await fetch(api("sendMessage"), {
       method: "POST", headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ chat_id: env.CHAT_ID, text, disable_web_page_preview: true }),
     });
-    if (!r1.ok) return new Response("Telegram error", { status: 502, headers: cors });
+    if (!r1.ok) {
+      // Log Telegram's reason (never the token) so `wrangler tail` shows why delivery failed.
+      const why = await r1.text().catch(() => "");
+      console.log("telegram sendMessage failed", r1.status, why.slice(0, 300));
+      return new Response("Telegram error", { status: 502, headers: cors });
+    }
 
     // 2) photos (single -> sendPhoto, multiple -> sendMediaGroup)
     if (photos.length === 1) {
