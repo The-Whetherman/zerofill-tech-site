@@ -1,6 +1,12 @@
 # Booking relay (Cloudflare Worker → Telegram)
 
-Free tier is plenty (100k requests/day). ~5 minutes.
+**Live:** https://zerofill-relay.isaiahmiguel95.workers.dev (account details are in the private business repo's NOTES.md).
+Settings live in `wrangler.toml` (CHAT_ID, ALLOWED_ORIGIN). Redeploy after editing `worker.js`:
+`cd worker && npx wrangler deploy`. The only secret is BOT_TOKEN: set it with
+`npx wrangler secret put BOT_TOKEN` or in the dashboard. It's never committed.
+The site falls back to a pre-filled email if the relay fails, so a booking is never lost.
+
+Free tier is plenty (100k requests/day). Original manual setup, kept for reference:
 
 ## 1. Create the worker
 1. https://dash.cloudflare.com → sign up / log in → **Workers & Pages** → **Create** → **Create Worker**.

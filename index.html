@@ -649,7 +649,7 @@ const CONFIG = {
   EMAIL: "hello@zerofill.tech",
   // Cloudflare Worker that forwards bookings + photos to Telegram (see worker/ in the repo).
   // Leave "" to fall back to a pre-filled email (photos are dropped in the fallback).
-  WORKER_URL: ""
+  WORKER_URL: "https://zerofill-relay.isaiahmiguel95.workers.dev"
 };
 
 /* ================= THEME ================= */
@@ -828,11 +828,16 @@ const CONFIG = {
     if($('#hp').value) return;
     const btn=$('#send'); btn.disabled=true; btn.textContent='Sending…'; $('#e5').textContent='';
     try{
+      let relayed=false;
       if(CONFIG.WORKER_URL){
-        const fd=new FormData(); fd.append('text',summaryText()); fd.append('json',JSON.stringify({...state,photos:state.photos.length}));
-        state.photos.forEach((b,i)=>fd.append('photo',b,`photo-${i+1}.jpg`));
-        const r=await fetch(CONFIG.WORKER_URL,{method:'POST',body:fd}); if(!r.ok) throw new Error('bad status '+r.status);
-      } else {
+        try{
+          const fd=new FormData(); fd.append('text',summaryText()); fd.append('json',JSON.stringify({...state,photos:state.photos.length}));
+          state.photos.forEach((b,i)=>fd.append('photo',b,`photo-${i+1}.jpg`));
+          const r=await fetch(CONFIG.WORKER_URL,{method:'POST',body:fd}); relayed=r.ok;
+        }catch(e){ relayed=false; }
+      }
+      if(!relayed){
+        // relay not configured or failed: fall back to a pre-filled email so the booking is never lost
         location.href=`mailto:${CONFIG.EMAIL}?subject=${encodeURIComponent('Pickup request — '+state.name+' ('+state.area+')')}&body=${encodeURIComponent(summaryText()+(state.photos.length?'\n\n(Photos could not be attached by email — we will text you for them.)':''))}`;
       }
       go(6);

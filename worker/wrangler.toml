@@ -1,0 +1,11 @@
+name = "zerofill-relay"
+main = "worker.js"
+compatibility_date = "2026-11-01"
+workers_dev = true
+preview_urls = false
+
+# Non-secret settings. BOT_TOKEN is a secret: set it with `npx wrangler secret put BOT_TOKEN`
+# or in the dashboard (Worker > Settings > Variables and Secrets), never in this file.
+[vars]
+CHAT_ID = "8274483328"
+ALLOWED_ORIGIN = "https://zerofill.tech"
