@@ -1,6 +1,6 @@
 # zerofill.tech
 
-Public site for ZeroFill Tech (Las Vegas): free e-waste pickup, certified data destruction (PURGE), refurbished tech.
+Public site for ZeroFill Tech (Las Vegas): free e-waste pickup, documented data destruction (PURGE), refurbished tech.
 
 Single static page, no build step. Hosted on GitHub Pages, domain at Porkbun.
 
