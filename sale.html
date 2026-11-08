@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tested, wiped tech for sale — ZeroFill Tech, Las Vegas</title>
+<meta name="description" content="Refurbished desktops, laptops, monitors and parts from ZeroFill Tech. Every drive wiped to NIST 800-88 before resale. Las Vegas local pickup or eBay.">
+<meta name="theme-color" content="#0a0a0a">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root, [data-theme="dark"]{
+    --bg:#0a0a0a; --bg-2:#0e0e0e; --panel:#121212; --panel-2:#181818;
+    --line:rgba(255,255,255,.08); --line-2:rgba(255,255,255,.16);
+    --ink:#f3efe7; --muted:#a39e95; --faint:#6b6760;
+    --accent:#8aff3c; --accent-hi:#8aff3c; --accent-ink:#071200; --accent-glow:rgba(138,255,60,.16);
+    --ascii-accent:#8aff3c; color-scheme:dark;
+  }
+  [data-theme="light"]{
+    --bg:#f6f3ec; --bg-2:#efebe2; --panel:#fff; --panel-2:#f7f4ee;
+    --line:rgba(20,18,14,.09); --line-2:rgba(20,18,14,.16);
+    --ink:#17150f; --muted:#625d53; --faint:#9a948a;
+    --accent:#f2b705; --accent-hi:#b07c00; --accent-ink:#1a1400; --accent-glow:rgba(242,183,5,.28); --ascii-accent:#b07c00; color-scheme:light;
+  }
+  :root{--sans:'Manrope',system-ui,sans-serif;--mono:'JetBrains Mono',ui-monospace,Menlo,monospace;--gutter:clamp(16px,4vw,40px);--max:1200px}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:17px;line-height:1.5;-webkit-font-smoothing:antialiased}
+  a{color:inherit;text-decoration:none} button{font:inherit;color:inherit}
+  .wrap{max-width:var(--max);margin:0 auto;padding:0 var(--gutter)}
+  .mono{font-family:var(--mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+  header{position:sticky;top:0;z-index:20;backdrop-filter:blur(14px);background:color-mix(in srgb,var(--bg) 78%,transparent);border-bottom:1px solid var(--line)}
+  .nav{height:64px;display:flex;align-items:center;justify-content:space-between;gap:16px}
+  .brand-l{display:flex;align-items:center;gap:12px}
+  .brand{display:flex;align-items:center;gap:10px;font-weight:800;font-size:20px;letter-spacing:.18em}
+  .mark{width:26px;height:26px;flex:none}
+  .ib{width:44px;height:44px;border:1.5px solid var(--line-2);border-radius:6px;background:var(--panel);display:grid;place-items:center;cursor:pointer;flex:none}
+  .ib svg{width:20px;height:20px;stroke:var(--ink);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+  .btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;font-weight:800;font-size:15px;background:var(--accent);color:var(--accent-ink);border:0;border-radius:6px;padding:0 18px;height:44px;cursor:pointer;white-space:nowrap}
+  .btn.ghost{background:transparent;color:var(--ink);border:1.5px solid var(--line-2)}
+  .nav-right{display:flex;gap:10px;align-items:center}
+  .theme .sun{display:none} [data-theme="light"] .theme .sun{display:block} [data-theme="light"] .theme .moon{display:none}
+
+  .head{padding:clamp(40px,6vw,80px) 0 24px;display:flex;justify-content:space-between;align-items:end;gap:20px;flex-wrap:wrap;position:relative}
+  h1{font-weight:800;font-size:clamp(34px,5vw,64px);line-height:1;letter-spacing:-.025em;text-transform:uppercase}
+  h1 em{font-style:normal;color:var(--accent-hi)}
+  .head p{color:var(--muted);max-width:52ch;margin-top:12px}
+  .filters{display:flex;gap:6px;flex-wrap:wrap;padding-bottom:18px;border-bottom:1px solid var(--line)}
+  .filters button{font-family:var(--mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;background:none;border:1px solid var(--line-2);color:var(--muted);padding:0 14px;height:40px;border-radius:4px;cursor:pointer}
+  .filters button.on{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);margin:24px 0 64px}
+  .card{background:var(--bg);padding:16px;display:grid;gap:12px;transition:background .15s}
+  .card:hover{background:var(--panel)}
+  .card img{width:100%;aspect-ratio:4/3;object-fit:cover;display:block;background:var(--panel-2);border-radius:4px}
+  .card .t{display:flex;justify-content:space-between;gap:10px;font-weight:700;font-size:17px;line-height:1.25}
+  .card .t b{font-family:var(--mono);font-size:13px;letter-spacing:.06em;color:var(--accent-hi);font-weight:500;white-space:nowrap}
+  .card .m{font-family:var(--mono);font-size:11px;letter-spacing:.06em;color:var(--muted);text-transform:uppercase}
+  .card .tags{display:flex;gap:6px;flex-wrap:wrap}
+  .card .tag{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;border:1px solid var(--line-2);padding:3px 7px;border-radius:3px;color:var(--muted)}
+  .card .tag.ok{border-color:color-mix(in srgb,var(--accent) 50%,transparent);color:var(--accent-hi)}
+  .card .act{display:flex;gap:8px;margin-top:4px}
+  .card .act .btn{flex:1;height:42px;font-size:14px}
+  .empty{padding:60px 20px;text-align:center;color:var(--muted);grid-column:1/-1;background:var(--bg)}
+  footer{border-top:1px solid var(--line);padding:28px 0;color:var(--muted);display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+  .xh{position:absolute;width:18px;height:18px;opacity:.5;pointer-events:none}
+  .xh::before,.xh::after{content:"";position:absolute;background:var(--ink)} .xh::before{left:8px;top:0;width:1px;height:18px} .xh::after{top:8px;left:0;height:1px;width:18px}
+  @media (max-width:560px){.nav .btn.book{display:none}}
+</style>
+</head>
+<body>
+<header><div class="wrap nav">
+  <div class="brand-l">
+    <a class="ib" href="/" aria-label="Back to home"><svg viewBox="0 0 24 24"><path d="M15 6l-6 6 6 6"/></svg></a>
+    <a class="brand" href="/" aria-label="ZeroFill Tech home"><svg class="mark" viewBox="0 0 100 100" aria-hidden="true"><defs><mask id="zm"><rect width="100" height="100" fill="#fff"/><line x1="18" y1="82" x2="82" y2="18" stroke="#000" stroke-width="22" stroke-linecap="round"/></mask></defs><circle cx="50" cy="50" r="36" fill="none" stroke="var(--accent-hi)" stroke-width="14" mask="url(#zm)"/><line x1="18" y1="82" x2="82" y2="18" stroke="var(--ink)" stroke-width="10" stroke-linecap="round"/></svg><span>ZEROFILL</span></a>
+  </div>
+  <div class="nav-right">
+    <a class="btn ghost" href="tel:+17027605037">Call us</a>
+    <button class="ib theme" id="theme" aria-label="Toggle theme"><svg class="moon" viewBox="0 0 24 24"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg><svg class="sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg></button>
+    <a class="btn book" href="/#book">Book a free pickup</a>
+  </div>
+</div></header>
+
+<main class="wrap" id="main">
+  <div class="head">
+    <i class="xh" style="right:0;top:24px"></i>
+    <div>
+      <span class="mono">Inventory · Las Vegas local or shipped</span>
+      <h1 style="margin-top:10px">Tested. Wiped.<br><em>For sale.</em></h1>
+      <p>Everything here came in on a free pickup, got a full hardware test and a NIST 800-88 wipe, and runs a clean OS install. Local pickup in Las Vegas or buy on eBay.</p>
+    </div>
+    <button class="btn ghost" id="reload" data-ascii="skip">Refresh listings</button>
+  </div>
+  <div class="filters" id="filters" data-ascii="skip">
+    <button class="on" data-f="all">All</button><button data-f="desktop">Desktops</button><button data-f="laptop">Laptops</button><button data-f="monitor">Monitors</button><button data-f="parts">Parts &amp; network</button>
+  </div>
+  <section class="grid" id="grid" aria-live="polite"></section>
+</main>
+<footer class="wrap mono"><span>ZeroFill Tech · hello@zerofill.tech · (702) 760-5037</span><span>Prices are local-pickup; eBay adds shipping</span></footer>
+
+<script type="module">
+import { createAsciiReveal } from "/proto/vendor/ascii-reveal-core.js";
+/* theme */
+const root=document.documentElement,key='zf-theme';
+root.dataset.theme=new URLSearchParams(location.search).get('theme')||localStorage.getItem(key)||(matchMedia('(prefers-color-scheme: light)').matches?'light':'dark');
+document.getElementById('theme').onclick=()=>{root.dataset.theme=root.dataset.theme==='light'?'dark':'light';localStorage.setItem(key,root.dataset.theme);};
+
+/* listings — placeholder data until real photos arrive; edit this array or point LISTINGS_URL at a JSON file */
+const LISTINGS_URL='';   // e.g. '/assets/listings.json'
+const seed=[
+ {t:'Dell OptiPlex 7070 SFF',s:'i5-9500 · 16GB · 256GB NVMe · Win 11 Pro',p:140,c:'desktop',id:'LOT-0412',img:'/proto/assets/ph0.png',ebay:''},
+ {t:'Lenovo ThinkPad T480',s:'i5-8350U · 16GB · 512GB · new battery',p:210,c:'laptop',id:'LOT-0413',img:'/proto/assets/ph1.png',ebay:''},
+ {t:'Dell U2719D 27" 1440p',s:'IPS · no dead pixels · stand + cables',p:95,c:'monitor',id:'LOT-0414',img:'/proto/assets/ph2.png',ebay:''},
+ {t:'HP ProDesk 600 G4 MT',s:'i7-8700 · 32GB · 1TB NVMe · Win 11 Pro',p:230,c:'desktop',id:'LOT-0415',img:'/proto/assets/ph0.png',ebay:''},
+ {t:'Samsung 870 EVO 1TB SSD',s:'0 reallocated · 98% health · wiped',p:48,c:'parts',id:'LOT-0416',img:'/proto/assets/ph1.png',ebay:''},
+ {t:'Cisco SG350-28 switch',s:'28-port managed · factory reset',p:85,c:'parts',id:'LOT-0417',img:'/proto/assets/ph2.png',ebay:''},
+];
+const grid=document.getElementById('grid');
+const esc=s=>String(s).replace(/[&<>"]/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[m]));
+function render(items){
+  grid.innerHTML=items.length?items.map(it=>`<article class="card" data-ascii="surface" data-c="${it.c}">
+    <img src="${esc(it.img)}" alt="${esc(it.t)}" loading="lazy">
+    <div class="t"><span>${esc(it.t)}</span><b>$${it.p}</b></div>
+    <div class="m">${esc(it.s)}</div>
+    <div class="tags"><span class="tag ok">Wiped · NIST 800-88</span><span class="tag ok">Tested</span><span class="tag">${esc(it.id)}</span></div>
+    <div class="act"><a class="btn" href="tel:+17027605037" data-ascii="fade">Call about it</a>${it.ebay?`<a class="btn ghost" href="${esc(it.ebay)}" target="_blank" rel="noopener" data-ascii="fade">eBay</a>`:''}</div>
+  </article>`).join(''):`<div class="empty">Nothing in this bucket right now — check back after the next pickup run.</div>`;
+}
+let all=seed, filter='all';
+const reveal=createAsciiReveal(document.getElementById('main'),{preset:'terminal',duration:'fast',origin:'top-left'});
+async function load(simulate){
+  await reveal.hide({within:grid,speed:2}); reveal.shimmer(true);
+  try{ if(LISTINGS_URL){const r=await fetch(LISTINGS_URL,{cache:'no-store'}); all=await r.json();} if(simulate) await new Promise(r=>setTimeout(r,900)); }catch(e){}
+  render(filter==='all'?all:all.filter(x=>x.c===filter));
+  await Promise.all([...grid.querySelectorAll('img')].map(i=>i.complete?0:new Promise(r=>{i.onload=i.onerror=r})));
+  reveal.shimmer(false); reveal.reveal({within:grid,origin:'top-left'});
+}
+render(all);
+document.getElementById('reload').onclick=()=>load(true);
+document.querySelectorAll('#filters button').forEach(b=>b.onclick=()=>{document.querySelectorAll('#filters button').forEach(x=>x.classList.toggle('on',x===b));filter=b.dataset.f;load(false);});
+</script>
+</body>
+</html>
