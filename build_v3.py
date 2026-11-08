@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Build v3.html from index.html: black+green dark theme, Neuenhaus details, new logo, burger drawer, ascii-reveal."""
 import re, sys, pathlib
-src = pathlib.Path("index.html").read_text()
+src = pathlib.Path("v2-index.html").read_text()
 out = src
 def rep(old, new, count=1, regex=False):
     global out
@@ -115,5 +115,30 @@ rep("stroke='white' stroke-width='3.2' stroke-linecap='round' stroke-linejoin='r
 rep("--dot:237,237,234; --dot-hi:138,255,60;", "--ok:#8aff3c; --dot:237,237,234; --dot-hi:138,255,60;")
 rep("--dot:23,21,15; --dot-hi:217,160,0;", "--ok:#2e9e5c; --dot:23,21,15; --dot-hi:217,160,0;")
 rep("[data-theme=\"light\"] .err{color:#b3261e}", "[data-theme=\"light\"] .err{color:#b3261e}\n  [data-theme=\"light\"] .list li::before{background-image:url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 6 9 17l-5-5'/%3E%3C/svg%3E\")}\n  [data-theme=\"light\"] .list.no li::before{background-image:url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3.2' stroke-linecap='round'%3E%3Cpath d='M6 6l12 12M18 6 6 18'/%3E%3C/svg%3E\")}")
+# dot-field wordmark -> rotating dot-matrix recycle symbol (top-right)
+rep("""    txt.width=cols; txt.height=rows; tctx.clearRect(0,0,cols,rows);
+    tctx.fillStyle='#fff'; tctx.textBaseline='alphabetic'; tctx.textAlign='right';
+    const fs=Math.min(rows*0.42, cols*0.115); tctx.font=`800 ${fs}px Manrope, sans-serif`;
+    tctx.fillText('ZER0FILL', cols-1, rows-Math.max(2,rows*0.08));
+    mask=tctx.getImageData(0,0,cols,rows).data; t0=performance.now();
+  }""","""    txt.width=cols; txt.height=rows; t0=performance.now(); ico.rebuild=true;
+  }
+  // recycle symbol: three arrow-arcs on a triangle, rasterised into the dot grid and rotated by rotAng
+  const ico={rebuild:true,R:0,cx:0,cy:0};
+  function drawIcon(ang){
+    const w=innerWidth;
+    ico.R=Math.min(rows*0.34, cols*0.17); ico.cx=cols-ico.R-Math.max(3,cols*0.06); ico.cy=ico.R+Math.max(3,rows*0.10);
+    if(w<960){ tctx.clearRect(0,0,cols,rows); mask=tctx.getImageData(0,0,cols,rows).data; return; }
+    const R=ico.R;
+    tctx.clearRect(0,0,cols,rows); tctx.save(); tctx.translate(ico.cx,ico.cy); tctx.rotate(ang);
+    tctx.fillStyle='#fff'; tctx.textAlign='center'; tctx.textBaseline='middle';
+    tctx.font=`${R*2.3}px "Noto Sans Symbols2","Segoe UI Symbol","Apple Symbols",sans-serif`;
+    tctx.fillText('\u267B', 0, R*0.08);
+    tctx.restore();
+    mask=tctx.getImageData(0,0,cols,rows).data;
+  }""")
+rep("    const t=(now-t0)/1000, head=1e9; // static field; motion comes from the waves only",
+    "    const t=(now-t0)/1000, head=1e9; // static field; motion comes from the waves only\n    if(reduce){ if(ico.rebuild){drawIcon(0); ico.rebuild=false;} } else if(ico.rebuild || (now-(ico.last||0))>90){ drawIcon(t*0.35); ico.last=now; ico.rebuild=false; }")
+rep("if(dd<gap*3 && !inMask) kind=1; }", "if(dd<gap*3 && !inMask) kind=1; }\n      if(inMask){ const q=Math.sin(t*2.2 - Math.atan2(py-ico.cy*gap, px-ico.cx*gap)*3); a=0.55+0.4*Math.max(0,q); }")
 pathlib.Path("v3.html").write_text(out)
 print("wrote v3.html", len(out))
