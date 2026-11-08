@@ -27,7 +27,7 @@ rep("meta.content = root.dataset.theme==='light' ? '#f6f3ec' : '#121212';", "met
 rep("family=Doto:wght@700;900&", "")
 rep("--dotf:'Doto',var(--mono);", "--dotf:var(--sans);")
 rep("tctx.font=`900 ${fs}px Doto, monospace`;", "tctx.font=`800 ${fs}px Manrope, sans-serif`;")
-rep("tctx.fillText('ZER0FILL',", "tctx.fillText('ZEROFILL',")
+rep("tctx.fillText('ZER0FILL',", "tctx.fillText('ZER0FILL',")
 rep("const fs=Math.min(rows*0.55, cols*0.19);", "const fs=Math.min(rows*0.42, cols*0.115);")
 
 # --- squarer geometry (Neuenhaus)
@@ -67,8 +67,8 @@ MARK = ('<svg class="mark" viewBox="0 0 100 100" aria-hidden="true"><defs><mask 
         '<line x1="18" y1="82" x2="82" y2="18" stroke="var(--ink)" stroke-width="10" stroke-linecap="round"/></svg>')
 rep('<a class="brand" href="#top" aria-label="ZeroFill Tech home"><span class="word">ZER<b>0</b>FILL</span></a>',
     '<div class="brand-l"><button class="burger" id="burger" aria-label="Open menu" aria-controls="drawer" aria-expanded="false"><svg viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>'
-    '<a class="brand" href="#top" aria-label="ZeroFill Tech home">' + MARK.replace("{ID}", "a") + '<span class="word">ZEROFILL</span></a></div>')
-rep('<div class="word">ZER<b>0</b>FILL TECH</div>', '<div class="word" style="display:flex;align-items:center;gap:10px">' + MARK.replace("{ID}", "b") + 'ZEROFILL TECH</div>')
+    '<a class="brand" href="#top" aria-label="ZeroFill Tech home">' + MARK.replace("{ID}", "a") + '<span class="word">ZER0FILL</span></a></div>')
+rep('<div class="word">ZER<b>0</b>FILL TECH</div>', '<div class="word" style="display:flex;align-items:center;gap:10px">' + MARK.replace("{ID}", "b") + 'ZER0FILL TECH</div>')
 
 # --- hero copy
 rep('<h1 class="h1">We haul off your old tech. <em>Free.</em></h1>',
