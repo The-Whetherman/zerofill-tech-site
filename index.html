@@ -16,22 +16,22 @@
 <meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
 <meta property="og:description" content="We haul off old computers and electronics for free, wipe every drive, and keep it out of the landfill. Las Vegas valley.">
-<meta name="theme-color" content="#121212">
+<meta name="theme-color" content="#0a0a0a">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%23121212'/%3E%3Cg transform='translate(10,10) scale(0.8)'%3E%3Cdefs%3E%3Cmask id='f'%3E%3Crect width='100' height='100' fill='%23fff'/%3E%3Cline x1='21.32' y1='90.96' x2='78.68' y2='9.04' stroke='%23000' stroke-width='18.40'/%3E%3C/mask%3E%3C/defs%3E%3Ccircle cx='50' cy='50' r='33' fill='none' stroke='%232fc4b4' stroke-width='12' mask='url(%23f)'/%3E%3Cline x1='21.32' y1='90.96' x2='78.68' y2='9.04' stroke='%23f3efe7' stroke-width='9.00' stroke-linecap='round'/%3E%3C/g%3E%3C/svg%3E">
 <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32.png">
 <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Doto:wght@700;900&family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   /* ---------- THEME TOKENS ---------- */
   :root, [data-theme="dark"]{
-    --bg:#121212; --bg-2:#161616; --panel:#1b1b1b; --panel-2:#222; --panel-3:#2a2a2a;
+    --bg:#0a0a0a; --bg-2:#0e0e0e; --panel:#121212; --panel-2:#181818; --panel-3:#202020;
     --line:rgba(255,255,255,.08); --line-2:rgba(255,255,255,.16); --line-3:rgba(255,255,255,.28);
     --ink:#f3efe7; --muted:#a39e95; --faint:#6b6760;
-    --accent:#188f83; --accent-2:#0f6d63; --accent-hi:#2fc4b4; --accent-ink:#06201d; --accent-soft:#0c211f;
-    --accent-glow:rgba(47,196,180,.22); --shadow:0 30px 80px rgba(0,0,0,.45);
-    --dot:243,239,231; --dot-hi:47,196,180; --term-bg:#0b0b0b; --term-ink:#d8d8d4;
+    --accent:#8aff3c; --accent-2:#6fd82c; --accent-hi:#8aff3c; --accent-ink:#071200; --accent-soft:#0f1d08;
+    --accent-glow:rgba(138,255,60,.16); --shadow:0 30px 80px rgba(0,0,0,.55);
+    --ok:#8aff3c; --dot:237,237,234; --dot-hi:138,255,60; --term-bg:#050505; --term-ink:#d8d8d4;
     color-scheme:dark;
   }
   [data-theme="light"]{
@@ -40,14 +40,14 @@
     --ink:#17150f; --muted:#625d53; --faint:#9a948a;
     --accent:#f2b705; --accent-2:#d9a000; --accent-hi:#b07c00; --accent-ink:#1a1400; --accent-soft:#fff3c4;
     --accent-glow:rgba(242,183,5,.28); --shadow:0 30px 80px rgba(60,45,0,.12);
-    --dot:23,21,15; --dot-hi:217,160,0; --term-bg:#17150f; --term-ink:#efe9da;
+    --ok:#2e9e5c; --dot:23,21,15; --dot-hi:217,160,0; --term-bg:#17150f; --term-ink:#efe9da;
     color-scheme:light;
   }
   :root{
     --sans:'Manrope',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
     --mono:'JetBrains Mono',ui-monospace,Menlo,monospace;
-    --dotf:'Doto',var(--mono);
-    --r:22px; --gutter:clamp(16px,4vw,40px); --max:1200px;
+    --dotf:var(--sans);
+    --r:10px; --gutter:clamp(16px,4vw,40px); --max:1200px;
   }
   *{box-sizing:border-box;margin:0;padding:0}
   html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
@@ -62,7 +62,7 @@
 
   /* ---------- BUTTONS ---------- */
   .btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;font-weight:800;font-size:16px;
-       background:var(--accent);color:var(--accent-ink);border:0;border-radius:999px;padding:0 22px;height:48px;cursor:pointer;white-space:nowrap;
+       background:var(--accent);color:var(--accent-ink);border:0;border-radius:6px;padding:0 22px;height:48px;cursor:pointer;white-space:nowrap;
        transition:transform .15s ease,filter .15s ease,box-shadow .15s ease;box-shadow:0 8px 24px var(--accent-glow)}
   .btn:hover{filter:brightness(1.06);transform:translateY(-1px)}
   .btn:disabled{opacity:.45;cursor:not-allowed;transform:none;box-shadow:none}
@@ -75,22 +75,43 @@
   header{position:sticky;top:0;z-index:20;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);background:color-mix(in srgb,var(--bg) 78%,transparent);border-bottom:1px solid var(--line)}
   .nav{height:64px;display:flex;align-items:center;justify-content:space-between;gap:16px}
   .brand{display:flex;align-items:center;gap:10px}
-  .brand .word{font-family:var(--dotf);font-weight:900;font-size:24px;letter-spacing:.06em;color:var(--ink)}
-  .brand .word b{color:var(--accent-hi);font-weight:900}
+  .brand .word{font-family:var(--sans);font-weight:800;font-size:19px;letter-spacing:.14em;color:var(--ink)}
+  .brand .word b{color:var(--ink);font-weight:800}
+  .brand .word{display:inline-block;line-height:1;white-space:nowrap}
+  .word .mk{width:.72em;height:.72em;margin:0 .14em 0 0;vertical-align:baseline;overflow:visible;display:inline}
+  .burger{width:44px;height:44px;border:1.5px solid var(--line-2);border-radius:6px;background:var(--panel);display:grid;place-items:center;cursor:pointer;flex:none}
+  .burger svg{width:20px;height:20px;stroke:var(--ink);fill:none;stroke-width:2;stroke-linecap:round}
+  .brand-l{display:flex;align-items:center;gap:12px}
+  .drawer{position:fixed;inset:0 auto 0 0;width:min(320px,86vw);background:var(--panel);border-right:1px solid var(--line-2);z-index:40;transform:translateX(-102%);transition:transform .28s ease;display:flex;flex-direction:column;padding:18px}
+  .drawer.open{transform:none}
+  .drawer .dh{display:flex;justify-content:space-between;align-items:center;height:44px;margin-bottom:18px}
+  .drawer a{display:grid;grid-template-columns:52px 1fr;align-items:center;gap:12px;padding:16px 12px;border-top:1px solid var(--line);font-weight:700;font-size:17px;min-height:56px}
+  .drawer a:last-of-type{border-bottom:1px solid var(--line)}
+  .drawer a .n{font-family:var(--mono);font-size:11px;letter-spacing:.12em;color:var(--muted)}
+  .drawer a:hover,.drawer a.on{background:var(--accent);color:var(--accent-ink)} .drawer a:hover .n,.drawer a.on .n{color:var(--accent-ink)}
+  .drawer .df{margin-top:auto;color:var(--muted);font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase}
+  .scrim{position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:39;opacity:0;pointer-events:none;transition:opacity .25s} .scrim.on{opacity:1;pointer-events:auto}
+  .xh{position:absolute;width:18px;height:18px;opacity:.5;pointer-events:none;z-index:1}
+  .xh::before,.xh::after{content:"";position:absolute;background:var(--ink)} .xh::before{left:8px;top:0;width:1px;height:18px} .xh::after{top:8px;left:0;height:1px;width:18px}
+  .strip{display:flex;justify-content:space-between;align-items:center;gap:18px;padding:14px var(--gutter);border-bottom:1px solid var(--line);font-family:var(--mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);overflow:auto;white-space:nowrap}
+  .strip b{color:var(--ink);font-weight:600;margin-right:8px} .strip .ar{color:var(--accent-hi)}
+  .h1{text-transform:uppercase}
+  .nav-links a.on{color:var(--accent-ink);background:var(--accent);padding:6px 10px;border-radius:4px}
   .nav-links{display:none;gap:26px;font-weight:600;font-size:15px;color:var(--muted)}
   .nav-links a:hover{color:var(--ink)}
   .nav-links a{white-space:nowrap}
-  .nav-links a.opt{display:none} @media (min-width:1280px){.nav-links a.opt{display:inline}}
+  .nav-links a.opt{display:none} @media (min-width:1400px){.nav-links a.opt{display:inline}}
   .nav-right{display:flex;align-items:center;gap:12px}
   .nav .call{display:none;color:var(--muted);font-weight:600;font-size:16px}
   .nav .call b{color:var(--ink);font-weight:700}
-  .theme{width:44px;height:44px;border-radius:50%;border:1.5px solid var(--line-2);background:var(--panel);display:grid;place-items:center;cursor:pointer;transition:border-color .15s,transform .15s}
+  .theme{width:44px;height:44px;border-radius:6px;border:1.5px solid var(--line-2);background:var(--panel);display:grid;place-items:center;cursor:pointer;transition:border-color .15s,transform .15s}
   .theme:hover{border-color:var(--ink);transform:rotate(15deg)}
   .theme svg{width:20px;height:20px;stroke:var(--ink);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
   .theme .sun{display:none} [data-theme="light"] .theme .sun{display:block} [data-theme="light"] .theme .moon{display:none}
   .nav .btn{display:none}
   .nav .callbtn{display:inline-flex;padding:0 16px}
   .nav .callnum{display:none}
+  @media (max-width:479px){.nav .calltxt{display:none}.nav .callbtn{padding:0;width:44px}}
   @media (min-width:560px){.nav .btn{display:inline-flex}}
   @media (min-width:700px){.nav .callnum{display:inline}.nav .calltxt{display:none}}
   @media (min-width:960px){.nav-links{display:flex}.nav .call{display:inline}}
@@ -102,7 +123,7 @@
   .hero::after{content:"";position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse 60% 80% at 22% 45%,color-mix(in srgb,var(--bg) 92%,transparent) 0%,color-mix(in srgb,var(--bg) 70%,transparent) 40%,transparent 75%)}
   .hero .wrap{position:relative;z-index:1;padding-top:clamp(56px,9vw,120px);padding-bottom:clamp(40px,7vw,96px)}
   .kicker{display:inline-flex;align-items:center;gap:10px;font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);
-          background:color-mix(in srgb,var(--panel) 80%,transparent);border:1px solid var(--line);border-radius:999px;padding:8px 14px}
+          background:color-mix(in srgb,var(--panel) 80%,transparent);border:1px solid var(--line);border-radius:4px;padding:8px 14px}
   .kicker::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--accent-hi);box-shadow:0 0 12px var(--accent-hi)}
   .h1{margin-top:22px;font-weight:800;font-size:clamp(40px,7.2vw,88px);line-height:1.02;letter-spacing:-.025em;max-width:13ch}
   .h1 em{font-style:normal;color:var(--accent-hi)}
@@ -143,7 +164,7 @@
   .q small{display:block;margin-top:8px;font-weight:500;font-size:17px;color:var(--muted);letter-spacing:0}
   .tiles{margin-top:24px;display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
   @media (min-width:640px){.tiles{grid-template-columns:repeat(4,1fr)}}
-  .tile{position:relative;text-align:left;background:var(--panel-2);border:1.5px solid var(--line);border-radius:18px;padding:18px 16px 16px;min-height:150px;cursor:pointer;color:var(--ink);
+  .tile{position:relative;text-align:left;background:var(--panel-2);border:1.5px solid var(--line);border-radius:8px;padding:18px 16px 16px;min-height:150px;cursor:pointer;color:var(--ink);
         display:flex;flex-direction:column;justify-content:space-between;gap:14px;transition:border-color .15s,transform .15s,background .15s,box-shadow .15s;user-select:none}
   .tile:hover{border-color:var(--line-3);transform:translateY(-2px)}
   .tile svg.ico{width:38px;height:38px;stroke:var(--ink);fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
@@ -182,10 +203,12 @@
   ::placeholder{color:var(--faint)}
   .err{color:#ff6b6b;font-size:14px;font-weight:600;margin-top:10px;min-height:18px}
   [data-theme="light"] .err{color:#b3261e}
+  [data-theme="light"] .list li::before{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 6 9 17l-5-5'/%3E%3C/svg%3E")}
+  [data-theme="light"] .list.no li::before{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3.2' stroke-linecap='round'%3E%3Cpath d='M6 6l12 12M18 6 6 18'/%3E%3C/svg%3E")}
 
   /* chips */
   .chips{display:flex;flex-wrap:wrap;gap:10px;margin-top:12px}
-  .chip{border:1.5px solid var(--line-2);background:var(--panel-2);border-radius:14px;padding:12px 16px;cursor:pointer;font-weight:700;font-size:15px;min-height:52px;display:inline-flex;flex-direction:column;justify-content:center;align-items:flex-start;transition:border-color .15s,background .15s;text-align:left}
+  .chip{border:1.5px solid var(--line-2);background:var(--panel-2);border-radius:6px;padding:12px 16px;cursor:pointer;font-weight:700;font-size:15px;min-height:52px;display:inline-flex;flex-direction:column;justify-content:center;align-items:flex-start;transition:border-color .15s,background .15s;text-align:left}
   .chip small{display:block;font-weight:500;color:var(--muted);font-size:13px}
   .chip:hover{border-color:var(--line-3)}
   .chip.on{border-color:var(--accent);background:var(--accent-soft);box-shadow:0 0 0 3px var(--accent-glow)}
@@ -254,12 +277,12 @@
   @media (min-width:860px){.two{grid-template-columns:1fr 1fr}}
   .list{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:26px}
   .list h3{display:flex;align-items:center;gap:10px;font-size:20px;font-weight:800;margin-bottom:14px}
-  .list h3 .dotk{width:12px;height:12px;border-radius:50%;background:#1f8a5b}
+  .list h3 .dotk{width:12px;height:12px;border-radius:50%;background:var(--ok,#1f8a5b)}
   .list.no h3 .dotk{background:#d93838}
   .list ul{list-style:none;display:grid}
   .list li{padding:12px 0;border-top:1px solid var(--line);font-size:16px;display:grid;grid-template-columns:30px 1fr;gap:14px;align-items:start}
-  .list li::before{content:"";width:26px;height:26px;border-radius:7px;margin-top:1px;background-color:#1f8a5b;background-repeat:no-repeat;background-position:center;background-size:16px;
-    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 6 9 17l-5-5'/%3E%3C/svg%3E")}
+  .list li::before{content:"";width:26px;height:26px;border-radius:6px;margin-top:1px;background-color:var(--ok,#1f8a5b);background-repeat:no-repeat;background-position:center;background-size:16px;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23071200' stroke-width='3.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 6 9 17l-5-5'/%3E%3C/svg%3E")}
   .list.no li::before{background-color:#d93838;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3.2' stroke-linecap='round'%3E%3Cpath d='M6 6l12 12M18 6 6 18'/%3E%3C/svg%3E")}
   .list li b{display:block;font-weight:700}
   .list li .c{display:block}
@@ -309,9 +332,15 @@
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Where can I dump old electronics in Las Vegas?", "acceptedAnswer": {"@type": "Answer", "text": "You don't have to dump them anywhere — we come to you. Book a free pickup and we take computers, laptops, monitors, servers, printers, phones and cables from your curb, garage or office anywhere in the Las Vegas valley. If you'd rather drop off, Nevada State Recycle (1816 Industrial Rd) takes most electronics free; CRT TVs cost $20 there and we don't take them at all."}}, {"@type": "Question", "name": "Is e-waste pickup really free?", "acceptedAnswer": {"@type": "Answer", "text": "Yes for standard residential and small-office loads. No hidden fee, no minimum. The only charges are a $49 truck fee for very large loads (told to you before we come) and optional data-destruction paperwork for businesses."}}, {"@type": "Question", "name": "Do you take TVs, printers and small appliances?", "acceptedAnswer": {"@type": "Answer", "text": "Flat-screen TVs and monitors yes. Printers, routers, cables, game consoles, phones and tablets yes. CRT (tube) TVs and loose batteries no — those are the two hazardous categories we refuse. Microwaves and kitchen appliances are not e-waste we handle."}}, {"@type": "Question", "name": "Do you do e-waste pickup in Henderson and North Las Vegas?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. North Las Vegas, Summerlin and Spring Valley are core areas with the same free pickup. Henderson and Boulder City are extended areas we group into one run each week."}}, {"@type": "Question", "name": "Why is it free?", "acceptedAnswer": {"@type": "Answer", "text": "Because working parts have value. A six-year-old office PC still holds RAM, an SSD and a CPU that someone wants. We make our money reselling tested gear, so we'd rather pick yours up than see it in a dumpster."}}, {"@type": "Question", "name": "When is there a charge?", "acceptedAnswer": {"@type": "Answer", "text": "Two cases. A big load that needs a rented truck (more than about six machines, a full rack, or an office cleanout) is a flat $49 — we tell you before we come, and it's waived for business jobs with 20 or more documented drives. And if you need paperwork for compliance: a wipe with a serialized certificate is $15 per drive ($30 minimum, $10 per drive for 20+), physical destruction with photo proof is $15 per drive, and destruction at your location while you watch is $25 per drive ($150 minimum). Residential pickups almost never pay anything."}}, {"@type": "Question", "name": "What happens to my data?", "acceptedAnswer": {"@type": "Answer", "text": "Every storage drive is removed before the machine is tested or resold, then wiped using the NIST SP 800-88 method — the same standard federal agencies use. If you'd like proof, we issue a signed certificate listing each drive serial. If you'd rather, we drill or shred the drive and send you a photo."}}, {"@type": "Question", "name": "Do I need to wipe it myself first?", "acceptedAnswer": {"@type": "Answer", "text": "No. Leave it as is. If you have passwords or a BIOS lock, you don't need to remove them either — we're wiping the drive, not logging in. For phones and tablets we do ask you to factory-reset in front of us, because activation locks make them unusable."}}, {"@type": "Question", "name": "Where do you go?", "acceptedAnswer": {"@type": "Answer", "text": "Our core area is Las Vegas, North Las Vegas, Summerlin and Spring Valley. Henderson and Boulder City are an extended area — we group those pickups into one run, so it may take a week or so, and small single items may be better dropped at Nevada State Recycle. Pickups happen Wednesdays, Thursdays and weekend afternoons."}}, {"@type": "Question", "name": "Are you a licensed recycler?", "acceptedAnswer": {"@type": "Answer", "text": "Nevada doesn't license e-waste recyclers (NDEP). We operate as a small-quantity handler, refuse the hazardous categories (CRTs, loose batteries), and send anything we can't reuse to an established downstream recycler in Las Vegas. Nothing goes to a landfill."}}, {"@type": "Question", "name": "Are you certified?", "acceptedAnswer": {"@type": "Answer", "text": "Our process follows NIST SP 800-88, and every job is documented: a signed chain-of-custody receipt at pickup and a certificate listing each drive serial, method, date and technician. We're not NAID AAA certified yet. If your compliance policy requires a NAID AAA vendor, tell us — we'd rather point you to one than fudge it."}}]}</script>
 </head>
 <body>
+<div class="scrim" id="scrim"></div>
+<aside class="drawer" id="drawer" aria-label="Menu" data-ascii="skip">
+  <div class="dh"><span class="mono">Menu</span><button class="burger" id="dclose" aria-label="Close menu"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></svg></button></div>
+  <a href="#book"><span class="n">01</span>Book a pickup</a><a href="#services"><span class="n">02</span>Services</a><a href="#purge"><span class="n">03</span>PURGE wipe</a><a href="#business"><span class="n">04</span>Businesses</a><a href="#take"><span class="n">05</span>What we take</a><a href="#how"><span class="n">06</span>How it works</a><a href="/sale.html"><span class="n">07</span>For sale</a><a href="#faq"><span class="n">08</span>FAQ</a>
+  <div class="df">ZeroFill Tech · Las Vegas NV<br>(702) 760-5037</div>
+</aside>
 
 <header><div class="wrap nav">
-  <a class="brand" href="#top" aria-label="ZeroFill Tech home"><span class="word">ZER<b>0</b>FILL</span></a>
+  <div class="brand-l"><button class="burger" id="burger" aria-label="Open menu" aria-controls="drawer" aria-expanded="false"><svg viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button><a class="brand" href="#top" aria-label="ZeroFill Tech home"><span class="word">ZER<svg class="mk" viewBox="0 0 100 100" aria-hidden="true"><defs><mask id="zma"><rect x="-20" y="-20" width="140" height="140" fill="#fff"/><line x1="14" y1="86" x2="86" y2="14" stroke="#000" stroke-width="23" stroke-linecap="round"/></mask></defs><circle cx="50" cy="50" r="42" fill="none" stroke="var(--accent-hi)" stroke-width="16" mask="url(#zma)"/><line x1="14" y1="86" x2="86" y2="14" stroke="var(--ink)" stroke-width="11" stroke-linecap="round"/></svg>FILL</span></a></div>
   <nav class="nav-links" aria-label="Sections">
     <a href="#services">Services</a><a href="#purge">PURGE</a><a href="#business">Businesses</a><a href="#take">What we take</a><a class="opt" href="#how">How it works</a><a class="opt" href="#faq">FAQ</a>
   </nav>
@@ -329,11 +358,12 @@
 
 <!-- HERO -->
 <section class="hero">
-  <canvas id="dots" aria-hidden="true"></canvas>
+  <canvas id="dots" aria-hidden="true" data-ascii="skip"></canvas>
   <div class="wrap">
-    <span class="kicker">Las Vegas e-waste pickup · Free</span>
-    <h1 class="h1">We haul off your old tech. <em>Free.</em></h1>
-    <p class="lede">Free e-waste removal and electronics recycling across the Las Vegas valley. Computers, laptops, monitors, servers — <b>we pick them up</b>, wipe every drive, and give what's still good a second life. You get a clean garage and a clear conscience.</p>
+    <span class="kicker">Las Vegas · NV &nbsp;·&nbsp; Accepting pickups</span>
+    <h1 class="h1">Free pickup.<br>Certified <em>wipe</em>.<br>Nothing left.</h1>
+  <i class="xh" style="right:24px;top:24px"></i><i class="xh" style="right:24px;bottom:24px"></i><i class="xh" style="left:24px;bottom:24px"></i>
+    <p class="lede">We haul off old computers, laptops, monitors and servers across the Las Vegas valley for free, <b>wipe every drive to NIST 800-88</b>, and give what's still good a second life.</p>
     <div class="hero-cta">
       <a class="btn lg" href="#book">Book a free pickup</a>
       <a class="btn ghost lg" href="#how">How it works</a>
@@ -345,9 +375,10 @@
     </div>
   </div>
 </section>
+<div class="strip" aria-label="Process"><span><b>01</b> Collect</span><span class="ar">→</span><span><b>02</b> Wipe</span><span class="ar">→</span><span><b>03</b> Certify</span><span class="ar">→</span><span><b>04</b> Resell or recycle</span></div>
 
 <!-- BOOKING -->
-<section class="book" id="book"><div class="wrap">
+<section class="book" id="book" data-ascii="skip"><div class="wrap">
   <div class="panel" id="wiz">
     <div class="steps" id="steps">
       <span class="s on"><i>1</i> Items</span><span class="sep"></span>
@@ -665,7 +696,7 @@
 </main>
 
 <footer><div class="wrap foot">
-  <div><div class="word">ZER<b>0</b>FILL TECH</div><p>Free pickup. Documented data destruction. Refurbished tech. Las Vegas, NV.</p></div>
+  <div><span class="word">ZER<svg class="mk" viewBox="0 0 100 100" aria-hidden="true"><defs><mask id="zmb"><rect x="-20" y="-20" width="140" height="140" fill="#fff"/><line x1="14" y1="86" x2="86" y2="14" stroke="#000" stroke-width="23" stroke-linecap="round"/></mask></defs><circle cx="50" cy="50" r="42" fill="none" stroke="var(--accent-hi)" stroke-width="16" mask="url(#zmb)"/><line x1="14" y1="86" x2="86" y2="14" stroke="var(--ink)" stroke-width="11" stroke-linecap="round"/></svg>FILL<span style="letter-spacing:.14em;margin-left:.5em;font-weight:600;color:var(--muted)">TECH</span></span><p>Free pickup. Documented data destruction. Refurbished tech. Las Vegas, NV.</p></div>
   <div><h5>Contact</h5><a href="tel:+17027605037">(702) 760-5037</a><a href="mailto:hello@zerofill.tech">hello@zerofill.tech</a></div>
   <div><h5>Site</h5><a href="#book">Book a pickup</a><a href="#purge">PURGE data destruction</a><a href="#take">What we take</a><a href="#faq">FAQ</a></div>
   <div class="legal"><span>© <span id="yr">2026</span> ZeroFill Tech</span><span>Las Vegas, Nevada</span></div>
@@ -688,9 +719,9 @@ const CONFIG = {
   const root=document.documentElement, key='zf-theme';
   const saved=localStorage.getItem(key);
   const sys=matchMedia('(prefers-color-scheme: light)').matches?'light':'dark';
-  root.dataset.theme = saved || sys;
+  root.dataset.theme = new URLSearchParams(location.search).get('theme') || saved || sys;
   const meta=document.querySelector('meta[name=theme-color]');
-  const sync=()=>{ meta.content = root.dataset.theme==='light' ? '#f6f3ec' : '#121212'; };
+  const sync=()=>{ meta.content = root.dataset.theme==='light' ? '#f6f3ec' : '#0a0a0a'; };
   sync();
   document.getElementById('theme').addEventListener('click',()=>{
     root.dataset.theme = root.dataset.theme==='light'?'dark':'light';
@@ -711,7 +742,7 @@ const CONFIG = {
     dots=new Float32Array(cols*rows); for(let i=0;i<dots.length;i++) dots[i]=Math.random();
     txt.width=cols; txt.height=rows; tctx.clearRect(0,0,cols,rows);
     tctx.fillStyle='#fff'; tctx.textBaseline='alphabetic'; tctx.textAlign='right';
-    const fs=Math.min(rows*0.55, cols*0.19); tctx.font=`900 ${fs}px Doto, monospace`;
+    const fs=Math.min(rows*0.42, cols*0.115); tctx.font=`800 ${fs}px Manrope, sans-serif`;
     tctx.fillText('ZER0FILL', cols-1, rows-Math.max(2,rows*0.08));
     mask=tctx.getImageData(0,0,cols,rows).data; t0=performance.now();
   }
@@ -875,6 +906,15 @@ const CONFIG = {
     }catch(err){ $('#e5').textContent=`Couldn't send. Call ${CONFIG.PHONE_DISPLAY} and we'll sort it.`; btn.disabled=false; btn.textContent='Book my free pickup'; }
   });
 })();
+</script>
+<script type="module">
+import { createAsciiReveal } from "/proto/vendor/ascii-reveal-core.js";
+const d=document.getElementById("drawer"),s=document.getElementById("scrim"),b=document.getElementById("burger");
+const open=o=>{d.classList.toggle("open",o);s.classList.toggle("on",o);b.setAttribute("aria-expanded",o);};
+b.onclick=()=>open(true);document.getElementById("dclose").onclick=()=>open(false);s.onclick=()=>open(false);
+addEventListener("keydown",e=>{if(e.key==="Escape")open(false)});
+const reveal=createAsciiReveal(document.querySelector("main"),{preset:"terminal",duration:"fast",origin:"top-left",media:"img,[data-ascii=media]",lazy:true});
+d.querySelectorAll("a[href^='#']").forEach(a=>a.onclick=e=>{open(false);const sec=document.querySelector(a.getAttribute("href"));if(sec)setTimeout(()=>reveal.reveal({within:sec,origin:"top-left",speed:1.4}),350);});
 </script>
 </body>
 </html>

@@ -32,7 +32,7 @@
   .nav{height:64px;display:flex;align-items:center;justify-content:space-between;gap:16px}
   .brand-l{display:flex;align-items:center;gap:12px}
   .brand{display:flex;align-items:center;gap:10px;font-weight:800;font-size:20px;letter-spacing:.18em}
-  .mark{width:26px;height:26px;flex:none}
+  .word{display:inline-block;line-height:1;white-space:nowrap}.word .mk{width:.72em;height:.72em;margin:0 .14em 0 0;vertical-align:baseline;overflow:visible;display:inline}
   .ib{width:44px;height:44px;border:1.5px solid var(--line-2);border-radius:6px;background:var(--panel);display:grid;place-items:center;cursor:pointer;flex:none}
   .ib svg{width:20px;height:20px;stroke:var(--ink);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
   .btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;font-weight:800;font-size:15px;background:var(--accent);color:var(--accent-ink);border:0;border-radius:6px;padding:0 18px;height:44px;cursor:pointer;white-space:nowrap}
@@ -70,7 +70,7 @@
 <header><div class="wrap nav">
   <div class="brand-l">
     <a class="ib" href="/" aria-label="Back to home"><svg viewBox="0 0 24 24"><path d="M15 6l-6 6 6 6"/></svg></a>
-    <a class="brand" href="/" aria-label="ZeroFill Tech home"><svg class="mark" viewBox="0 0 100 100" aria-hidden="true"><defs><mask id="zm"><rect width="100" height="100" fill="#fff"/><line x1="18" y1="82" x2="82" y2="18" stroke="#000" stroke-width="22" stroke-linecap="round"/></mask></defs><circle cx="50" cy="50" r="36" fill="none" stroke="var(--accent-hi)" stroke-width="14" mask="url(#zm)"/><line x1="18" y1="82" x2="82" y2="18" stroke="var(--ink)" stroke-width="10" stroke-linecap="round"/></svg><span>ZER0FILL</span></a>
+    <a class="brand" href="/" aria-label="ZeroFill Tech home"><span class="word">ZER<svg class="mk" viewBox="0 0 100 100" aria-hidden="true"><defs><mask id="zm"><rect x="-20" y="-20" width="140" height="140" fill="#fff"/><line x1="14" y1="86" x2="86" y2="14" stroke="#000" stroke-width="23" stroke-linecap="round"/></mask></defs><circle cx="50" cy="50" r="42" fill="none" stroke="var(--accent-hi)" stroke-width="16" mask="url(#zm)"/><line x1="14" y1="86" x2="86" y2="14" stroke="var(--ink)" stroke-width="11" stroke-linecap="round"/></svg>FILL</span></a>
   </div>
   <div class="nav-right">
     <a class="btn ghost" href="tel:+17027605037">Call us</a>

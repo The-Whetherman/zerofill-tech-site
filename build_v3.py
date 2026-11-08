@@ -42,7 +42,7 @@ rep(".theme{width:44px;height:44px;border-radius:50%;", ".theme{width:44px;heigh
 rep(".brand .word{font-family:var(--dotf);font-weight:900;font-size:24px;letter-spacing:.06em;color:var(--ink)}\n  .brand .word b{color:var(--accent-hi);font-weight:900}",
     ".brand .word{font-family:var(--sans);font-weight:800;font-size:20px;letter-spacing:.18em;color:var(--ink)}\n"
     "  .brand .word b{color:var(--ink);font-weight:800}\n"
-    "  .mark{width:26px;height:26px;flex:none}\n"
+    "  .brand .word{display:inline-block;line-height:1;white-space:nowrap}\n  .word .mk{width:.72em;height:.72em;margin:0 .14em 0 0;vertical-align:baseline;overflow:visible;display:inline}\n"
     "  .burger{width:44px;height:44px;border:1.5px solid var(--line-2);border-radius:6px;background:var(--panel);display:grid;place-items:center;cursor:pointer;flex:none}\n"
     "  .burger svg{width:20px;height:20px;stroke:var(--ink);fill:none;stroke-width:2;stroke-linecap:round}\n"
     "  .brand-l{display:flex;align-items:center;gap:12px}\n"
@@ -61,14 +61,15 @@ rep(".brand .word{font-family:var(--dotf);font-weight:900;font-size:24px;letter-
     "  .strip b{color:var(--ink);font-weight:600;margin-right:8px} .strip .ar{color:var(--accent-hi)}\n"
     "  .h1{text-transform:uppercase}\n"
     "  .nav-links a.on{color:var(--accent-ink);background:var(--accent);padding:6px 10px;border-radius:4px}")
-MARK = ('<svg class="mark" viewBox="0 0 100 100" aria-hidden="true"><defs><mask id="zm{ID}"><rect width="100" height="100" fill="#fff"/>'
-        '<line x1="18" y1="82" x2="82" y2="18" stroke="#000" stroke-width="22" stroke-linecap="round"/></mask></defs>'
-        '<circle cx="50" cy="50" r="36" fill="none" stroke="var(--accent-hi)" stroke-width="14" mask="url(#zm{ID})"/>'
-        '<line x1="18" y1="82" x2="82" y2="18" stroke="var(--ink)" stroke-width="10" stroke-linecap="round"/></svg>')
+MARK = ('<svg class="mk" viewBox="0 0 100 100" aria-hidden="true"><defs><mask id="zm{ID}"><rect x="-20" y="-20" width="140" height="140" fill="#fff"/>'
+        '<line x1="14" y1="86" x2="86" y2="14" stroke="#000" stroke-width="23" stroke-linecap="round"/></mask></defs>'
+        '<circle cx="50" cy="50" r="42" fill="none" stroke="var(--accent-hi)" stroke-width="16" mask="url(#zm{ID})"/>'
+        '<line x1="14" y1="86" x2="86" y2="14" stroke="var(--ink)" stroke-width="11" stroke-linecap="round"/></svg>')
+WORD = '<span class="word">ZER' + MARK + 'FILL</span>'
 rep('<a class="brand" href="#top" aria-label="ZeroFill Tech home"><span class="word">ZER<b>0</b>FILL</span></a>',
     '<div class="brand-l"><button class="burger" id="burger" aria-label="Open menu" aria-controls="drawer" aria-expanded="false"><svg viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>'
-    '<a class="brand" href="#top" aria-label="ZeroFill Tech home">' + MARK.replace("{ID}", "a") + '<span class="word">ZER0FILL</span></a></div>')
-rep('<div class="word">ZER<b>0</b>FILL TECH</div>', '<div class="word" style="display:flex;align-items:center;gap:10px">' + MARK.replace("{ID}", "b") + 'ZER0FILL TECH</div>')
+    '<a class="brand" href="#top" aria-label="ZeroFill Tech home">' + WORD.replace("{ID}", "a") + '</a></div>')
+rep('<div class="word">ZER<b>0</b>FILL TECH</div>', WORD.replace("{ID}", "b").replace('FILL</span>','FILL<span style="letter-spacing:.14em;margin-left:.5em;font-weight:600;color:var(--muted)">TECH</span></span>'))
 
 # --- hero copy
 rep('<h1 class="h1">We haul off your old tech. <em>Free.</em></h1>',
