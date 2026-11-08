@@ -107,5 +107,12 @@ rep('</body>',
     'd.querySelectorAll("a[href^=\'#\']").forEach(a=>a.onclick=e=>{open(false);const sec=document.querySelector(a.getAttribute("href"));if(sec)setTimeout(()=>reveal.reveal({within:sec,origin:"top-left",speed:1.4}),350);});\n'
     '</script>\n</body>')
 
+# check tiles -> accent green with dark check (light theme keeps a readable green)
+rep(".list h3 .dotk{width:12px;height:12px;border-radius:50%;background:#1f8a5b}", ".list h3 .dotk{width:12px;height:12px;border-radius:50%;background:var(--ok,#1f8a5b)}")
+rep("border-radius:7px;margin-top:1px;background-color:#1f8a5b;", "border-radius:6px;margin-top:1px;background-color:var(--ok,#1f8a5b);")
+rep("stroke='white' stroke-width='3.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 6 9 17l-5-5'", "stroke='%23071200' stroke-width='3.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 6 9 17l-5-5'")
+rep("--dot:237,237,234; --dot-hi:138,255,60;", "--ok:#8aff3c; --dot:237,237,234; --dot-hi:138,255,60;")
+rep("--dot:23,21,15; --dot-hi:217,160,0;", "--ok:#2e9e5c; --dot:23,21,15; --dot-hi:217,160,0;")
+rep("[data-theme=\"light\"] .err{color:#b3261e}", "[data-theme=\"light\"] .err{color:#b3261e}\n  [data-theme=\"light\"] .list li::before{background-image:url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 6 9 17l-5-5'/%3E%3C/svg%3E\")}\n  [data-theme=\"light\"] .list.no li::before{background-image:url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3.2' stroke-linecap='round'%3E%3Cpath d='M6 6l12 12M18 6 6 18'/%3E%3C/svg%3E\")}")
 pathlib.Path("v3.html").write_text(out)
 print("wrote v3.html", len(out))
