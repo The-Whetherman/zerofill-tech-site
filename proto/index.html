@@ -1,0 +1,275 @@
+<!doctype html>
+<html lang="en" data-accent="teal">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ZeroFill Tech — v3 direction mock</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Archivo:wght@500;700;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0a0a0a; --panel:#111; --line:#232323; --ink:#ededea; --mute:#8a8a84;
+  --acc:#2fc4b4; --acc-ink:#04110f; --scan:#2fc4b4;
+  --mono:"JetBrains Mono",ui-monospace,Menlo,monospace;
+  --sans:"Archivo",system-ui,sans-serif;
+}
+[data-accent="orange"]{--acc:#ff5a1f;--acc-ink:#120500;--scan:#ff5a1f}
+[data-accent="green"]{--acc:#8aff3c;--acc-ink:#071200;--scan:#8aff3c}
+[data-accent="teal"]{--acc:#2fc4b4;--acc-ink:#04110f;--scan:#2fc4b4}
+*{box-sizing:border-box;margin:0}
+html,body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:17px;line-height:1.45;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+.mono{font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase}
+.wrap{padding:0 clamp(16px,4vw,56px)}
+
+/* nav */
+nav{position:sticky;top:0;z-index:20;display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:24px;height:56px;border-bottom:1px solid var(--line);background:rgba(10,10,10,.92);backdrop-filter:blur(6px)}
+.brand{display:flex;align-items:center;gap:10px;font-weight:900;letter-spacing:.14em;font-size:15px}
+.brand .o{display:inline-block;width:16px;height:16px;border:3px solid var(--acc);border-radius:50%;position:relative;top:1px}
+.brand .o::after{content:"";position:absolute;left:-5px;top:4px;width:20px;height:3px;background:var(--ink);transform:rotate(-45deg);border-radius:2px}
+.menu{display:flex;gap:2px;justify-self:center}
+.menu a{font-family:var(--mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;padding:8px 14px;color:var(--mute);border:1px solid transparent}
+.menu a.on{background:var(--acc);color:var(--acc-ink)}
+.menu a:hover{color:var(--ink);border-color:var(--line)}
+.cta{font-family:var(--mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;padding:10px 16px;border:1px solid var(--ink);min-height:44px;display:inline-flex;align-items:center}
+.cta.fill{background:var(--acc);color:var(--acc-ink);border-color:var(--acc)}
+
+/* hero split */
+.hero{display:grid;grid-template-columns:1fr 1fr;min-height:min(calc(100vh - 56px),820px);border-bottom:1px solid var(--line)}
+.hero-l{position:relative;overflow:hidden;background:#000}
+.hero-l canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
+.log{position:absolute;left:20px;top:20px;bottom:20px;width:260px;overflow:hidden;font-family:var(--mono);font-size:11px;line-height:1.5;color:var(--scan);opacity:.75;mask-image:linear-gradient(#000 70%,transparent);pointer-events:none;white-space:pre}
+.mark{position:absolute;width:18px;height:18px;opacity:.55}
+.mark::before,.mark::after{content:"";position:absolute;background:var(--ink)}
+.mark::before{left:8px;top:0;width:1px;height:18px}.mark::after{top:8px;left:0;height:1px;width:18px}
+.hero-r{position:relative;padding:clamp(28px,5vw,64px) clamp(20px,4vw,56px);display:grid;grid-template-rows:auto 1fr auto;gap:28px;border-left:1px solid var(--line)}
+.eyebrow{display:flex;gap:18px;color:var(--mute)}
+.eyebrow b{color:var(--acc);font-weight:600}
+h1{font-size:clamp(44px,6.4vw,104px);line-height:.92;letter-spacing:-.03em;font-weight:900;text-transform:uppercase;align-self:center}
+h1 span{color:var(--acc)}
+.sub{max-width:52ch;color:#c9c9c4;font-size:19px}
+.hero-form{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.field{border:1px solid var(--line);padding:12px 14px;min-height:62px;display:grid;gap:6px;background:var(--panel)}
+.field label{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--acc-ink);background:var(--acc);padding:2px 6px;justify-self:start}
+.field input,.field select{background:none;border:0;color:var(--ink);font:inherit;font-size:16px;outline:0;width:100%}
+.hero-form .cta{grid-column:1/-1;justify-content:center}
+
+/* process strip */
+.strip{display:flex;justify-content:space-between;align-items:center;gap:20px;padding:14px clamp(16px,4vw,56px);border-bottom:1px solid var(--line);color:var(--mute);overflow:auto}
+.strip b{color:var(--ink);font-weight:600}
+.strip .arrow{color:var(--acc)}
+
+/* services as ops menu */
+.ops{display:grid;grid-template-columns:1.1fr 1fr;border-bottom:1px solid var(--line)}
+.ops ul{list-style:none;border-right:1px solid var(--line)}
+.ops li{display:grid;grid-template-columns:70px 1fr auto;gap:16px;align-items:center;padding:22px clamp(16px,4vw,56px);border-bottom:1px solid var(--line);cursor:pointer;font-weight:700;font-size:clamp(20px,2.4vw,30px);letter-spacing:-.01em;text-transform:uppercase}
+.ops li:last-child{border-bottom:0}
+.ops li .n{font-family:var(--mono);font-size:12px;color:var(--mute);letter-spacing:.1em}
+.ops li .p{font-family:var(--mono);font-size:12px;color:var(--mute);letter-spacing:.06em;text-transform:none}
+.ops li.on{background:var(--acc);color:var(--acc-ink)}
+.ops li.on .n,.ops li.on .p{color:var(--acc-ink)}
+.ops-d{padding:clamp(24px,4vw,56px);display:grid;gap:18px;align-content:start}
+.ops-d h3{font-size:14px;font-family:var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--acc)}
+.ops-d p{color:#c9c9c4;max-width:48ch}
+.ops-d .kv{display:grid;grid-template-columns:auto 1fr;gap:6px 18px;font-family:var(--mono);font-size:12px;letter-spacing:.06em;color:var(--mute)}
+.ops-d .kv b{color:var(--ink);font-weight:600}
+
+/* for sale grid (ascii-reveal media demo) */
+.sale{border-bottom:1px solid var(--line)}
+.sale-h{display:flex;justify-content:space-between;align-items:end;padding:36px clamp(16px,4vw,56px) 18px;gap:20px;flex-wrap:wrap}
+.sale-h h2{font-size:clamp(28px,3.6vw,48px);letter-spacing:-.02em;text-transform:uppercase;line-height:1}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border-top:1px solid var(--line)}
+.card{background:var(--bg);padding:14px;display:grid;gap:10px}
+.card img{width:100%;aspect-ratio:4/3;object-fit:cover;display:block;background:#161616}
+.card .t{display:flex;justify-content:space-between;gap:10px;font-weight:700}
+.card .t small{font-family:var(--mono);font-size:11px;letter-spacing:.08em;color:var(--acc);font-weight:600}
+.card .m{font-family:var(--mono);font-size:11px;letter-spacing:.06em;color:var(--mute)}
+
+footer{padding:28px clamp(16px,4vw,56px);display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;color:var(--mute)}
+
+/* tweaks */
+.tweaks{position:fixed;right:12px;bottom:12px;z-index:50;display:flex;gap:6px;background:#000;border:1px solid var(--line);padding:6px}
+.tweaks button{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;background:none;border:1px solid var(--line);color:var(--mute);padding:8px 10px;cursor:pointer;min-height:36px}
+.tweaks button.on{border-color:var(--acc);color:var(--acc)}
+
+@media (max-width:900px){
+  nav{grid-template-columns:auto 1fr auto}.menu{display:none}
+  .hero{grid-template-columns:1fr;min-height:0}
+  .hero-l{height:62vw;min-height:300px}
+  .hero-r{border-left:0;border-top:1px solid var(--line)}
+  .log{width:200px;font-size:10px}
+  .ops{grid-template-columns:1fr}.ops ul{border-right:0;border-bottom:1px solid var(--line)}
+  .ops li{grid-template-columns:50px 1fr;padding:18px 16px}.ops li .p{grid-column:2}
+  .grid{grid-template-columns:repeat(2,1fr)}
+  .hero-form{grid-template-columns:1fr}
+}
+@media (prefers-reduced-motion:reduce){.log{display:none}}
+</style>
+</head>
+<body>
+<div id="app">
+<nav class="wrap">
+  <a class="brand" href="#"><span class="o"></span>ZER<span style="width:4px;display:inline-block"></span>FILL</a>
+  <div class="menu">
+    <a class="on" href="#pickup">Pickup</a><a href="#purge">Purge</a><a href="#sale">For sale</a><a href="#faq">FAQ</a>
+  </div>
+  <a class="cta" href="tel:+17027605037" data-ascii="fade">Call (702) 760-5037</a>
+</nav>
+
+<section class="hero" id="pickup">
+  <div class="hero-l">
+    <canvas id="scan"></canvas>
+    <pre class="log" id="log"></pre>
+    <i class="mark" style="right:22px;top:22px"></i><i class="mark" style="right:22px;bottom:22px"></i><i class="mark" style="left:22px;bottom:22px"></i>
+  </div>
+  <div class="hero-r">
+    <div class="eyebrow mono"><span>Las Vegas · NV</span><span><b>Node</b> LV_01</span><span><b>Status</b> Accepting pickups</span></div>
+    <h1>Free pickup.<br>Certified <span>wipe</span>.<br>Nothing left.</h1>
+    <div style="display:grid;gap:22px">
+      <p class="sub">We haul off your old computers, servers and phones for free, wipe every drive to NIST 800-88, and hand you the paperwork.</p>
+      <form class="hero-form" onsubmit="return false">
+        <div class="field"><label>Zip</label><input placeholder="89xxx" inputmode="numeric"></div>
+        <div class="field"><label>Items</label><select><option>1–5 machines</option><option>6+ / office cleanout</option><option>Servers / rack</option></select></div>
+        <button class="cta fill" type="submit" data-ascii="fade">Book a free pickup →</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<div class="strip mono"><span><b>01</b> Collect</span><span class="arrow">→</span><span><b>02</b> Wipe</span><span class="arrow">→</span><span><b>03</b> Certify</span><span class="arrow">→</span><span><b>04</b> Resell or recycle</span></div>
+
+<section class="ops" id="purge">
+  <ul id="ops">
+    <li class="on" data-k="0"><span class="n">SVC_01</span><span>Pickup</span><span class="p">free</span></li>
+    <li data-k="1"><span class="n">SVC_02</span><span>Purge wipe</span><span class="p">free</span></li>
+    <li data-k="2"><span class="n">SVC_03</span><span>Certificate</span><span class="p">$10 / drive</span></li>
+    <li data-k="3"><span class="n">SVC_04</span><span>Destroy</span><span class="p">$15 / drive</span></li>
+  </ul>
+  <div class="ops-d" id="opsd" data-ascii="surface"></div>
+</section>
+
+<section class="sale" id="sale">
+  <div class="sale-h">
+    <h2>Tested. Wiped. <span style="color:var(--acc)">For sale.</span></h2>
+    <button class="cta" id="reload" data-ascii="skip">Simulate photo load</button>
+  </div>
+  <div class="grid" id="grid"></div>
+</section>
+
+<footer class="mono"><span>ZeroFill Tech · hello@zerofill.tech</span><span>v3 direction mock · not live</span></footer>
+</div>
+
+<div class="tweaks" data-ascii="skip">
+  <button data-acc="teal" class="on">Teal</button><button data-acc="green">Green</button><button data-acc="orange">Orange</button><button id="replay">Replay</button>
+</div>
+
+<script type="module">
+import { createAsciiReveal } from './vendor/ascii-reveal-core.js';
+
+/* ---------- accent tweaks ---------- */
+const html=document.documentElement;
+{const q=new URLSearchParams(location.search).get('acc'); if(q){html.dataset.accent=q;document.querySelectorAll('[data-acc]').forEach(x=>x.classList.toggle('on',x.dataset.acc===q));}}
+document.querySelectorAll('[data-acc]').forEach(b=>b.onclick=()=>{
+  html.dataset.accent=b.dataset.acc;
+  document.querySelectorAll('[data-acc]').forEach(x=>x.classList.toggle('on',x===b));
+});
+
+/* ---------- hero: scanline raster of a procedurally drawn drive ---------- */
+const cv=document.getElementById('scan'),ctx=cv.getContext('2d');
+const src=document.createElement('canvas'),sctx=src.getContext('2d');
+let W,H,ptr={x:-1e4,y:-1e4};
+function drawSource(){
+  // a 3.5" HDD platter + head, white on black, feeds luminance to the raster
+  const w=src.width=240,h=src.height=240; sctx.fillStyle='#000';sctx.fillRect(0,0,w,h);
+  const cx=w*.52,cy=h*.5;
+  const g=sctx.createRadialGradient(cx,cy,10,cx,cy,95); g.addColorStop(0,'#fff');g.addColorStop(.6,'#9a9a9a');g.addColorStop(1,'#333');
+  sctx.fillStyle=g; sctx.beginPath();sctx.arc(cx,cy,95,0,7);sctx.fill();
+  sctx.strokeStyle='#000';sctx.lineWidth=2; for(let r=30;r<95;r+=12){sctx.beginPath();sctx.arc(cx,cy,r,0,7);sctx.stroke();}
+  sctx.fillStyle='#000';sctx.beginPath();sctx.arc(cx,cy,18,0,7);sctx.fill();
+  sctx.fillStyle='#fff';sctx.beginPath();sctx.arc(cx,cy,8,0,7);sctx.fill();
+  // actuator arm
+  sctx.save();sctx.translate(w*.12,h*.84);sctx.rotate(-0.72);sctx.fillStyle='#ddd';sctx.fillRect(0,-5,150,10);sctx.beginPath();sctx.arc(0,0,16,0,7);sctx.fill();sctx.restore();
+}
+function resize(){W=cv.width=cv.clientWidth*devicePixelRatio;H=cv.height=cv.clientHeight*devicePixelRatio;}
+drawSource();resize();addEventListener('resize',resize);
+cv.parentElement.addEventListener('pointermove',e=>{const r=cv.getBoundingClientRect();ptr={x:(e.clientX-r.left)*devicePixelRatio,y:(e.clientY-r.top)*devicePixelRatio};});
+cv.parentElement.addEventListener('pointerleave',()=>ptr={x:-1e4,y:-1e4});
+let lum=null;
+function sample(){const d=sctx.getImageData(0,0,src.width,src.height).data;lum=new Float32Array(src.width*src.height);for(let i=0;i<lum.length;i++)lum[i]=d[i*4]/255;}
+sample();
+const reduce=matchMedia('(prefers-reduced-motion:reduce)').matches;
+let t=0;
+function frame(){
+  t+=reduce?0:1/60;
+  ctx.fillStyle='#000';ctx.fillRect(0,0,W,H);
+  const col=getComputedStyle(html).getPropertyValue('--scan').trim();
+  const cell=Math.max(3,Math.round(4*devicePixelRatio));            // row pitch
+  const size=Math.min(W,H)*.86, ox=(W-size)/2+W*.08, oy=(H-size)/2;
+  const rows=Math.floor(size/cell), cols=Math.floor(size/(cell*.5));
+  ctx.fillStyle=col;
+  for(let r=0;r<rows;r++){
+    const y=oy+r*cell;
+    // glitch tear: a slow travelling band shifts rows horizontally
+    const band=Math.sin(t*.6)*.5+.5, tear=Math.abs(r/rows-band)<.03?Math.sin(t*40+r)*14*devicePixelRatio:0;
+    for(let c=0;c<cols;c++){
+      const x=ox+c*cell*.5+tear;
+      const sx=Math.floor(c/cols*src.width),sy=Math.floor(r/rows*src.height);
+      let l=lum[sy*src.width+sx];
+      // slow breathing + pointer heat
+      l*= .85+.15*Math.sin(t*1.3+r*.08);
+      const dx=x-ptr.x,dy=y-ptr.y,d=dx*dx+dy*dy; if(d<(120*devicePixelRatio)**2) l=Math.min(1,l+ .35*(1-d/((120*devicePixelRatio)**2)));
+      if(l<.08) continue;
+      const len=cell*.5*Math.min(1,l*1.4), hgt=Math.max(1,cell*.42*(.5+l));
+      ctx.globalAlpha=.35+.65*l;
+      ctx.fillRect(x,y,len,hgt);
+    }
+  }
+  ctx.globalAlpha=1;
+  requestAnimationFrame(frame);
+}
+frame();
+
+/* ---------- fake wipe log ---------- */
+const log=document.getElementById('log');const lines=[];
+const hx=()=>'0x'+Math.floor(Math.random()*0xFFFF).toString(16).toUpperCase().padStart(4,'0');
+const pool=[()=>`SECTOR ${hx()} .. OVERWRITTEN`,()=>`PASS ${1+Math.floor(Math.random()*3)}/3  ${(Math.random()*180+40).toFixed(1)} MB/S`,()=>`VERIFY ${hx()} OK`,()=>`CRC ${Math.random()<.1?'FAIL RETRY':'OK'}`,()=>`ATA SECURE ERASE  NOMINAL`,()=>`NIST 800-88  PURGE`,()=>`CARRIER LOCKED`,()=>`${hx()} ${hx()} ${hx()} ${hx()}`,()=>`CERT ${Math.floor(Math.random()*9000+1000)}  ISSUED`];
+function tick(){lines.push(pool[Math.floor(Math.random()*pool.length)]());if(lines.length>40)lines.shift();log.textContent=lines.join('\n');}
+if(!reduce){for(let i=0;i<30;i++)tick();setInterval(tick,140);}
+
+/* ---------- ops detail ---------- */
+const detail=[
+ ['Pickup — free','We come to you on Wed/Thu or weekend afternoons. Up to ~6 machines is always free; bigger loads are a $49 truck pass-through, confirmed before we show up.',[['Area','Las Vegas · N. Las Vegas · Summerlin · Spring Valley'],['Extended','Henderson · Boulder City (grouped runs)'],['Refused','CRT screens · loose batteries']]],
+ ['Purge wipe — free','Every drive we take gets a NIST 800-88 wipe before anything else happens to it. No exceptions, no upsell.',[['Method','ATA Secure Erase / 3-pass overwrite'],['Log','Serial + result kept 12 months'],['Cost','$0']]],
+ ['Certificate of destruction','For businesses and anyone who needs proof. Serial-level record of every drive, signed, PDF to your inbox.',[['Price','$10 / drive · $25 minimum'],['Turnaround','Same day as wipe'],['Format','PDF + paper on request']]],
+ ['Physical destruction','Drive is punched/shredded and photographed. For failed drives or when policy says wipe isn\'t enough.',[['Price','$15 / drive'],['Proof','Photo of serial + destroyed platter'],['Note','Pairs with the certificate']]],
+];
+const opsd=document.getElementById('opsd');
+function renderOps(k){const [h,p,kv]=detail[k];opsd.innerHTML=`<h3>${h}</h3><p>${p}</p><div class="kv">${kv.map(([a,b])=>`<span>${a}</span><b>${b}</b>`).join('')}</div>`;}
+renderOps(0);
+document.querySelectorAll('#ops li').forEach(li=>li.onclick=e=>{
+  document.querySelectorAll('#ops li').forEach(x=>x.classList.toggle('on',x===li));
+  renderOps(+li.dataset.k);
+  reveal.reveal({within:opsd,origin:{x:e.clientX,y:e.clientY},duration:'fast',speed:1.4});
+});
+
+/* ---------- for-sale grid with simulated photo loading ---------- */
+const items=[['Dell OptiPlex 7070','i5-9500 · 16GB · 256GB NVMe','$140','LOT_0412'],['ThinkPad T480','i5-8350U · 16GB · 512GB','$210','LOT_0413'],['Dell U2719D 27"','1440p IPS · no dead pixels','$95','LOT_0414'],['HP ProDesk 600 G4','i7-8700 · 32GB · 1TB','$230','LOT_0415'],['Samsung 870 EVO 1TB','0 reallocated · 98% health','$48','LOT_0416'],['Cisco SG350-28','28-port managed · reset','$85','LOT_0417']];
+const grid=document.getElementById('grid');
+grid.innerHTML=items.map((it,i)=>`<article class="card" data-ascii="surface"><img src="assets/ph${i%3}.png" alt=""><div class="t"><span>${it[0]}</span><small>${it[2]}</small></div><div class="m">${it[1]} · ${it[3]}</div></article>`).join('');
+
+/* ---------- ascii-reveal ---------- */
+const reveal=createAsciiReveal(document.getElementById('app'),{preset:'terminal',duration:'cinematic',origin:'top-left'});
+document.getElementById('replay').onclick=()=>reveal.reveal({origin:'top-left',duration:'cinematic'});
+document.getElementById('reload').onclick=async()=>{
+  await reveal.hide({within:grid,speed:2}); reveal.shimmer(true);
+  await new Promise(r=>setTimeout(r,900));
+  reveal.shimmer(false); reveal.reveal({within:grid,origin:'top-left',duration:'fast'});
+};
+document.querySelectorAll('.menu a').forEach(a=>a.onclick=e=>{
+  document.querySelectorAll('.menu a').forEach(x=>x.classList.toggle('on',x===a));
+  const sec=document.querySelector(a.getAttribute('href'));
+  if(sec) reveal.reveal({within:sec,origin:{x:e.clientX,y:e.clientY},duration:'fast',speed:1.3});
+});
+</script>
+</body>
+</html>
