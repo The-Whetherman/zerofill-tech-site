@@ -140,5 +140,17 @@ rep("""    txt.width=cols; txt.height=rows; tctx.clearRect(0,0,cols,rows);
 rep("    const t=(now-t0)/1000, head=1e9; // static field; motion comes from the waves only",
     "    const t=(now-t0)/1000, head=1e9; // static field; motion comes from the waves only\n    if(reduce){ if(ico.rebuild){drawIcon(0); ico.rebuild=false;} } else if(ico.rebuild || (now-(ico.last||0))>90){ drawIcon(t*0.35); ico.last=now; ico.rebuild=false; }")
 rep("if(dd<gap*3 && !inMask) kind=1; }", "if(dd<gap*3 && !inMask) kind=1; }\n      if(inMask){ const q=Math.sin(t*2.2 - Math.atan2(py-ico.cy*gap, px-ico.cx*gap)*3); a=0.55+0.4*Math.max(0,q); }")
+
+# --- Umami analytics (cloud.umami.is, free tier) + click events ---------------------------
+UMAMI = '<script defer src="https://cloud.umami.is/script.js" data-website-id="624150c4-ad5f-4aa6-bc27-78ea86899371"></script>\n'
+rep("</head>", UMAMI + "</head>")
+rep('<a class="btn ghost callbtn" href="tel:', '<a class="btn ghost callbtn" data-umami-event="call" href="tel:')
+rep('<a class="btn" href="#book">Book a free pickup</a>', '<a class="btn" data-umami-event="book-cta" href="#book">Book a free pickup</a>', count=2)
+rep('<a class="btn lg" href="#book">Book a free pickup</a>', '<a class="btn lg" data-umami-event="book-hero" href="#book">Book a free pickup</a>')
+rep('<a class="btn" href="#book">Book a business pickup</a>', '<a class="btn" data-umami-event="book-business" href="#book">Book a business pickup</a>')
+rep('href="assets/sample-certificate-of-destruction.pdf"', 'data-umami-event="sample-cert" href="assets/sample-certificate-of-destruction.pdf"', count=3)
+rep('<a href="/sale.html"><span class="n">07</span>For sale</a>', '<a data-umami-event="for-sale" href="/sale.html"><span class="n">07</span>For sale</a>')
+rep("const r=await fetch(CONFIG.WORKER_URL,{method:'POST',body:fd}); relayed=r.ok;",
+    "const r=await fetch(CONFIG.WORKER_URL,{method:'POST',body:fd}); relayed=r.ok; try{window.umami&&umami.track('booking-submitted');}catch(e){}")
 pathlib.Path("v3.html").write_text(out)
 print("wrote v3.html", len(out))
