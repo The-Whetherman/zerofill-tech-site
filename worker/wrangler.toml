@@ -4,8 +4,19 @@ compatibility_date = "2026-11-01"
 workers_dev = true
 preview_urls = false
 
-# Non-secret settings. BOT_TOKEN is a secret: set it with `npx wrangler secret put BOT_TOKEN`
-# or in the dashboard (Worker > Settings > Variables and Secrets), never in this file.
+# Non-secret settings. BOT_TOKEN and TURNSTILE_SECRET are secrets: set them with
+# `npx wrangler secret put <NAME>` or in the dashboard (Worker > Settings > Variables and Secrets),
+# never in this file (this repo is served publicly by GitHub Pages).
 [vars]
 CHAT_ID = "8274483328"
 ALLOWED_ORIGIN = "https://zerofill.tech"
+
+# Booking posts per visitor IP (Workers Rate Limiting API; approximate, counted per Cloudflare
+# location; period must be 10 or 60 seconds). A real customer sends one.
+[[ratelimits]]
+name = "BOOKING_RL"
+namespace_id = "1001"
+
+  [ratelimits.simple]
+  limit = 5
+  period = 60

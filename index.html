@@ -504,6 +504,7 @@
     <div class="step" data-step="5">
       <h2 class="q">Look right?<small>We'll text you within a day to confirm the time.</small></h2>
       <div class="review" id="review"></div>
+      <div id="ts" style="margin-top:14px"></div>
       <div class="err" id="e5"></div>
       <div class="tray"><button class="btn ghost" data-back>← Back</button><div class="acts"><button class="btn lg" id="send">Book my free pickup</button></div></div>
     </div>
@@ -712,7 +713,10 @@ const CONFIG = {
   EMAIL: "hello@zerofill.tech",
   // Cloudflare Worker that forwards bookings + photos to Telegram (see worker/ in the repo).
   // Leave "" to fall back to a pre-filled email (photos are dropped in the fallback).
-  WORKER_URL: "https://zerofill-relay.zerofill.workers.dev"
+  WORKER_URL: "https://zerofill-relay.zerofill.workers.dev",
+  // Cloudflare Turnstile site key (public; bot check on the booking form). "" = off.
+  // The relay only demands the check once its TURNSTILE_SECRET secret is set.
+  TURNSTILE_SITEKEY: ""
 };
 
 /* ================= THEME ================= */
@@ -811,10 +815,27 @@ const CONFIG = {
   const state={ref:REF||localStorage.getItem('zf-ref')||'',items:{},big:false,addr:'',area:'',ptype:'',access:'',day:'',win:'',photos:[],name:'',phone:'',email:'',data:'Wipe (free)'};
   let cur=0;
   const steps=$$('#steps .s'), panes=$$('.step');
+  // Bot check (Cloudflare Turnstile): the script loads once someone starts a booking, the widget
+  // renders on the review step and stays invisible unless Cloudflare wants a click.
+  const ts={id:null,token:'',wait:[],loaded:false};
+  function tsLoad(){
+    if(!CONFIG.TURNSTILE_SITEKEY||ts.loaded) return; ts.loaded=true;
+    window.zfTurnstileReady=()=>{ if(cur===5) tsRender(); };
+    const s=document.createElement('script'); s.src='https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit&onload=zfTurnstileReady'; s.async=true; document.head.appendChild(s);
+  }
+  function tsRender(){
+    if(ts.id!==null||!window.turnstile) return;
+    ts.id=turnstile.render('#ts',{sitekey:CONFIG.TURNSTILE_SITEKEY,action:'booking',appearance:'interaction-only',
+      theme:document.documentElement.dataset.theme==='light'?'light':'dark',
+      callback:t=>{ ts.token=t; ts.wait.splice(0).forEach(f=>f(t)); },
+      'expired-callback':()=>{ ts.token=''; }});
+  }
+  const tsToken=()=>ts.token?Promise.resolve(ts.token):new Promise(res=>{ ts.wait.push(res); setTimeout(()=>res(''),10000); });
   function go(n){
     cur=n; panes.forEach(p=>p.classList.toggle('on',+p.dataset.step===n));
     steps.forEach((s,i)=>{ s.classList.toggle('on',i===Math.min(n,4)); s.classList.toggle('done',i<n); });
-    if(n===5) renderReview();
+    if(n>=1) tsLoad();
+    if(n===5){ renderReview(); tsRender(); }
     if(n>0) $('#wiz').scrollIntoView({block:'start',behavior:'smooth'});
   }
   steps.forEach((s,i)=>s.addEventListener('click',()=>{ if(s.classList.contains('done') && cur<6) go(i); }));
@@ -908,7 +929,14 @@ const CONFIG = {
         try{
           const fd=new FormData(); fd.append('text',summaryText()); fd.append('json',JSON.stringify({...state,photos:state.photos.length}));
           state.photos.forEach((b,i)=>fd.append('photo',b,`photo-${i+1}.jpg`));
+          if(CONFIG.TURNSTILE_SITEKEY){
+            const t=await tsToken();
+            // Cloudflare wants a click: ask once; a second press goes ahead (worst case: the email fallback below)
+            if(!t && window.turnstile && !ts.asked){ ts.asked=true; $('#e5').textContent='One more step: tick the box above, then press Book again.'; btn.disabled=false; btn.textContent='Book my free pickup'; return; }
+            fd.append('cf-turnstile-response',t);
+          }
           const r=await fetch(CONFIG.WORKER_URL,{method:'POST',body:fd}); relayed=r.ok; try{window.umami&&umami.track('booking-submitted');}catch(e){}
+          try{ if(ts.id!==null){ ts.token=''; turnstile.reset(ts.id); } }catch(e){}
         }catch(e){ relayed=false; }
       }
       if(!relayed){
